@@ -1,0 +1,14 @@
+# cuprit-js:
+#   filter: rjsmin
+#   output: ckanext-cuprit/%(version)s-cuprit.js
+#   contents:
+#     - js/cuprit.js
+#   extra:
+#     preload:
+#       - base/main
+
+# cuprit-css:
+#   filter: cssrewrite
+#   output: ckanext-cuprit/%(version)s-cuprit.css
+#   contents:
+#     - css/cuprit.css

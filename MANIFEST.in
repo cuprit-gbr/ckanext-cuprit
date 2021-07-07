@@ -1,0 +1,5 @@
+include README.rst
+include LICENSE
+include requirements.txt
+recursive-include ckanext/cuprit *.html *.json *.js *.less *.css *.mo *.yml
+recursive-include ckanext/cuprit/migration *.ini *.py *.mako
