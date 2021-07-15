@@ -1,0 +1,10 @@
+{% ckan_extends %}
+
+{% block extras %}
+  {% if pkg_dict.gazetteer_id %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Gazetteer Id") }}</th>
+      <td class="dataset-details">{{ pkg_dict.gazetteer_id }}</td>
+    </tr>
+  {% endif %}
+{% endblock %}
