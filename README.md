@@ -1,39 +1,12 @@
-[![Tests](https://github.com//ckanext-cuprit/workflows/Tests/badge.svg?branch=main)](https://github.com//ckanext-cuprit/actions)
-
 # ckanext-cuprit
 
-**TODO:** Put a description of your extension here:  What does it do? What features does it have? Consider including some screenshots or embedding a video!
-
+CKAN extension for the cuprit project.
 
 ## Requirements
 
-**TODO:** For example, you might want to mention here which versions of CKAN this
-extension works with.
-
-If your extension works across different versions you can add the following table:
-
-Compatibility with core CKAN versions:
-
-| CKAN version    | Compatible?   |
-| --------------- | ------------- |
-| 2.6 and earlier | not tested    |
-| 2.7             | not tested    |
-| 2.8             | not tested    |
-| 2.9             | not tested    |
-
-Suggested values:
-
-* "yes"
-* "not tested" - I can't think of a reason why it wouldn't work
-* "not yet" - there is an intention to get it working
-* "no"
-
+The extension was tested only in CKAN 2.9.
 
 ## Installation
-
-**TODO:** Add any additional install steps to the list below.
-   For example installing any non-Python dependencies or adding any required
-   config settings.
 
 To install ckanext-cuprit:
 
@@ -43,10 +16,12 @@ To install ckanext-cuprit:
 
 2. Clone the source and install it on the virtualenv
 
+```
     git clone https://github.com//ckanext-cuprit.git
     cd ckanext-cuprit
     pip install -e .
 	pip install -r requirements.txt
+```
 
 3. Add `cuprit` to the `ckan.plugins` setting in your CKAN
    config file (by default the config file is located at
@@ -56,28 +31,17 @@ To install ckanext-cuprit:
 
      sudo service apache2 reload
 
-
-## Config settings
-
-None at present
-
-**TODO:** Document any optional config settings here. For example:
-
-	# The minimum number of hours to wait before re-checking a resource
-	# (optional, default: 24).
-	ckanext.cuprit.some_setting = some_default_value
-
-
 ## Developer installation
 
 To install ckanext-cuprit for development, activate your CKAN virtualenv and
 do:
 
+```
     git clone https://github.com//ckanext-cuprit.git
     cd ckanext-cuprit
     python setup.py develop
     pip install -r dev-requirements.txt
-
+```
 
 ## Tests
 
