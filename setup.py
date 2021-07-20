@@ -84,7 +84,7 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points='''
         [ckan.plugins]
-        cuprit=ckanext.cuprit.plugin:CupritPlugin
+        cuprit=ckanext.cuprit.plugin:CupritExtendMetadataPlugin
 
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
