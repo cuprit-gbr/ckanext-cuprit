@@ -1,10 +1,16 @@
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 
+import ckanext.cuprit.logic.auth as auth
+import ckanext.cuprit.logic.action as action
+import ckanext.cuprit.lib.helpers as helpers
 
 class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IDatasetForm)
+    plugins.implements(plugins.IAuthFunctions)
+    plugins.implements(plugins.IActions)
+    plugins.implements(plugins.ITemplateHelpers)
 
     # IConfigurer
     def update_config(self, config_):
@@ -48,3 +54,30 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         # This plugin doesn't handle any special package types, it just
         # registers itself as the default (above).
         return []
+
+    # IAuthFunctions
+    def get_auth_functions(self):
+        return {
+            'package_update': auth.package_update
+        }
+
+    # IActions
+    def get_actions(self):
+        '''
+        Define custom functions (or override existing ones).
+        Available via API /api/action/{action-name}
+        '''
+        return {
+            'package_create': action.package_create,
+            'package_update': action.package_update
+        }
+
+    # ITemplateHelpers
+    def get_helpers(self):
+        '''
+        Define custom helpers (or override existing ones).
+        Available as h.{helper-name}() in templates.
+        '''
+        return {
+            'is_editor': helpers.is_editor
+        }
