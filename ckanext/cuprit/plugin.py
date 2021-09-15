@@ -5,12 +5,31 @@ import ckanext.cuprit.logic.auth as auth
 import ckanext.cuprit.logic.action as action
 import ckanext.cuprit.lib.helpers as helpers
 
-class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
+from flask import Blueprint
+import ckanext.cuprit.blueprints as cuprit_blueprints
+from ckan.lib.plugins import DefaultTranslation
+
+class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IDatasetForm)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.ITemplateHelpers)
+    plugins.implements(plugins.IBlueprint)
+    plugins.implements(plugins.ITranslation)
+
+    # Custom pages
+    def get_blueprint(self):
+        # Create Blueprint for custom routes
+        blueprint = Blueprint(self.name, self.__module__)
+        blueprint.template_folder = u'templates'
+        rules = [
+            (u'/participate', u'render_about_custom_page', cuprit_blueprints.render_about_custom_page),
+        ]
+        for rule in rules:
+            blueprint.add_url_rule(*rule)
+
+        return blueprint
 
     # IConfigurer
     def update_config(self, config_):

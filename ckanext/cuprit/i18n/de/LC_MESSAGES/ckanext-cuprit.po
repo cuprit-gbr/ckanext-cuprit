@@ -1,0 +1,95 @@
+# German translations for ckanext-cuprit.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the ckanext-cuprit
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-cuprit 0.0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-09-15 17:12+0200\n"
+"PO-Revision-Date: 2021-09-15 17:21+0200\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+"Last-Translator: \n"
+"X-Generator: Poedit 2.3\n"
+
+#: ckanext/cuprit/logic/action.py:20
+msgid "Missing value"
+msgstr "Fehlernder Wert"
+
+#: ckanext/cuprit/logic/action.py:24
+msgid "Package was not found."
+msgstr "Deponat wurde nicht gefunden."
+
+#: ckanext/cuprit/templates/header.html:8
+msgid "Datasets"
+msgstr "Deponate"
+
+#: ckanext/cuprit/templates/header.html:10
+msgid "Organizations"
+msgstr "Organisation"
+
+#: ckanext/cuprit/templates/header.html:12
+msgid "Groups"
+msgstr "Gruppen"
+
+#: ckanext/cuprit/templates/header.html:13
+#: ckanext/cuprit/templates/participate.html:3
+#: ckanext/cuprit/templates/participate.html:14
+msgid "Participate"
+msgstr "Deponat einreichen"
+
+#: ckanext/cuprit/templates/participate.html:15
+msgid ""
+"<p> There are two ways to submit deposits.</p> <h2>As a DAI employee</"
+"h2> <p> As a DAI staff member, log in to the system with your known "
+"username and password. Click on \"Add Dataset\" and fill in all required "
+"metadata fields. Finally, upload your files. </p> <p> After saving, an "
+"administrator will receive an e-mail, complete your metadata if "
+"necessary and publish the deposit. </p> <h2>an external person</h2> <p> "
+"As an external person, please download the following PDF form <a href=\"/"
+"base/pdf/new-dataset.pdf\">new-dataset.pdf</a> . Save it filled out "
+"together with all your files to be deposited in a folder. Package your "
+"folder as a \"zip\" archive (<a href=\"https://support.microsoft.com/de-"
+"de/windows/zippen-und-entzippen-von-dateien-f6dde0a7-0fec-8294-"
+"e1d3-703ed85e7ebc\">zip with windows</a>) and send it to : new-"
+"dataset@dainst.org. </p> <p> If your archive is too large to be sent by "
+"email, please use a file transfer service such as Dropbox, Cumulus, "
+"https://wetransfer.com, https://www.sendbig.com. If this is not "
+"possible. You can also send us FTP access data. If no server is "
+"available we can provide FTP access. </p> <p> After receiving the data, "
+"an administrator will add your metadata if necessary and publish the "
+"deposit. </p>"
+msgstr ""
+"<p>Um Deponate einzureichen gibt es zwei Möglichkeiten.</p><h2>Als DAI "
+"Mitarbeiter</h2><p>Als DAI Mitarbeiter melden Sie sich mit Ihren "
+"bekannten Benutzernamen und Passwort im System an. Klicken Sie auf "
+"\"Dataset hinzufügen\" und füllen Sie alle erforderlichen "
+"Metadatenfelder aus. Abschließend laden Sie Ihre Dateien hoch. </"
+"p><p>Nach dem speichern wird ein Administrator eine E-mail erhalten, "
+"Ihre Metadaten gegebenenfalls ergänzen und das Deponat publizieren.</"
+"p><h2>Als externe Person</h2><p>Als externe Person laden Sie bitte "
+"folgendes PDF Formular herunter /new-dataset . Speichern Sie diese "
+"ausgefüllt zusammen mit all Ihren einzureichenden Dateien in einem "
+"Ordner. Verpacken Sie Ihren Ordner als \"Zip\" Archiv (https://support."
+"microsoft.com/de-de/windows/zippen-und-entzippen-von-dateien-"
+"f6dde0a7-0fec-8294-e1d3-703ed85e7ebc) und senden Sie es an : new-"
+"dataset@dainst.org. </p><p>Sollte Ihr Archiv zu groß für den E-Mail "
+"Versand sein, benutzen Sie bitte einen Dateitransfer Service  wie "
+"Dropbox, cumulus, https://wetransfer.com, https://www.sendbig.com.Sollte "
+"dies nicht möglich sein. Können Sie uns ebenfalls FTP Zugangsdaten "
+"senden. Falls kein Server vorhanden ist können wir einen FTP Zugang "
+"bereitstellen.</p><p>Ein Administrator wird nach dem Erhalt der Daten, "
+"Ihre Metadaten gegebenenfalls ergänzen und das Deponat publizieren.</p>"
+
+#: ckanext/cuprit/templates/package/snippets/additional_info.html:6
+#: ckanext/cuprit/templates/package/snippets/package_basic_fields.html:4
+msgid "Gazetteer Id"
+msgstr "Gazetteer Id"

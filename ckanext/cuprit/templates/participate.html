@@ -1,0 +1,46 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ _('Participate') }}{% endblock %}
+
+
+
+{% block primary %}
+  <article class="module" role="main">
+    <div class="module-content">
+      {% block about %}
+        {% if g.site_about %}
+          {{ h.render_markdown(g.site_about) }}
+        {% else %}
+          <h1 class="page-heading">{{ _('Participate') }}</h1>
+          {% trans %}
+             <p> There are two ways to submit deposits.</p>
+
+      <h2>As a DAI employee</h2>
+              <p>
+                As a DAI staff member, log in to the system with your known username and password. Click on "Add Dataset" and fill in all required metadata fields. Finally, upload your files.
+              </p>
+              <p>
+              After saving, an administrator will receive an e-mail, complete your metadata if necessary and publish the deposit.
+              </p>
+      <h2>an external person</h2>
+      <p>
+        As an external person, please download the following PDF form <a href="/base/pdf/new-dataset.pdf">new-dataset.pdf</a> .
+        Save it filled out together with all your files to be deposited in a folder.
+        Package your folder as a "zip" archive (<a href="https://support.microsoft.com/de-de/windows/zippen-und-entzippen-von-dateien-f6dde0a7-0fec-8294-e1d3-703ed85e7ebc">zip with windows</a>)
+        and send it to : new-dataset@dainst.org.
+              </p>
+      <p>
+              If your archive is too large to be sent by email, please use a file transfer service such as Dropbox, Cumulus, https://wetransfer.com, https://www.sendbig.com.
+              If this is not possible. You can also send us FTP access data. If no server is available we can provide FTP access.
+       </p>
+      <p>
+              After receiving the data, an administrator will add your metadata if necessary and publish the deposit.
+      <p>
+              {% endtrans %}
+        {% endif %}
+      {% endblock %}
+    </div>
+  </article>
+{% endblock %}
+
+{% block secondary %}{% endblock %}
