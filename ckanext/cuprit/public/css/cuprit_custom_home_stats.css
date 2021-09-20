@@ -1,0 +1,13 @@
+.c_stats{
+  margin: 0 auto!important;
+  max-width: 1170px;
+  padding-bottom: 2rem
+}
+
+
+.homepage .c_stats ul li {
+    width: 30%!important;
+    border: 2px solid white;
+    margin: 0 .5rem;
+    padding-bottom: 1rem;
+}

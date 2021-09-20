@@ -1,4 +1,6 @@
 import ckanext.cuprit.logic.authz as authz
+import ckan.plugins.toolkit as tk
+
 
 def is_editor(user, office=None):
     """
@@ -14,3 +16,10 @@ def is_editor(user, office=None):
     :rtype: boolean
     """
     return authz.is_editor({'user': user}, {'user': user}, office)
+
+def get_recent_articles():
+    """
+    get recent updated packages for startpage
+    """
+    result = tk.get_action("package_search")({}, {"rows": 10, "sort": "metadata_modified desc"})
+    return result["results"]

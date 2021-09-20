@@ -36,7 +36,7 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'cuprit')
-    
+
     # IDatasetForm
     def create_package_schema(self):
         schema = super(CupritPlugin, self).create_package_schema()
@@ -46,7 +46,7 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
                             toolkit.get_converter('convert_to_extras')]
         })
         return schema
-    
+
     def update_package_schema(self):
         schema = super(CupritPlugin, self).update_package_schema()
         # our custom field
@@ -55,7 +55,7 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
                             toolkit.get_converter('convert_to_extras')]
         })
         return schema
-    
+
     def show_package_schema(self):
         schema = super(CupritPlugin, self).show_package_schema()
         schema.update({
@@ -98,5 +98,6 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         Available as h.{helper-name}() in templates.
         '''
         return {
-            'is_editor': helpers.is_editor
+            'is_editor': helpers.is_editor,
+            'get_recent_articles': helpers.get_recent_articles
         }

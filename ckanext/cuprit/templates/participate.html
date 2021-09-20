@@ -8,36 +8,64 @@
   <article class="module" role="main">
     <div class="module-content">
       {% block about %}
-        {% if g.site_about %}
-          {{ h.render_markdown(g.site_about) }}
-        {% else %}
-          <h1 class="page-heading">{{ _('Participate') }}</h1>
-          {% trans %}
-             <p> There are two ways to submit deposits.</p>
 
-      <h2>As a DAI employee</h2>
+        {% trans%}
+                        <h1>iDAI.open-data</h1>
+<hr>
+        <h3>Content</h3>
+<ul>
+    <li><a href="#">Introduction to System Fundamentals</a></li>
+    <li><a href="#">Submit data as a DAI Employee</a></li>
+    <li><a href="#">Submit data as an external Person</a></li>
+</ul>
+
+        <hr>
+        <h3>Introduction to System Fundamentals</h3>
+        To get a brief overview of the system have a look at:<br>
+        <br>
+        <iframe width="100%" height="500" src="https://www.youtube.com/embed/PFe3Gv_-1wY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        <hr>
+
+
+      <h3>Submit data as a DAI Employee</h3>
               <p>
-                As a DAI staff member, log in to the system with your known username and password. Click on "Add Dataset" and fill in all required metadata fields. Finally, upload your files.
+                As a DAI staff member:
+                  <ol>
+        <li>log in to the system with your known username and password</li>
+        <li>Click on "Add Dataset"</li>
+        <li>fill in all required metadata fields</li>
+        <li>Finally, upload your files.</li>
+    </ol>
               </p>
-              <p>
-              After saving, an administrator will receive an e-mail, complete your metadata if necessary and publish the deposit.
+              <p class="text-danger"><b>
+              After saving, an administrator will receive an e-mail, complete your metadata if necessary and publish the deposit.</b>
               </p>
-      <h2>an external person</h2>
+        <hr>
+      <h3>Submit data as an external Person</h3>
       <p>
-        As an external person, please download the following PDF form <a href="/base/pdf/new-dataset.pdf">new-dataset.pdf</a> .
-        Save it filled out together with all your files to be deposited in a folder.
-        Package your folder as a "zip" archive (<a href="https://support.microsoft.com/de-de/windows/zippen-und-entzippen-von-dateien-f6dde0a7-0fec-8294-e1d3-703ed85e7ebc">zip with windows</a>)
-        and send it to : new-dataset@dainst.org.
+        As an external person<br>
+          <ol>
+        <li>download the following PDF form <a href="/base/pdf/new-dataset.pdf">new-dataset.pdf</a></li>
+        <li>Save it filled out together with all your files to be deposited in a dedicated folder.</li>
+        <li>Package your folder as a "zip" archive (<a href="https://support.microsoft.com/de-de/windows/zippen-und-entzippen-von-dateien-f6dde0a7-0fec-8294-e1d3-703ed85e7ebc">zip with windows</a>) </li>
+        <li>send it to : new-dataset@dainst.org</li>
+    </ol>
               </p>
-      <p>
-              If your archive is too large to be sent by email, please use a file transfer service such as Dropbox, Cumulus, https://wetransfer.com, https://www.sendbig.com.
-              If this is not possible. You can also send us FTP access data. If no server is available we can provide FTP access.
+      <p class="text-danger">
+          <b>If your archive is too large to be sent by email</b>, please use a file transfer service such as
+          <ul>
+        <li><a href="#">Dropbox</a></li>
+        <li><a href="#">Cumulus</a></li>
+        <li><a href=">https://wetransfer.com">Wetransfer</a></li>
+        <li><a href="https://www.sendbig.com">Sendbig</a></li>
+        </ul>
+              If this is not possible. You can also send us FTP access data. If no FTP-server is available for you we can provide FTP access from our side.
        </p>
       <p>
               After receiving the data, an administrator will add your metadata if necessary and publish the deposit.
       <p>
               {% endtrans %}
-        {% endif %}
       {% endblock %}
     </div>
   </article>

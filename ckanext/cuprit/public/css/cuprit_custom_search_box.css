@@ -1,0 +1,63 @@
+.custom_search_box{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.homepage .module-search .module-content {
+    border-radius: 3px 3px 0 0;
+    background-color: #eee!important;
+    border-bottom: none;
+}
+
+.homepage .module-search {
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+.hero {
+    background: #fff!important;
+    background: url(/custom_img/idai_publications_header.jpg)!important;
+    background-repeat: no-repeat!important;
+    background-size: cover!important;
+    height: 450px!important;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+
+.hero .heading-main {
+    margin: 0 auto;
+    color: #ffffff;
+    font-size: 5rem;
+    font-weight: bold;
+    word-wrap: break-word;
+    margin-bottom: 3rem;
+}
+
+.homepage .module-search .module-content .heading {
+    margin-top: 0;
+    margin-bottom: 7px;
+    font-size: 24px;
+    line-height: 40px;
+    color: #333;
+}
+
+.search-form .search-input button {
+    cursor: pointer;
+    display: block;
+    position: absolute!important;
+    top: 15px!important;
+    border-radius: 0px;
+    right: 10px;
+    height: 100%!important;
+    padding: .85rem 2rem!important;
+    border: none;
+    background: #666!important;
+}
+
+#field-main-search {
+  border-radius: 0px!important;
+}

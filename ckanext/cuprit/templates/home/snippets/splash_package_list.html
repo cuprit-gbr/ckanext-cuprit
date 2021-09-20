@@ -1,0 +1,27 @@
+{#
+Displays a list of datasets.
+
+packages       - A list of packages to display.
+list_class     - The class name for the list item.
+item_class     - The class name to use on each item.
+hide_resources - If true hides the resources (default: false).
+banner         - If true displays a popular banner (default: false).
+
+Example:
+
+  {% snippet 'snippets/package_list.html', packages=c.datasets %}
+
+#}
+{% block package_list %}
+  {% if packages %}
+  <div role="main">
+    <div class="splash_cards">
+      <ul class="cards">
+	      {% for package in packages %}
+	        {% snippet 'home/snippets/splash_package_item.html', package=package %}
+	      {% endfor %}
+    </ul>
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}
