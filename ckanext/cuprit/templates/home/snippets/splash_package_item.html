@@ -18,7 +18,7 @@ Example:
 
 <li class="cards_item">
   <div class="card">
-    <div class="card_image"><img src="https://idai.world/assets/images/content/banner-libraries.jpg"></div>
+    <!-- <div class="card_image"><img src="https://idai.world/assets/images/content/banner-libraries.jpg"></div> -->
     <div class="card_content">
       <h2 class="card_title">{{ h.link_to(title|truncate(80), h.url_for('%s.read' % package.type, id=package.name)) }}</h2>
       <div class="card_text">
@@ -29,7 +29,15 @@ Example:
                     <p>{{ _("This dataset has no description") }}</p>
                   {% endif %}
           {% endblock %}
+
+
         </div>
       <button class="btn card_btn" onclick="window.location.href='{{ h.url_for('%s.read' % package.type, id=package.name) }}'">Read More</button>
+      <div class="card_tag-container">
+      {% for tag in package.tags %}
+        <small class="badge">{{ tag['display_name'] }}</small>
+      {% endfor %}
+    </div>
+
     </div>
 </li>
