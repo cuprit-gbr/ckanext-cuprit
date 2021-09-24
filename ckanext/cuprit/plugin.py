@@ -1,6 +1,7 @@
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 
+import ckanext.cuprit.mailer as mailer
 import ckanext.cuprit.logic.auth as auth
 import ckanext.cuprit.logic.action as action
 import ckanext.cuprit.lib.helpers as helpers
@@ -11,6 +12,7 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.ITemplateHelpers)
+    plugins.implements(plugins.IPackageController, inherit=True)
 
     # IConfigurer
     def update_config(self, config_):
@@ -81,3 +83,10 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         return {
             'is_editor': helpers.is_editor
         }
+
+    # IPackageController
+    def after_create(self, context, pkg_dict):
+        '''
+        Called after a dataset has been created
+        '''
+        mailer.mail_dataset_created_to_admins(context, pkg_dict)
