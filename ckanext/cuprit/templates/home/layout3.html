@@ -1,0 +1,42 @@
+
+<div role="main" class="hero">
+  <div class="container custom_search_box">
+    <h1 class="heading-main text-center">iDAI Open data service</h1>
+    {% block search %}
+      {% snippet 'home/snippets/search.html' %}
+    {% endblock %}
+  </div>
+</div>
+
+<div class="c_attention-box">
+  <h2 class="section__headline-blue" >{% trans %}Participate{% endtrans %}</h2>
+  <p class="c_attention">
+Our portal allows the addition of data for DAI employees and external persons. Everything you need to know about using the system and how we accept your data can be found here.
+  </p>
+
+
+  <p class="c_attention">
+    <a href="/participate">
+      <button class="btn btn-default btn-lg">{% trans %}read more{% endtrans %}</button>
+    </a>
+  </p>
+
+
+</div>
+
+<div role="main" style="background: white">
+  <!-- show latest items -->
+
+  <h2 class="section__headline-blue">{% trans %}Recently Updated Datasets{% endtrans %}</h2>
+  {% snippet 'home/snippets/splash_package_list.html', packages=h.get_recent_articles(), item_class="splash_data_set_item", list_class="splash_dataset_list" %}
+</div>
+
+{#
+<div class="" style="background-color: #eee; padding: 2rem 0 3rem 0">
+  <div class="">
+    {% block stats %}
+      {% snippet 'home/snippets/stats.html' %}
+    {% endblock %}
+  </div>
+</div>
+#}

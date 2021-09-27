@@ -1,0 +1,15 @@
+.masthead .nav > li > a, .site-footer .nav > li > a, .masthead .nav > li > a:focus, .masthead .nav > li > a:hover, .masthead .nav > .active > a, .site-footer .nav > .active > a, .masthead .nav > .active > a:hover, .masthead .nav > .active > a:focus {
+    color: #333!important;
+}
+
+
+body .masthead .navigation .nav-pills li a:hover, .site-footer .navigation .nav-pills li a:hover, .masthead .navigation .nav-pills li a:focus, .site-footer .navigation .nav-pills li a:focus, .masthead .navigation .nav-pills li.active a, .site-footer .navigation .nav-pills li.active a {
+    background-color: #eee!important;
+}
+
+
+.account-masthead {
+    min-height: 30px;
+    color: #333;
+    background-color: #003647!important
+}

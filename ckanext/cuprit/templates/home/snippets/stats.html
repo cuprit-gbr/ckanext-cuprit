@@ -1,0 +1,65 @@
+{% set stats = h.get_site_statistics() %}
+
+<div class="stats c_stats">
+  <div class="inner">
+    <h2 class="section__headline-blue">{% trans %}Statistics{% endtrans %}</h2>
+
+    <ul style="text-align: center; width: 100%">
+      {% block stats_group %}
+      <li>
+        <h2>
+        <a href="{{ h.url_for('dataset.search') }}">
+          <strong class="count">{{ h.SI_number_span(stats.dataset_count) }}</strong>
+          {{ _('dataset') if stats.dataset_count == 1 else _('datasets') }}
+        </a>
+      </h2>
+      </li>
+      <li>
+        <h2>
+        <a href="{{ h.url_for('organization.index') }}">
+          <strong class="count">{{ h.SI_number_span(stats.organization_count) }}</strong>
+          {{ _('organization') if stats.organization_count == 1 else _('organizations') }}
+        </a>
+          </li>
+      </li>
+      <li>
+        <h2>
+        <a href="{{ h.url_for('group.index') }}">
+          <strong class="count">{{ h.SI_number_span(stats.group_count) }}</strong>
+          {{ _('group') if stats.group_count == 1 else _('groups') }}
+        </a>
+          </li>
+      </li>
+      {% endblock %}
+    </ul>
+  </div>
+</div>
+
+<script>
+
+var li = document.querySelectorAll('.count');
+li.forEach(function(el, index) {
+  let start // set on the first step to the timestamp provided
+  const final = parseInt(el.textContent, 10) // parse out the final number
+  const duration = 300 // duration in ms
+  const step = ts => {
+    if (!start) {
+      start = ts
+    }
+    // get the time passed as a fraction of total duration
+    let progress = (ts - start) / duration
+
+    el.textContent = Math.floor(progress * final) // set the text
+    if (progress < 1) {
+      // if we're not 100% complete, request another animation frame
+      requestAnimationFrame(step)
+    }
+  }
+
+  // start the animation
+  requestAnimationFrame(step)
+});
+
+
+
+</script>

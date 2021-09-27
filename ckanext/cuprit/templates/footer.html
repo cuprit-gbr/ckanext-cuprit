@@ -1,0 +1,78 @@
+<div id="dsgvo_accept" style="background-color: #E6E2E2; position: fixed; bottom: 0; left: 0; width: 100%; padding: 15px;" class="bg-info" id="idai-cookie-notice"><button class="btn" onclick="IDaiCookieNotice()" style="float:right;">Akzeptieren</button>Um unsere Webseite für Sie optimal zu gestalten und fortlaufend verbessern zu können, verwenden wir Cookies. Durch die weitere Nutzung der Webseite stimmen Sie der Verwendung von Cookies zu. Weitere Informationen zu Cookies erhalten Sie in unserer <a href="http://www.dainst.org/de/datenschutz" target="_blank">Datenschutzerklärung</a><a>.</a></div>
+
+<script>
+  function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  function IDaiCookieNotice(){
+        setCookie("cookie_accepted", true, 365);
+        hide_bar();
+  }
+
+  function hide_bar() {
+    let accepted = getCookie("cookie_accepted");
+    if (accepted != "") {
+      let bar = document.getElementById("dsgvo_accept")
+      bar.style.display = "none"
+    }
+  }
+
+  hide_bar();
+
+</script>
+
+<footer class="site-footer">
+  <div class="container">
+    {% block footer_content %}
+    <div class="row">
+      <div class="col-md-8 footer-links">
+        {% block footer_nav %}
+          <ul class="list-unstyled">
+            {% block footer_links %}
+              <li><a href="/">{{ _('Home') }}</a></li>
+            {% endblock %}
+          </ul>
+          <ul class="list-unstyled">
+            {% block footer_links_ckan %}
+              {% set api_url = 'http://docs.ckan.org/en/{0}/api/'.format(g.ckan_doc_version) %}
+              <li><a href="https://idai.world/">idai.world</a></li>
+              <li><a href="https://www.dainst.org/de/datenschutz/">DSGVO</a></li>
+            {% endblock %}
+          </ul>
+        {% endblock %}
+      </div>
+      <div class="col-md-4 attribution">
+        {% block footer_lang %}
+          {% snippet "snippets/language_selector.html" %}
+        {% endblock %}
+      </div>
+    </div>
+    {% endblock %}
+  </div>
+
+  {% block footer_debug %}
+    {% if g.debug %}
+      {% include 'snippets/debug.html' %}
+    {% endif %}
+  {% endblock %}
+</footer>

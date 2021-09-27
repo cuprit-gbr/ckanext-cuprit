@@ -6,20 +6,39 @@ import ckanext.cuprit.logic.auth as auth
 import ckanext.cuprit.logic.action as action
 import ckanext.cuprit.lib.helpers as helpers
 
-class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
+from flask import Blueprint
+import ckanext.cuprit.blueprints as cuprit_blueprints
+from ckan.lib.plugins import DefaultTranslation
+
+class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IDatasetForm)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.ITemplateHelpers)
+    plugins.implements(plugins.IBlueprint)
+    plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.IPackageController, inherit=True)
+
+    # Custom pages
+    def get_blueprint(self):
+        # Create Blueprint for custom routes
+        blueprint = Blueprint(self.name, self.__module__)
+        blueprint.template_folder = u'templates'
+        rules = [
+            (u'/participate', u'render_about_custom_page', cuprit_blueprints.render_about_custom_page),
+        ]
+        for rule in rules:
+            blueprint.add_url_rule(*rule)
+
+        return blueprint
 
     # IConfigurer
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'cuprit')
-    
+
     # IDatasetForm
     def create_package_schema(self):
         schema = super(CupritPlugin, self).create_package_schema()
@@ -29,7 +48,7 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                             toolkit.get_converter('convert_to_extras')]
         })
         return schema
-    
+
     def update_package_schema(self):
         schema = super(CupritPlugin, self).update_package_schema()
         # our custom field
@@ -38,7 +57,7 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                             toolkit.get_converter('convert_to_extras')]
         })
         return schema
-    
+
     def show_package_schema(self):
         schema = super(CupritPlugin, self).show_package_schema()
         schema.update({
@@ -81,7 +100,8 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         Available as h.{helper-name}() in templates.
         '''
         return {
-            'is_editor': helpers.is_editor
+            'is_editor': helpers.is_editor,
+            'get_recent_articles': helpers.get_recent_articles
         }
 
     # IPackageController
