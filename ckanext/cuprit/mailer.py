@@ -38,7 +38,7 @@ def _email_subj(data_dict, object_type='package', event='request'):
     if object_type == 'package':
         object_type_str = 'Package'
 
-    return '[CUPRIT GBR] {0} Publishing {1}: {2}'.format(object_type_str, event.capitalize(), data_dict.get('title') or data_dict.get('name'))
+    return '[DAINST] {0} Publishing {1}: {2}'.format(object_type_str, event.capitalize(), data_dict.get('title') or data_dict.get('name'))
 
 def _email_body(data_dict, user, event='request'):
     '''
