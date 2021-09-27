@@ -1,6 +1,7 @@
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 
+import ckanext.cuprit.mailer as mailer
 import ckanext.cuprit.logic.auth as auth
 import ckanext.cuprit.logic.action as action
 import ckanext.cuprit.lib.helpers as helpers
@@ -17,6 +18,7 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.ITranslation)
+    plugins.implements(plugins.IPackageController, inherit=True)
 
     # Custom pages
     def get_blueprint(self):
@@ -101,3 +103,10 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
             'is_editor': helpers.is_editor,
             'get_recent_articles': helpers.get_recent_articles
         }
+
+    # IPackageController
+    def after_create(self, context, pkg_dict):
+        '''
+        Called after a dataset has been created
+        '''
+        mailer.mail_dataset_created_to_admins(context, pkg_dict)
