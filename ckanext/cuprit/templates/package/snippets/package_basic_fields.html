@@ -1,5 +1,8 @@
 {% ckan_extends %}
 
+{% block package_basic_fields_custom %}
+{% endblock %}
+
 {% block package_metadata_fields_visibility %}
 {% if not h.is_editor(c.user, data.owner_org or data.group) and data.id %}
   {{ super() }}
