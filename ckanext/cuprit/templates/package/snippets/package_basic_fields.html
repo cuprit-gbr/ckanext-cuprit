@@ -1,9 +1,5 @@
 {% ckan_extends %}
 
-{% block package_basic_fields_custom %}
-  {{ form.input('gazetteer_id', label=_('Gazetteer Id'), id='field-gazetteer_id', placeholder=_(''), value=data.gazetteer_id, error=errors.gazetteer_id, classes=['control-medium']) }}
-{% endblock %}
-
 {% block package_metadata_fields_visibility %}
 {% if not h.is_editor(c.user, data.owner_org or data.group) and data.id %}
   {{ super() }}
