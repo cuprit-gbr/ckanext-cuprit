@@ -134,5 +134,4 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         '''
         Called after a dataset has been created
         '''
-        ctx_copy = context.copy()
-        mailer.mail_dataset_created_to_admins(ctx_copy, pkg_dict)
+        mailer.mail_dataset_created_to_admins(context, pkg_dict)
