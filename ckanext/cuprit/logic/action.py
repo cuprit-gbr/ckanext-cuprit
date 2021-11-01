@@ -22,7 +22,7 @@ def _is_user_editor_of_pkg_org(context, data_dict):
     pkg = model.Package.get(name_or_id)
     if pkg is None:
         raise NotFound(_('Package was not found.'))
-    
+
     return authz.is_editor(context, user, pkg.owner_org)
 
 def package_create(context, data_dict):
@@ -33,6 +33,7 @@ def package_create(context, data_dict):
     '''
     #make dataset private by default
     data_dict['private'] = 'True'
+    context["with_capacity"] = False
 
     return core_package_create(context, data_dict)
 
@@ -45,5 +46,6 @@ def package_update(context, data_dict):
     #make dataset private by default if user is editor
     if _is_user_editor_of_pkg_org(context, data_dict):
         data_dict['private'] = 'True'
+    context["with_capacity"] = False
 
     return core_package_update(context, data_dict)
