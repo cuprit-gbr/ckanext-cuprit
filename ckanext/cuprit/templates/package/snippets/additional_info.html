@@ -1,10 +1,28 @@
 {% ckan_extends %}
 
 {% block extras %}
-  {% if pkg_dict.gazetteer_id %}
+  {% if pkg_dict.publisher %}
     <tr>
-      <th scope="row" class="dataset-label">{{ _("Gazetteer Id") }}</th>
-      <td class="dataset-details">{{ pkg_dict.gazetteer_id }}</td>
+      <th scope="row" class="dataset-label">{{ _("Publisher") }}</th>
+      <td class="dataset-details">{{ pkg_dict.publisher }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.contributor %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Contributor") }}</th>
+      <td class="dataset-details">{{ pkg_dict.contributor }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.in_language %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("In Language") }}</th>
+      <td class="dataset-details">{{ pkg_dict.in_language }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.type_of_publication %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Publication Type") }}</th>
+      <td class="dataset-details">{{ pkg_dict.type_of_publication }}</td>
     </tr>
   {% endif %}
 {% endblock %}

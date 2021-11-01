@@ -10,6 +10,7 @@ from flask import Blueprint
 import ckanext.cuprit.blueprints as cuprit_blueprints
 from ckan.lib.plugins import DefaultTranslation
 
+
 class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IDatasetForm)
@@ -39,29 +40,53 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'cuprit')
 
-    # IDatasetForm
-    def create_package_schema(self):
-        schema = super(CupritPlugin, self).create_package_schema()
-        # our custom field
+
+    def _modify_package_schema(self, schema):
         schema.update({
-            'gazetteer_id': [toolkit.get_validator('ignore_missing'),
+            'publisher': [toolkit.get_validator('ignore_missing'),
+                            toolkit.get_converter('convert_to_extras')]
+        })
+        schema.update({
+            'contributor': [toolkit.get_validator('ignore_missing'),
+                            toolkit.get_converter('convert_to_extras')]
+        })
+        schema.update({
+            'in_language': [toolkit.get_validator('ignore_missing'),
+                            toolkit.get_converter('convert_to_extras')]
+        })
+        schema.update({
+            'type_of_publication': [toolkit.get_validator('ignore_missing'),
                             toolkit.get_converter('convert_to_extras')]
         })
         return schema
 
+    # IDatasetForm
+    def create_package_schema(self):
+        schema = super(CupritPlugin, self).create_package_schema()
+        schema = self._modify_package_schema(schema)
+        return schema
+
     def update_package_schema(self):
         schema = super(CupritPlugin, self).update_package_schema()
-        # our custom field
-        schema.update({
-            'gazetteer_id': [toolkit.get_validator('ignore_missing'),
-                            toolkit.get_converter('convert_to_extras')]
-        })
+        schema = self._modify_package_schema(schema)
         return schema
 
     def show_package_schema(self):
         schema = super(CupritPlugin, self).show_package_schema()
         schema.update({
-            'gazetteer_id': [toolkit.get_converter('convert_from_extras'),
+            'publisher': [toolkit.get_converter('convert_from_extras'),
+                            toolkit.get_validator('ignore_missing')]
+        })
+        schema.update({
+            'contributor': [toolkit.get_converter('convert_from_extras'),
+                            toolkit.get_validator('ignore_missing')]
+        })
+        schema.update({
+            'in_language': [toolkit.get_converter('convert_from_extras'),
+                            toolkit.get_validator('ignore_missing')]
+        })
+        schema.update({
+            'type_of_publication': [toolkit.get_converter('convert_from_extras'),
                             toolkit.get_validator('ignore_missing')]
         })
         return schema
@@ -109,4 +134,5 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         '''
         Called after a dataset has been created
         '''
-        mailer.mail_dataset_created_to_admins(context, pkg_dict)
+        ctx_copy = context.copy()
+        mailer.mail_dataset_created_to_admins(ctx_copy, pkg_dict)
