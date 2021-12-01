@@ -1,7 +1,7 @@
 import ckan.logic.auth as logic_auth
 from ckan.logic.auth.update import package_update as core_package_update_auth
 
-from ckanext.cuprit.logic.authz import(
+from ckanext.cuprit.logic.auth_utils import(
     get_user,
     is_editor
 )

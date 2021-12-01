@@ -1,4 +1,4 @@
-import ckanext.cuprit.logic.authz as authz
+import ckanext.cuprit.logic.auth_utils as auth_utils
 import ckan.plugins.toolkit as tk
 
 
@@ -15,7 +15,7 @@ def is_editor(user, office=None):
     :returns: True/False
     :rtype: boolean
     """
-    return authz.is_editor({'user': user}, {'user': user}, office)
+    return auth_utils.is_editor({'user': user}, {'user': user}, office)
 
 def get_recent_articles():
     """

@@ -1,5 +1,8 @@
+import distutils
+
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+from ckan.common import config
 
 import ckanext.cuprit.mailer as mailer
 import ckanext.cuprit.logic.auth as auth
@@ -20,6 +23,44 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.IPackageController, inherit=True)
+    plugins.implements(plugins.IRoutes)
+
+    def _get_config_value(self, key):
+        if config.get(key):
+            if config.get(key).lower() in ['true', 'false']:
+                return bool(distutils.util.strtobool(config.get(key)))
+            else:
+                return config.get(key)
+        else:
+            return ''
+
+    def _modify_create_package_schema(self, schema):
+        options = {
+            'default' : [toolkit.get_validator('ignore_missing'),
+                            toolkit.get_converter('convert_to_extras')]
+        }
+        
+        schema.update({
+            'publisher': options.get('default'),
+            'contributor': options.get('default'),
+            'in_language': options.get('default'),
+            'type_of_publication': options.get('default')
+        })
+
+        return schema
+
+    def _modify_show_package_schema(self, schema):
+        options = {
+            'default' : [toolkit.get_converter('convert_from_extras'),
+                            toolkit.get_validator('ignore_missing')]
+        }
+        schema.update({
+            'publisher': options.get('default'),
+            'contributor': options.get('default'),
+            'in_language': options.get('default'),
+            'type_of_publication': options.get('default')                
+        })
+        return schema
 
     # Custom pages
     def get_blueprint(self):
@@ -39,56 +80,21 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'cuprit')
-
-
-    def _modify_package_schema(self, schema):
-        schema.update({
-            'publisher': [toolkit.get_validator('ignore_missing'),
-                            toolkit.get_converter('convert_to_extras')]
-        })
-        schema.update({
-            'contributor': [toolkit.get_validator('ignore_missing'),
-                            toolkit.get_converter('convert_to_extras')]
-        })
-        schema.update({
-            'in_language': [toolkit.get_validator('ignore_missing'),
-                            toolkit.get_converter('convert_to_extras')]
-        })
-        schema.update({
-            'type_of_publication': [toolkit.get_validator('ignore_missing'),
-                            toolkit.get_converter('convert_to_extras')]
-        })
-        return schema
-
+            
     # IDatasetForm
     def create_package_schema(self):
         schema = super(CupritPlugin, self).create_package_schema()
-        schema = self._modify_package_schema(schema)
+        schema = self._modify_create_package_schema(schema)
         return schema
 
     def update_package_schema(self):
         schema = super(CupritPlugin, self).update_package_schema()
-        schema = self._modify_package_schema(schema)
+        schema = self._modify_create_package_schema(schema)
         return schema
 
     def show_package_schema(self):
         schema = super(CupritPlugin, self).show_package_schema()
-        schema.update({
-            'publisher': [toolkit.get_converter('convert_from_extras'),
-                            toolkit.get_validator('ignore_missing')]
-        })
-        schema.update({
-            'contributor': [toolkit.get_converter('convert_from_extras'),
-                            toolkit.get_validator('ignore_missing')]
-        })
-        schema.update({
-            'in_language': [toolkit.get_converter('convert_from_extras'),
-                            toolkit.get_validator('ignore_missing')]
-        })
-        schema.update({
-            'type_of_publication': [toolkit.get_converter('convert_from_extras'),
-                            toolkit.get_validator('ignore_missing')]
-        })
+        schema = self._modify_show_package_schema(schema)
         return schema
 
     def is_fallback(self):
@@ -134,4 +140,5 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         '''
         Called after a dataset has been created
         '''
-        mailer.mail_dataset_created_to_admins(context, pkg_dict)
+        if self._get_config_value('ckanext.cuprit.email_sender'):
+            mailer.mail_dataset_created_to_admins(context, pkg_dict)
