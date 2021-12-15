@@ -60,6 +60,7 @@
       ".topojson": "application/json",
       ".ttf": "text/plain",
       ".wfs": "application/xml",
-      ".wmts": "application/xml"
+      ".wmts": "application/xml",
+      ".jsonl": "application/octet-stream"
   }
 }
