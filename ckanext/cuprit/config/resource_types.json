@@ -1,6 +1,6 @@
 {
   "allowed_extensions": [
-      "csv", "xls", "odt", "rdf", "txt", "jpeg", "png", "tiff", "pdf", "json", "xlsx"
+      "csv", "odt", "rdf", "txt", "jpeg", "png", "tiff", "pdf", "json", "xlsx", "xml", "mkv", "geojson", "tsv", "geotiff", "txt", "docx", "ods", "wld", "svg", "sql", "jsonl"
   ],
   "allowed_overrides": {
       "application/octet-stream": ["*"],
