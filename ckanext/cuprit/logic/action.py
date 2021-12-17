@@ -1,6 +1,7 @@
 from ckan.common import _
 from ckan.logic.action.create import package_create as core_package_create
 from ckan.logic.action.update import package_update as core_package_update
+import ckan.plugins.toolkit as toolkit
 
 import ckanext.cuprit.logic.auth_utils as auth_utils
 
@@ -32,7 +33,6 @@ def package_update(context, data_dict):
 
     return core_package_update(context, data_dict)
 
-def get_conf(context,data_dict):
-  # Custom config enpoint
-    if auth_utils.is_user_editor_of_pkg_org(context, data_dict):
-        return {"hello":"world"}
+@toolkit.side_effect_free
+def get_conf(context,data_dict=None):
+    return {"hello":"world"}
