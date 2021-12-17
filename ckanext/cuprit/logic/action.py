@@ -35,4 +35,10 @@ def package_update(context, data_dict):
 
 @toolkit.side_effect_free
 def get_conf(context,data_dict=None):
-    return {"hello":"world"}
+    max_size = toolkit.config.get("ckan.max_resource.size")
+    ext_file = open('/srv/app/src/ckanext-cuprit/ckanext/cuprit/public/allowed_extensions.json')
+    ext = json.load(ext_file)
+    return {
+        "max_size": max_size,
+        "ext": ext['allowed_extensions']
+     
