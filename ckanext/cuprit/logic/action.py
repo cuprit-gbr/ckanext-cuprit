@@ -31,3 +31,8 @@ def package_update(context, data_dict):
     context["with_capacity"] = False
 
     return core_package_update(context, data_dict)
+
+def get_conf(context,data_dict):
+  # Custom config enpoint
+    if auth_utils.is_user_editor_of_pkg_org(context, data_dict):
+        return {"hello":"world"}
