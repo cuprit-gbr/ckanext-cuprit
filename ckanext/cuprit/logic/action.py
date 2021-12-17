@@ -41,4 +41,4 @@ def get_conf(context,data_dict=None):
     return {
         "max_size": max_size,
         "ext": ext['allowed_extensions']
-     
+    }
