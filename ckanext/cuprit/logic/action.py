@@ -4,6 +4,7 @@ from ckan.logic.action.update import package_update as core_package_update
 import ckan.plugins.toolkit as toolkit
 
 import ckanext.cuprit.logic.auth_utils as auth_utils
+import json
 
 from logging import getLogger
 log = getLogger(__name__)
@@ -35,6 +36,7 @@ def package_update(context, data_dict):
 
 @toolkit.side_effect_free
 def get_conf(context,data_dict=None):
+    # toolkit.check_access('datastore_create', context, data_dict)
     max_size = toolkit.config.get("ckan.max_resource.size")
     ext_file = open('/srv/app/src/ckanext-cuprit/ckanext/cuprit/public/allowed_extensions.json')
     ext = json.load(ext_file)
