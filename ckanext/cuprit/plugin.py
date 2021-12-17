@@ -121,7 +121,8 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         '''
         return {
             'package_create': action.package_create,
-            'package_update': action.package_update
+            'package_update': action.package_update,
+            'get_conf': action.get_conf
         }
 
     # ITemplateHelpers
