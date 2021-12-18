@@ -6,6 +6,7 @@ from ckan import authz
 
 import ckanext.cuprit.logic.auth_utils as auth_utils
 import json
+import os
 
 from logging import getLogger
 log = getLogger(__name__)
@@ -37,15 +38,23 @@ def package_update(context, data_dict):
 
 @toolkit.side_effect_free
 def get_conf(context,data_dict=None):
-    is_logged_in = authz.auth_is_loggedin_user()
-    if not is_logged_in:
-        return {}
+    
+    ## it looks this does not respect api auth with token ;(
+    # is_logged_in = authz.auth_is_loggedin_user()
+    # if not is_logged_in:
+    #    return {}
   
-    max_size = toolkit.config.get("ckan.max_resource.size")
-    # TODO: refactor read path from settings
-    ext_file = open('/srv/app/src/ckanext-cuprit/ckanext/cuprit/public/allowed_extensions.json')
-    ext = json.load(ext_file)
-    return {
-        "max_size": max_size,
-        "ext": ext['allowed_extensions']
-    }
+    # toolkit.config.get("ckan.max_resource.size")
+    # does not work so read from env by now
+    max_size = os.getenv('CKAN__MAX_RESOURCE_SIZE')
+    
+    ext_file = os.getenv('CKANEXT__RESOURCE_VALIDATION__TYPES_FILE')
+    try:
+        read_ext_file = open(ext_file)
+        ext_file_content = json.load(read_ext_file)
+        return {
+            "max_size": max_size,
+            "ext": ext_file_content['allowed_extensions']
+        }
+    except:
+        return {"error": "Cannot read ext file"}
