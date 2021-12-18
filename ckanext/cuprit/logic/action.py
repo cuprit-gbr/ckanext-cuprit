@@ -2,6 +2,7 @@ from ckan.common import _
 from ckan.logic.action.create import package_create as core_package_create
 from ckan.logic.action.update import package_update as core_package_update
 import ckan.plugins.toolkit as toolkit
+from ckan import authz
 
 import ckanext.cuprit.logic.auth_utils as auth_utils
 import json
@@ -36,8 +37,12 @@ def package_update(context, data_dict):
 
 @toolkit.side_effect_free
 def get_conf(context,data_dict=None):
-    # toolkit.check_access('datastore_create', context, data_dict)
+    is_logged_in = authz.auth_is_loggedin_user()
+    if not is_logged_in:
+        return {}
+  
     max_size = toolkit.config.get("ckan.max_resource.size")
+    # TODO: refactor read path from settings
     ext_file = open('/srv/app/src/ckanext-cuprit/ckanext/cuprit/public/allowed_extensions.json')
     ext = json.load(ext_file)
     return {
