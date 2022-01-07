@@ -52,14 +52,24 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
 
     def _modify_show_package_schema(self, schema):
         options = {
-            'default' : [toolkit.get_converter('convert_from_extras'),
-                            toolkit.get_validator('ignore_missing')]
+            'default': [toolkit.get_converter('convert_from_extras'),
+                            toolkit.get_validator('ignore_missing')],
+            'force': [toolkit.get_converter('convert_from_extras'),
+                            toolkit.get_validator('not_empty')]
         }
         schema.update({
+            'notes': options.get('force'),
+            'version': options.get('force'),
+            'author': options.get('force'),
+            'author_email': options.get('force'),
+            'maintainer': options.get('force'),
+            'maintainer_email': options.get('force'),
+            'publisher': options.get('force'),
+             # custom fields
             'publisher': options.get('default'),
             'contributor': options.get('default'),
-            'in_language': options.get('default'),
-            'type_of_publication': options.get('default')                
+            'in_language': options.get('force'),
+            'type_of_publication': options.get('force')                
         })
         return schema
 
