@@ -116,7 +116,7 @@ nameField.addEventListener ('change', function (event, initial_value) {
         var dirty_value = document.getElementById('field-image-url').value
       }
       
-      cleaned_value = dirty_value.replace(/  +/g, ' ').replace(/\s/g,'_').replace(/\./g,'')
+      cleaned_value = dirty_value.replace(/  +/g, ' ').replace(/\s/g,'_')
       cleaned_value = replaceUmlaute(cleaned_value)
       event.target.value = cleaned_value
    }
