@@ -3,6 +3,8 @@
 {% block custom_fields %}
 {{ form.input('publisher', label=_('Publisher'), id='field-publisher', placeholder=_('Firstname Lastname'), value=data.publisher, error=errors.publisher, classes=['control-medium']) }}
 {{ form.input('contributor', label=_('Contributor'), id='field-contributor', placeholder=_('Firstname Lastname'), value=data.contributor, error=errors.contributor, classes=['control-medium']) }}
+{{ form.input('ror_id', label=_('ROR ID'), id='field-ror_id', placeholder=_('Your ROR ID'), value=data.ror_id, error=errors.ror_id, classes=['control-medium']) }}
+{{ form.input('orcid_id', label=_('ORCID ID'), id='field-orcid_id', placeholder=_('Your ORCID ID'), value=data.orcid_id, error=errors.orcid_id, classes=['control-medium']) }}
 {{ form.input('in_language', label=_('Published in language'), id='field-in_language', placeholder=_('English, French, Italien'), value=data.in_language, error=errors.in_language, classes=['control-medium']) }}
 {{ form.input('type_of_publication', label=_('Publication Type'), id='field-type_of_publication', placeholder=_('Book, Leaflet, Digital goods'), value=data.type_of_publication, error=errors.type_of_publication, classes=['control-medium']) }}
 {% endblock %}

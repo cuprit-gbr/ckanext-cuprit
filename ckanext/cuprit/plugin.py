@@ -54,6 +54,8 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
             'maintainer_email': options.get('force_default'),
             'publisher': options.get('force_extras'),
             'contributor': options.get('force_extras'),
+            'ROR ID': options.get('default'),
+            'ORCID ID': options.get('default'),
             'in_language': options.get('force_extras'),
             'type_of_publication': options.get('force_extras')
         })
@@ -68,6 +70,8 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         schema.update({
             'publisher': options.get('default'),
             'contributor': options.get('default'),
+            'ror_id': options.get('default'),
+            'orcid_id': options.get('default'),
             'in_language': options.get('default'),
             'type_of_publication': options.get('default')
         })
