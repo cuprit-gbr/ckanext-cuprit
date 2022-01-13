@@ -13,18 +13,6 @@
       <td class="dataset-details">{{ pkg_dict.contributor }}</td>
     </tr>
   {% endif %}
-  {% if pkg_dict.contributor %}
-    <tr>
-      <th scope="row" class="dataset-label">{{ _("Contributor") }}</th>
-      <td class="dataset-details">{{ pkg_dict.contributor }}</td>
-    </tr>
-  {% endif %}
-  {% if pkg_dict.contributor %}
-    <tr>
-      <th scope="row" class="dataset-label">{{ _("Contributor") }}</th>
-      <td class="dataset-details">{{ pkg_dict.contributor }}</td>
-    </tr>
-  {% endif %}
   {% if pkg_dict.ror_id %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("ROR ID") }}</th>
@@ -35,6 +23,18 @@
     <tr>
       <th scope="row" class="dataset-label">{{ _("ORCID ID") }}</th>
       <td class="dataset-details">{{ pkg_dict.orcid_id }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.in_language %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("In Language") }}</th>
+      <td class="dataset-details">{{ pkg_dict.in_language }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.type_of_publication %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Publication Type") }}</th>
+      <td class="dataset-details">{{ pkg_dict.type_of_publication }}</td>
     </tr>
   {% endif %}
 {% endblock %}
