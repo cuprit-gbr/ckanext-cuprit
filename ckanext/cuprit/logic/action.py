@@ -3,10 +3,9 @@ from ckan.logic.action.create import package_create as core_package_create
 from ckan.logic.action.update import package_update as core_package_update
 import ckan.plugins.toolkit as toolkit
 from ckan import authz
+import ckan.lib.helpers as h
 
 import ckanext.cuprit.logic.auth_utils as auth_utils
-import json
-import os
 
 from logging import getLogger
 log = getLogger(__name__)
@@ -21,7 +20,11 @@ def package_create(context, data_dict):
     data_dict['private'] = 'True'
     context["with_capacity"] = False
 
-    return core_package_create(context, data_dict)
+    created_dataset = core_package_create(context, data_dict)
+    if created_dataset:
+        h.flash_success("Thank you for creating a dataset. Admins will receive a notification to check and publish your dataset.")
+
+    return created_dataset
 
 def package_update(context, data_dict):
     '''
