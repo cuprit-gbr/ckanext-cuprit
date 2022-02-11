@@ -1,21 +1,39 @@
 {% ckan_extends %}
 
 {% block extras %}
+{% if pkg_dict.subtitle %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Subtitle") }}</th>
+  <td class="dataset-details">{{ pkg_dict.subtitle }}</td>
+</tr>
+{% endif %}
   {% if pkg_dict.publisher %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Publisher") }}</th>
       <td class="dataset-details">{{ pkg_dict.publisher }}</td>
     </tr>
   {% endif %}
+  {% if pkg_dict.funding %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Funding") }}</th>
+      <td class="dataset-details">{{ pkg_dict.funding }}</td>
+    </tr>
+  {% endif %}
   {% if pkg_dict.contributor %}
     <tr>
-      <th scope="row" class="dataset-label">{{ _("Contributor") }}</th>
+      <th scope="row" class="dataset-label">{{ _("Contributor(s)") }}</th>
       <td class="dataset-details">{{ pkg_dict.contributor }}</td>
     </tr>
   {% endif %}
+  {% if pkg_dict.contributor %}
+  <tr>
+    <th scope="row" class="dataset-label">{{ _("Contributor(s) ORCID ID(s)") }}</th>
+    <td class="dataset-details">{{ pkg_dict.contributor }}</td>
+  </tr>
+{% endif %}
   {% if pkg_dict.ror_id %}
     <tr>
-      <th scope="row" class="dataset-label">{{ _("ROR ID") }}</th>
+      <th scope="row" class="dataset-label">{{ _("Author(s) ROR ID(s)") }}</th>
       <td class="dataset-details">{{ pkg_dict.ror_id }}</td>
     </tr>
   {% endif %}
@@ -33,8 +51,21 @@
   {% endif %}
   {% if pkg_dict.type_of_publication %}
     <tr>
-      <th scope="row" class="dataset-label">{{ _("Publication Type") }}</th>
+      <th scope="row" class="dataset-label">{{ _("Resource Type General") }}</th>
       <td class="dataset-details">{{ pkg_dict.type_of_publication }}</td>
     </tr>
   {% endif %}
+{% if pkg_dict.doi %}
+  <tr>
+    <th scope="row" class="dataset-label">{{ _("DOI") }}</th>
+    <td class="dataset-details">{{ pkg_dict.doi }}</td>
+  </tr>
+{% endif %}
+{% if pkg_dict.related_resources %}
+  <tr>
+    {% set rel = h.render_markdown(pkg_dict.related_resources) %}
+    <th scope="row" class="dataset-label">{{ _("Related Resources") }}</th>
+    <td class="dataset-details">{{ rel }}</td>
+  </tr>
+{% endif %}
 {% endblock %}

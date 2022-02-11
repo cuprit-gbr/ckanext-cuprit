@@ -1,10 +1,60 @@
 {% ckan_extends %}
 
-{% block package_basic_fields_custom %}
-{% endblock %}
-
 {% block package_metadata_fields_visibility %}
 {% if not h.is_editor(c.user, data.owner_org or data.group) and data.id %}
   {{ super() }}
 {% endif %}
 {% endblock %}
+
+
+{% block package_basic_fields_org %}
+  {% if c.userobj.sysadmin %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}
+
+
+{% block package_basic_fields_title %}
+<fieldset>
+  <legend>General Dataset Information</legend>
+  {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('eg. A descriptive title'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
+  {{ form.input('subtitle', label=_('Subtitle'), id='field-subtitle', placeholder=_('Project Name'), value=data.subtitle, error=errors.subtitle, classes=['control-medium']) }}
+  {{ form.input('funding', label=_('Funding'), id='field-funding', placeholder=_('Funding authority'), value=data.funding, error=errors.funding, classes=['control-medium']) }}
+  {{ form.input('version', label=_('Version'), id='field-version', placeholder=_('1.0'), value=data.version, error=errors.version, classes=['control-medium']) }}
+
+  {{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes) }}
+
+
+  <div class="form-group">
+    {% set error = errors.type_of_publication %}
+    <label class="control-label" for="type_of_publication">Resource Type General</label>
+    <div class="controls">
+      <div class="row">
+        <div class="col-md-6">
+          <select id="type_of_publication" name="type_of_publication" data-module="autocomplete">
+            {% set existing_type_of_publication = data.get('type_of_publication') %}
+            {% set empty_type = _('Please select a general resource type') %}
+            <option value="">{{ empty_type }}</option>
+            {% for res_id, res_desc in h.resource_types %}
+              <option value="{{ res_id }}" {% if existing_type_of_publication == res_id %}selected="selected"{% endif %}>{{ res_desc }}</option>
+            {% endfor %}
+          </select>
+          {% if error %}<span class="error-block">{{ error }}</span>{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{{ form.input('in_language', label=_('Published in language'), id='field-in_language', placeholder=_('English, French, Italien'), value=data.in_language, error=errors.in_language, classes=['control-medium']) }}
+
+{{ form.markdown('related_resources', label=_('Related Resources (URLS, Literature)'), id='field-related_resources', placeholder=_('Book, Leaflet, Digital goods'), value=data.related_resources, error=errors.related_resources, classes=['control-small']) }}
+
+{% if c.userobj.sysadmin %}
+  {{ form.input('doi', label=_('DOI'), id='field-doi', placeholder=_('The dataset DOI (datacite.org) if present'), value=data.doi, error=errors.doi, classes=['control-medium']) }}
+{% endif %}
+
+{% block package_basic_fields_description %}
+{% endblock %}
+
+{% endblock %}
+

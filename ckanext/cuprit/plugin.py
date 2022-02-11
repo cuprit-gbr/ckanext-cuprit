@@ -12,7 +12,7 @@ import ckanext.cuprit.lib.helpers as helpers
 from flask import Blueprint
 import ckanext.cuprit.blueprints as cuprit_blueprints
 from ckan.lib.plugins import DefaultTranslation
-
+from ckanext.cuprit.lib.choices import resource_types
 
 class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
@@ -42,22 +42,30 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
             'force_extras': [toolkit.get_validator('ignore_missing'),
                         toolkit.get_converter('convert_to_extras'),
                         toolkit.get_validator('not_empty')],
-            'force_default': [toolkit.get_validator('not_empty'),
-                        toolkit.get_validator('not_empty')]
+            'force_default': [toolkit.get_validator('not_empty')]
         }
         schema.update({
-            'notes': options.get('force_default'),
+            'title': options.get('force_default'),
+            'subtitle': options.get('default'),
+            'notes': options.get('default'),
+            'funding': options.get('default'),
             'version': options.get('force_default'),
+            'license_id': options.get('force_default'),
+            'notes': options.get('force_default'),
             'author': options.get('force_default'),
             'author_email': options.get('force_default'),
             'maintainer': options.get('force_default'),
             'maintainer_email': options.get('force_default'),
             'publisher': options.get('force_extras'),
-            'contributor': options.get('force_extras'),
+            'contributor': options.get('default'),
+            'contributor_orcid_id': options.get('default'),
             'ror_id': options.get('default'),
             'orcid_id': options.get('default'),
             'in_language': options.get('force_extras'),
-            'type_of_publication': options.get('force_extras')
+            'type_of_publication': options.get('force_extras'),
+            'doi': options.get('default'),
+            'related_resources': options.get('default'),
+            
         })
         
         return schema
@@ -70,10 +78,17 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         schema.update({
             'publisher': options.get('default'),
             'contributor': options.get('default'),
+            'contributor_orcid_id': options.get('default'),
             'ror_id': options.get('default'),
             'orcid_id': options.get('default'),
             'in_language': options.get('default'),
-            'type_of_publication': options.get('default')
+            'type_of_publication': options.get('default'),
+            'doi': options.get('default'),
+            'funding': options.get('default'),
+            'subtitle': options.get('default'),
+            'related_resources': options.get('default'),
+
+
         })
         return schema
 
@@ -165,7 +180,8 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         '''
         return {
             'is_editor': helpers.is_editor,
-            'get_recent_articles': helpers.get_recent_articles
+            'get_recent_articles': helpers.get_recent_articles,
+            'resource_types': resource_types
         }
 
     # IPackageController

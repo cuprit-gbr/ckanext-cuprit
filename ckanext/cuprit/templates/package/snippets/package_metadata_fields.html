@@ -1,10 +1,42 @@
 {% ckan_extends %}
 
-{% block custom_fields %}
-{{ form.input('publisher', label=_('Publisher'), id='field-publisher', placeholder=_('Firstname Lastname'), value=data.publisher, error=errors.publisher, classes=['control-medium']) }}
-{{ form.input('contributor', label=_('Contributor'), id='field-contributor', placeholder=_('Firstname Lastname'), value=data.contributor, error=errors.contributor, classes=['control-medium']) }}
-{{ form.input('ror_id', label=_('ROR ID'), id='field-ror_id', placeholder=_('Your ROR ID'), value=data.ror_id, error=errors.ror_id, classes=['control-medium']) }}
-{{ form.input('orcid_id', label=_('ORCID ID'), id='field-orcid_id', placeholder=_('Your ORCID ID'), value=data.orcid_id, error=errors.orcid_id, classes=['control-medium']) }}
-{{ form.input('in_language', label=_('Published in language'), id='field-in_language', placeholder=_('English, French, Italien'), value=data.in_language, error=errors.in_language, classes=['control-medium']) }}
-{{ form.input('type_of_publication', label=_('Publication Type'), id='field-type_of_publication', placeholder=_('Book, Leaflet, Digital goods'), value=data.type_of_publication, error=errors.type_of_publication, classes=['control-medium']) }}
+{% block package_metadata_author %}
+</fieldset>
+<fieldset>
+  <legend>Responsibilities</legend>
+    {{ form.input('author', label=_('Author(s)'), id='field-author', placeholder=_('Firstname Lastname of author'), value=data.author, error=errors.author, classes=['control-medium']) }}
+
+    {{ form.input('author_email', label=_('Author Email'), id='field-author-email', placeholder=_('erika.mustermann@dainst.de'), value=data.author_email, error=errors.author_email, classes=['control-medium']) }}
+    {{ form.input('orcid_id', label=_('Author(s) ORCID ID(s)'), id='field-orcid_id', placeholder=_('0000-0002-4087-4023; 0000-0002-4087-4024 | Divided by semicolon'), value=data.orcid_id, error=errors.orcid_id, classes=['control-medium']) }}
+    {{ form.input('contributor', label=_('Contributor'), id='field-contributor', placeholder=_('Firstname Lastname of person who contributed to this work'), value=data.contributor, error=errors.contributor, classes=['control-medium']) }} 
+    {{ form.input('contributor_orcid_id', label=_('Contributor(s) ORCID ID(s)'), id='field-contributor_orcid_id', placeholder=_('0000-0002-4087-4023; 0000-0002-4087-4024 | Divided by semicolon'), value=data.contributor_orcid_id, error=errors.contributor_orcid_id, classes=['control-medium']) }}
+
+    <hr>
+    {{ form.input('ror_id', label=_('ROR ID (of organization)'), id='field-ror_id', placeholder=_('https://ror.org/041qv0h25'), value=data.ror_id, error=errors.ror_id, classes=['control-medium']) }}
+    {% endblock %}
+
+    {% block package_metadata_fields_maintainer %}
+<hr>
+    {{ form.input('maintainer', label=_('Maintainer'), id='field-maintainer', placeholder=_('Firstname Lastname of person that maintains this dataset'), value=data.maintainer, error=errors.maintainer, classes=['control-medium']) }}
+
+      {{ form.input('maintainer_email', label=_('Maintainer Email'), id='field-maintainer-email', placeholder=_('max.mustermannk@dainst.de'), value=data.maintainer_email, error=errors.maintainer_email, classes=['control-medium']) }}
+
+    {% endblock %}
+
+    {% block custom_fields %}
+<hr>
+    {{ form.input('publisher', label=_('Publisher'), id='field-publisher', placeholder=_('DAI or other publishing house'), value=data.publisher, error=errors.publisher, classes=['control-medium']) }}
+
+
+</fieldset>
+
+
 {% endblock %}
+
+{% block package_metadata_fields_url %}
+{% endblock %}
+{% block package_metadata_fields_version %}
+{% endblock %}
+
+
+
