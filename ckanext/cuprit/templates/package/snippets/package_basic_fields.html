@@ -45,6 +45,19 @@
     </div>
   </div>
 
+      <div class="form-group control-medium">
+        <label for="field-organizations" class="form-label">{{ _('Organization') }}</label><br>
+        <select id="field-organizations" name="owner_org" disabled>
+          {% set organizations_available = h.organizations_available('create_dataset') %}
+          {% for organization in organizations_available %}
+            {# get out first org from users list only if there is not an existing org #}
+          {% set selected_org = (existing_org and existing_org == organization.id) or (not existing_org and not data.id and organization.id == organizations_available[0].id) %}
+          <option value="{{ organization.id }}" {% if selected_org %} selected="selected" {% endif %}>{{ organization.display_name }}</option>
+          {% endfor %}
+        </select>
+    </div>
+
+
 {{ form.input('in_language', label=_('Published in language'), id='field-in_language', placeholder=_('English, French, Italien'), value=data.in_language, error=errors.in_language, classes=['control-medium']) }}
 
 {{ form.markdown('related_resources', label=_('Related Resources (URLS, Literature)'), id='field-related_resources', placeholder=_('Book, Leaflet, Digital goods'), value=data.related_resources, error=errors.related_resources, classes=['control-small']) }}
