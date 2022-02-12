@@ -6,7 +6,7 @@
   <legend>Responsibilities</legend>
     {{ form.input('author', label=_('Author(s)'), id='field-author', placeholder=_('Firstname Lastname of author'), value=data.author, error=errors.author, classes=['control-medium']) }}
 
-    {{ form.input('author_email', label=_('Author Email'), id='field-author-email', placeholder=_('erika.mustermann@dainst.de'), value=data.author_email, error=errors.author_email, classes=['control-medium']) }}
+    {{ form.input('author_email', label=_('Author Email'), id='field-author-email', placeholder=_('erika.mustermann@dainst.de (currently only one E-mail address supported!)'), value=data.author_email, error=errors.author_email, classes=['control-medium']) }}
     {{ form.input('orcid_id', label=_('Author(s) ORCID ID(s)'), id='field-orcid_id', placeholder=_('0000-0002-4087-4023; 0000-0002-4087-4024 | Divided by semicolon'), value=data.orcid_id, error=errors.orcid_id, classes=['control-medium']) }}
     {{ form.input('contributor', label=_('Contributor'), id='field-contributor', placeholder=_('Firstname Lastname of person who contributed to this work'), value=data.contributor, error=errors.contributor, classes=['control-medium']) }} 
     {{ form.input('contributor_orcid_id', label=_('Contributor(s) ORCID ID(s)'), id='field-contributor_orcid_id', placeholder=_('0000-0002-4087-4023; 0000-0002-4087-4024 | Divided by semicolon'), value=data.contributor_orcid_id, error=errors.contributor_orcid_id, classes=['control-medium']) }}
@@ -19,7 +19,7 @@
 <hr>
     {{ form.input('maintainer', label=_('Maintainer'), id='field-maintainer', placeholder=_('Firstname Lastname of person that maintains this dataset'), value=data.maintainer, error=errors.maintainer, classes=['control-medium']) }}
 
-      {{ form.input('maintainer_email', label=_('Maintainer Email'), id='field-maintainer-email', placeholder=_('max.mustermannk@dainst.de'), value=data.maintainer_email, error=errors.maintainer_email, classes=['control-medium']) }}
+      {{ form.input('maintainer_email', label=_('Maintainer Email'), id='field-maintainer-email', placeholder=_('max.mustermannk@dainst.de (currently only one E-mail address supported!)'), value=data.maintainer_email, error=errors.maintainer_email, classes=['control-medium']) }}
 
     {% endblock %}
 
