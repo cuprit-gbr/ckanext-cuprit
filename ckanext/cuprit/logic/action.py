@@ -3,6 +3,7 @@ from ckan.logic.action.create import package_create as core_package_create
 from ckan.logic.action.update import package_update as core_package_update
 import ckan.plugins.toolkit as toolkit
 from ckan import authz
+import os
 import ckan.lib.helpers as h
 
 import ckanext.cuprit.logic.auth_utils as auth_utils
