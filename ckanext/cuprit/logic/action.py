@@ -7,6 +7,7 @@ import os
 import ckan.lib.helpers as h
 
 import ckanext.cuprit.logic.auth_utils as auth_utils
+import json
 
 from logging import getLogger
 log = getLogger(__name__)
