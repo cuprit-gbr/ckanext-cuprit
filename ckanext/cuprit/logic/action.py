@@ -49,9 +49,10 @@ def get_conf(context,data_dict=None):
   
     # toolkit.config.get("ckan.max_resource.size")
     # does not work so read from env by now
-    max_size = os.getenv('CKAN__MAX_RESOURCE_SIZE')
+    max_size = os.getenv('CKAN__MAX_RESOURCE_SIZE', 200)
     
-    ext_file = os.getenv('CKANEXT__RESOURCE_VALIDATION__TYPES_FILE')
+    ext_file = os.getenv('CKANEXT__RESOURCE_VALIDATION__TYPES_FILE',
+                         '/srv/app/src/ckanext-cuprit/ckanext/cuprit/config/resource_types.json')
     try:
         read_ext_file = open(ext_file)
         ext_file_content = json.load(read_ext_file)
