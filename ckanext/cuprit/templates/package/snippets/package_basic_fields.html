@@ -47,7 +47,7 @@
 
       <div class="form-group control-medium">
         <label for="field-organizations" class="form-label">{{ _('Organization') }}</label><br>
-        <select id="field-organizations" name="owner_org" disabled>
+        <select id="field-organizations" name="owner_org" readonly="readonly" >
           {% set organizations_available = h.organizations_available('create_dataset') %}
           {% for organization in organizations_available %}
             {# get out first org from users list only if there is not an existing org #}
