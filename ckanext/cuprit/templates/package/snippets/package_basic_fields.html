@@ -45,6 +45,7 @@
     </div>
   </div>
 
+{% if not c.userobj.sysadmin %}
       <div class="form-group control-medium">
         <label for="field-organizations" class="form-label">{{ _('Organization') }}</label><br>
         <select id="field-organizations" name="owner_org" readonly="readonly" >
@@ -56,7 +57,7 @@
           {% endfor %}
         </select>
     </div>
-
+{% endif %}
 
 {{ form.input('in_language', label=_('Published in language'), id='field-in_language', placeholder=_('English, French, Italien'), value=data.in_language, error=errors.in_language, classes=['control-medium']) }}
 
