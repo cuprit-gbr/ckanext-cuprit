@@ -42,8 +42,9 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
             'force_extras': [toolkit.get_validator('ignore_missing'),
                         toolkit.get_converter('convert_to_extras'),
                         toolkit.get_validator('not_empty')],
-            'force_default': [toolkit.get_validator('not_empty')]
+            'force_default': [toolkit.get_validator('not_empty')],
         }
+
         schema.update({
             'title': options.get('force_default'),
             'subtitle': options.get('default'),
@@ -65,14 +66,14 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
             'type_of_publication': options.get('force_extras'),
             'doi': options.get('default'),
             'related_resources': options.get('default'),
-            
+            'agree': options.get('default'),
         })
         
         return schema
 
     def _modify_show_package_schema(self, schema):
         options = {
-            'default' : [toolkit.get_converter('convert_from_extras'),
+            'default': [toolkit.get_converter('convert_from_extras'),
                             toolkit.get_validator('ignore_missing')]
         }
         schema.update({
@@ -87,8 +88,7 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
             'funding': options.get('default'),
             'subtitle': options.get('default'),
             'related_resources': options.get('default'),
-
-
+            'agree': options.get('default'),
         })
         return schema
 

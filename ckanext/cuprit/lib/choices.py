@@ -14,7 +14,7 @@ resource_types = [
                 ('Journal', 'Journal'),
                 ('Journal Article', 'Journal Article'),
                 ('Model', 'Model'),
-                ('Outpu tManagementPlan', 'Output ManagementPlan'),
+                ('Output ManagementPlan', 'Output ManagementPlan'),
                 ('Peer Review', 'Peer Review'),
                 ('Physical Object', 'Physical Object'),
                 ('Preprint', 'Preprint'),

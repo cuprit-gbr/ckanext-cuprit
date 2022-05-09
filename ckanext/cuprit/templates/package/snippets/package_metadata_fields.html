@@ -26,7 +26,33 @@
     {% block custom_fields %}
 <hr>
     {{ form.input('publisher', label=_('Publisher'), id='field-publisher', placeholder=_('DAI or other publishing house'), value=data.publisher, error=errors.publisher, classes=['control-medium']) }}
+    {{ form.checkbox('agree', label=_('I have read and agree to the <a href="/participate" target="blank">terms of service</a>.'), id='agree', value='1' if data.agree else '0', error=errors.agree, is_required=true) }}
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
 
+            agr = jQuery("#agree");
+            if (agr.val() == '1') { agr.prop('checked', true) }
+
+            jQuery(document).on("submit", "form", function(e) {
+                if (!agr.prop('checked')) {
+                    e.preventDefault();
+                    jQuery("label.checkbox").append('<span id="agree_warning" class="control-required">Please agree to the terms of service.</span>')
+                    alert('Please agree to the terms of service.');
+                    return false;
+                }
+            });
+
+            jQuery(document).on("click", agr, function(e) {
+                if (agr.prop('checked')) {
+                    $("button[name='save']").attr('disabled', false);
+                    agr.val('1')
+                } else {
+                    agr.val('0')
+                }
+            });
+
+        });
+    </script>
 
 </fieldset>
 
