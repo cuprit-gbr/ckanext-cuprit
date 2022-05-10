@@ -19,7 +19,6 @@
   <input name="id" value="{{ data.id }}" type="hidden"/>
 
   {% block basic_fields %}
-      <input id="agree" type="checkbox" name="agree" value="{{ data.agree }}">
 
     {% block basic_fields_url %}
       {% set is_upload = (data.url_type == 'upload') %}
