@@ -1,6 +1,6 @@
 {
   "allowed_extensions": [
-      "csv", "odt", "rdf", "txt", "jpeg", "jpg", "png", "tiff", "pdf", "json", "xlsx", "xml", "mkv", "geojson", "tsv", "geotiff", "txt", "docx", "ods", "wld", "svg", "sql", "jsonl", "zip"
+      "ply","obj","csv", "odt", "rdf", "txt", "jpeg", "jpg", "png", "tiff", "pdf", "json", "xlsx", "xml", "mkv", "geojson", "tsv", "geotiff", "txt", "docx", "ods", "wld", "svg", "sql", "jsonl", "zip"
   ],
   "allowed_overrides": {
       "application/octet-stream": ["*"],
@@ -52,6 +52,7 @@
       ".kmz": "application/vnd.google-earth.kmz",
       ".mtl": "model/mtl",
       ".obj": "text/plain",
+      ".ply": "text/plain",
       ".n3": "text/n3",
       ".rdf": "application/rdf+xml",
       ".shp": "x-gis/x-shapefile",
