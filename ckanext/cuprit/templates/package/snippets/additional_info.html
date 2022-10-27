@@ -49,6 +49,12 @@
       <td class="dataset-details">{{ pkg_dict.in_language }}</td>
     </tr>
   {% endif %}
+  {% if pkg_dict.year_of_publication %}
+  <tr>
+    <th scope="row" class="dataset-label">{{ _("Year of publication") }}</th>
+    <td class="dataset-details">{{ pkg_dict.year_of_publication }}</td>
+  </tr>
+{% endif %}
   {% if pkg_dict.type_of_publication %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Resource Type General") }}</th>

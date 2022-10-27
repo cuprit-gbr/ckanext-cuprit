@@ -1,6 +1,7 @@
 resource_types = [
                 ('Audiovisual', 'Audiovisual'), 
                 ('Book', 'Book'), 
+                ('Booklet', 'Booklet'), 
                 ('Collection', 'Collection'),
                 ('Computational Notebook', 'Computational Notebook'),
                 ('Conference Paper', 'Conference Paper'),
