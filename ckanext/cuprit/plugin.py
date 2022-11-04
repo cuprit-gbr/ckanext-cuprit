@@ -177,6 +177,19 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
             'format_orcid': helpers.format_orcid
         }
 
+    # Custom pages
+    def get_blueprint(self):
+        # Create Blueprint for custom routes
+        blueprint = Blueprint(self.name, self.__module__)
+        blueprint.template_folder = u'templates'
+        rules = [
+            (u'/help', u'render_about_custom_page', cuprit_blueprints.render_about_custom_page),
+        ]
+        for rule in rules:
+            blueprint.add_url_rule(*rule)
+
+        return blueprint
+
     # IPackageController
     def after_create(self, context, pkg_dict):
         '''

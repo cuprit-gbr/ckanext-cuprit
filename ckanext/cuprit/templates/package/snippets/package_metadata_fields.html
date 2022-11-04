@@ -81,7 +81,7 @@
 
     {% block custom_fields %}
     {{ form.input('publisher', label=_('Publisher'), id='field-publisher', placeholder=_('DAI or other publishing house'), value=data.publisher, error=errors.publisher, classes=['control-medium']) }}
-    {{ form.checkbox('agree', label=_('I have read and agree to the <a href="/participate" target="blank">terms of service</a>.'), id='agree', value='1' if data.agree else '0', error=errors.agree, is_required=true) }}
+    {{ form.checkbox('agree', label=_('I have read and agree to the <a href="/help" target="blank">terms of service</a>.'), id='agree', value='1' if data.agree else '0', error=errors.agree, is_required=true) }}
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
 
