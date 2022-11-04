@@ -40,3 +40,19 @@ html, body {
   margin: 0 auto;
   margin-top: 1rem;
 }
+
+/* Format dataset headlines */
+h2.dataset-heading a {
+  color: #065D77!important;
+}
+
+h2.dataset-heading {
+  font-size: 2.4rem!important;
+}
+
+/* Dataset Form */
+.ds_notes {
+  background-color: #ffd;
+  color: #8d939e;
+  display: block;
+}
