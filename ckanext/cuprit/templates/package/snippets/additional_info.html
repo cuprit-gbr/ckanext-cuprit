@@ -18,7 +18,7 @@
 
 {% if pkg_dict.author  %}
   <tr>
-    <th scope="row" class="dataset-label">{{ _("Author") }}</th>
+    <th scope="row" class="dataset-label">{{ _("Author(s)") }}</th>
     <td class="dataset-details" property="dc:creator">{{ h.format_orcid(pkg_dict.author) | safe }}</td>
   </tr>
 {% endif %}
@@ -90,18 +90,13 @@
   {% if pkg_dict.contributor %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Contributor(s)") }}</th>
-      <td class="dataset-details">{{ pkg_dict.contributor }}</td>
+      <td class="dataset-details">{{ h.format_orcid(pkg_dict.contributor) | safe }}</td>
     </tr>
   {% endif %}
-  {% if pkg_dict.contributor %}
-  <tr>
-    <th scope="row" class="dataset-label">{{ _("Contributor(s) ORCID ID(s)") }}</th>
-    <td class="dataset-details">{{ pkg_dict.contributor }}</td>
-  </tr>
-{% endif %}
+
   {% if pkg_dict.ror_id %}
     <tr>
-      <th scope="row" class="dataset-label">{{ _("Author(s) ROR ID(s)") }}</th>
+      <th scope="row" class="dataset-label">{{ _("ROR ID") }}</th>
       <td class="dataset-details">{{ pkg_dict.ror_id }}</td>
     </tr>
   {% endif %}

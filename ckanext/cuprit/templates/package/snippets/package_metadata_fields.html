@@ -2,24 +2,25 @@
 
 {% block package_metadata_author %}
 </fieldset>
+<script src="/js/vue.global.prod.min.js"></script>
+
 <fieldset>
   <legend>Responsibilities</legend>
     {{ form.input('author', label=_('Author(s)'), id='field-author', placeholder=_('Firstname Lastname of author'), value=data.author, error=errors.author, classes=['control-medium']) }}
     <input id="a_holder" value="{{data.author}}" class="hidden" style="height: 1px">
-    <div id="app" style="background-color: rgb(248 246 243 / 58%); padding: 16px 8px; transform: translateY(-30px);">
+    <div id="author_widget" style="background-color: rgb(248 246 243 / 58%); padding: 16px 8px; transform: translateY(-30px);">
           <div v-for="(item, index) in authors" >
             <input type="text" :value="item" @input="update_item($event, index)" class="form-control control-medium">
             <a @click="remove_author(item)" style="cursor: pointer; color: #979797; display: block; margin-bottom: 8px; margin-left: 8px">remove</a> 
           </div>
           <p>
             <hr style="margin:0">
-          <input type="text" ref="newInput" placeholder="Firstname Lastname (0000-0000-0000-0000)" class="form-control" style="margin: 10px 10px 0 0;width: 85%; display: inline-block;"> 
-          <button @click.prevent.stop="add_new_author($event)" class="btn btn-primary">add author</button>
-          <span class="ds_notes" style="width: 85%">Add the authors ORCID in parantheses to link it.</span>
+          <input type="text" ref="newInput" placeholder="Firstname Lastname (0000-0000-0000-0000)" class="form-control" style="margin: 10px 10px 0 0;width: 90%; display: inline-block;"> 
+          <button @click.prevent.stop="add_new_author($event)" class="btn btn-primary" style="transform: translateY(-2px);">add</button>
+          <span class="ds_notes" style="width: 90%">Add the authors ORCID in parantheses to link it.</span>
         </p>
-      </div>
+    </div>
       
-    <script src="/js/vue.global.prod.min.js"></script>
 
     <script>
         const { createApp } = Vue
@@ -52,7 +53,7 @@
               }
             }
           }
-        }).mount('#app')
+        }).mount('#author_widget')
       </script>
 
 
@@ -61,11 +62,55 @@
 
 
 </script>
-
-    {{ form.input('author_email', label=_('Author Email'), id='field-author-email', placeholder=_('erika.mustermann@dainst.de (currently only one E-mail address supported!)'), value=data.author_email, error=errors.author_email, classes=['control-medium']) }}
     {{ form.input('contributor', label=_('Contributor'), id='field-contributor', placeholder=_('Firstname Lastname of person who contributed to this work'), value=data.contributor, error=errors.contributor, classes=['control-medium']) }} 
-    {{ form.input('contributor_orcid_id', label=_('Contributor(s) ORCID ID(s)'), id='field-contributor_orcid_id', placeholder=_('0000-0002-4087-4023; 0000-0002-4087-4024 | Divided by semicolon'), value=data.contributor_orcid_id, error=errors.contributor_orcid_id, classes=['control-medium']) }}
+    <input id="c_holder" value="{{data.contributor}}" class="hidden" style="height: 1px">
+    <div id="contributor_widget" style="background-color: rgb(248 246 243 / 58%); padding: 16px 8px; transform: translateY(-30px);">
+          <div v-for="(item, index) in contributors" >
+            <input type="text" :value="item" @input="update_item($event, index)" class="form-control control-medium">
+            <a @click="remove_contributor(item)" style="cursor: pointer; color: #979797; display: block; margin-bottom: 8px; margin-left: 8px">remove</a> 
+          </div>
+          <p>
+            <hr style="margin:0" v-if="contributors.length > 0">
+          <input type="text" ref="newContributorInput" placeholder="Firstname Lastname (0000-0000-0000-0000)" class="form-control" style="margin: 10px 10px 0 0;width: 90%; display: inline-block;"> 
+          <button @click.prevent.stop="add_new_contributor($event)" class="btn btn-primary" style="transform: translateY(-2px);">add</button>
+          <span class="ds_notes" style="width: 90%">Add the contributor ORCID in parantheses to link it.</span>
+        </p>
+     </div>
 
+    <script>
+      document.getElementById("field-contributor").readOnly = true
+      createApp({
+        data() {
+          return {
+            contributors: []
+          }
+        },
+        mounted() {
+          dat = document.getElementById("c_holder").value
+          contributors_from_database = dat.replaceAll('; ',';').split(";").filter(item => item);
+          this.contributors = contributors_from_database
+        },
+        updated() {
+          document.getElementById("field-contributor").value = this.contributors.join('; ')
+        },
+        methods: {
+          add_new_contributor(e){
+            this.contributors.push(this.$refs.newContributorInput.value)
+            console.log(this.$refs.newContributorInput.value)
+            console.log(this.contributors.join('; '))
+            this.$refs.newContributorInput.value = ""
+          },
+          remove_contributor(item) {
+            this.contributors = this.contributors.filter((t) => t !== item)
+          },
+          update_item(event, i){
+            if (i !== -1 && event){
+              this.contributors[i] = event.target.value  !== "" ? event.target.value : "please fill"
+            }
+          }
+        }
+      }).mount('#contributor_widget')
+    </script>
 
     {{ form.input('ror_id', label=_('ROR ID (of organization)'), id='field-ror_id', placeholder=_('https://ror.org/041qv0h25'), value=data.ror_id, error=errors.ror_id, classes=['control-medium']) }}
     {% endblock %}

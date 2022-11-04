@@ -27,9 +27,9 @@ def format_orcid(authors: str) -> str:
     authors = authors.split(";")
     author_html_str = ""
     for author in authors:
-        author_orcid = re.search('\(?(\d{4}-\d{4}-\d{4}-\d{4})\)?', author)
+        author_orcid = re.search('(\d{4}-\d{4}-\d{4}-\d{4})', author)
         author = re.sub('\s?\(.*?\)', '', author)
-        full_author = f'<a href="https://orcid.org/{author_orcid.group()}">{author}</a>' \
+        full_author = f'<a href="https://orcid.org/{author_orcid.group()}" target="blank">{author}</a>' \
                         if author_orcid is not None \
                         else f'{author}'
         author_html_str += f'{full_author}<br>'
