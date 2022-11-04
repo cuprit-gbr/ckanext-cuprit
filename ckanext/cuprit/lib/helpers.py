@@ -1,25 +1,37 @@
 import ckanext.cuprit.logic.auth_utils as auth_utils
 import ckan.plugins.toolkit as tk
+import re
 
 
-def is_editor(user, office=None):
+def is_editor(user: str, office: str =None) -> bool:
     """
     Returns True if user is editor of given organisation.
     If office param is not provided checks if user is editor of any organisation
 
     :param user: user name
-    :type user: string
     :param office: office id
-    :type office: string
-
-    :returns: True/False
-    :rtype: boolean
     """
     return auth_utils.is_editor({'user': user}, {'user': user}, office)
 
-def get_recent_articles():
+def get_recent_articles() -> dict:
     """
     get recent updated packages for startpage
     """
     result = tk.get_action("package_search")({}, {"rows": 10, "sort": "metadata_modified desc"})
     return result["results"]
+
+def format_orcid(authors: str) -> str:
+    """
+    link author to orcids if id is found
+    """
+    authors = authors.split(";")
+    author_html_str = ""
+    for author in authors:
+        author_orcid = re.search('\(?(\d{4}-\d{4}-\d{4}-\d{4})\)?', author)
+        author = re.sub('\s?\(.*?\)', '', author)
+        full_author = f'<a href="https://orcid.org/{author_orcid.group()}">{author}</a>' \
+                        if author_orcid is not None \
+                        else f'{author}'
+        author_html_str += f'{full_author}<br>'
+    
+    return author_html_str
