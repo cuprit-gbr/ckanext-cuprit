@@ -12,7 +12,9 @@ import ckanext.cuprit.lib.helpers as helpers
 from flask import Blueprint
 import ckanext.cuprit.blueprints as cuprit_blueprints
 from ckan.lib.plugins import DefaultTranslation
-from ckanext.cuprit.lib.choices import resource_types
+from ckanext.cuprit.lib.choices import resource_types, custom_tags
+
+
 
 class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
@@ -25,6 +27,7 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IFacets)
+    plugins.implements(plugins.ITemplateHelpers)
 
     def _get_config_value(self, key):
         if config.get(key):
@@ -82,7 +85,6 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
             'contributor': options.get('default'),
             'contributor_orcid_id': options.get('default'),
             'ror_id': options.get('default'),
-            'orcid_id': options.get('default'),
             'in_language': options.get('default'),
             'year_of_publication': options.get('default'),
             'type_of_publication': options.get('default'),
@@ -170,7 +172,9 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         return {
             'is_editor': helpers.is_editor,
             'get_recent_articles': helpers.get_recent_articles,
-            'resource_types': resource_types
+            'resource_types': resource_types,
+            'custom_tags': custom_tags,
+            'format_orcid': helpers.format_orcid
         }
 
     # IPackageController
@@ -180,3 +184,4 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         '''
         if self._get_config_value('ckanext.cuprit.email_sender'):
             mailer.mail_dataset_created_to_admins(context, pkg_dict)
+
