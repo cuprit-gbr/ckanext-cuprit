@@ -5,26 +5,81 @@
 <fieldset>
   <legend>Responsibilities</legend>
     {{ form.input('author', label=_('Author(s)'), id='field-author', placeholder=_('Firstname Lastname of author'), value=data.author, error=errors.author, classes=['control-medium']) }}
+    <input id="a_holder" value="{{data.author}}" class="hidden" style="height: 1px">
+    <div id="app" style="background-color: rgb(248 246 243 / 58%); padding: 16px 8px; transform: translateY(-30px);">
+          <div v-for="(item, index) in authors" >
+            <input type="text" :value="item" @input="update_item($event, index)" class="form-control control-medium">
+            <a @click="remove_author(item)" style="cursor: pointer; color: #979797; display: block; margin-bottom: 8px; margin-left: 8px">remove</a> 
+          </div>
+          <p>
+            <hr style="margin:0">
+          <input type="text" ref="newInput" placeholder="Firstname Lastname (0000-0000-0000-0000)" class="form-control" style="margin: 10px 10px 0 0;width: 85%; display: inline-block;"> 
+          <button @click.prevent.stop="add_new_author($event)" class="btn btn-primary">add author</button>
+          <span class="ds_notes" style="width: 85%">Add the authors ORCID in parantheses to link it.</span>
+        </p>
+      </div>
+      
+    <script src="/js/vue.global.prod.min.js"></script>
+
+    <script>
+        const { createApp } = Vue
+        document.getElementById("field-author").readOnly = true
+        createApp({
+          data() {
+            return {
+              authors: []
+            }
+          },
+          mounted() {
+            dat = document.getElementById("a_holder").value
+            authors_from_database = dat.replaceAll('; ',';').split(";").filter(item => item);
+            this.authors = authors_from_database
+          },
+          updated() {
+            document.getElementById("field-author").value = this.authors.join('; ')
+          },
+          methods: {
+            add_new_author(e){
+              this.authors.push(this.$refs.newInput.value)
+              this.$refs.newInput.value = ""
+            },
+            remove_author(item) {
+              this.authors = this.authors.filter((t) => t !== item)
+            },
+            update_item(event, i){
+              if (i !== -1 && event){
+                this.authors[i] = event.target.value  !== "" ? event.target.value : "please fill"
+              }
+            }
+          }
+        }).mount('#app')
+      </script>
+
+
+<script>
+
+
+
+</script>
 
     {{ form.input('author_email', label=_('Author Email'), id='field-author-email', placeholder=_('erika.mustermann@dainst.de (currently only one E-mail address supported!)'), value=data.author_email, error=errors.author_email, classes=['control-medium']) }}
-    {{ form.input('orcid_id', label=_('Author(s) ORCID ID(s)'), id='field-orcid_id', placeholder=_('0000-0002-4087-4023; 0000-0002-4087-4024 | Divided by semicolon'), value=data.orcid_id, error=errors.orcid_id, classes=['control-medium']) }}
     {{ form.input('contributor', label=_('Contributor'), id='field-contributor', placeholder=_('Firstname Lastname of person who contributed to this work'), value=data.contributor, error=errors.contributor, classes=['control-medium']) }} 
     {{ form.input('contributor_orcid_id', label=_('Contributor(s) ORCID ID(s)'), id='field-contributor_orcid_id', placeholder=_('0000-0002-4087-4023; 0000-0002-4087-4024 | Divided by semicolon'), value=data.contributor_orcid_id, error=errors.contributor_orcid_id, classes=['control-medium']) }}
 
-    <hr>
+
     {{ form.input('ror_id', label=_('ROR ID (of organization)'), id='field-ror_id', placeholder=_('https://ror.org/041qv0h25'), value=data.ror_id, error=errors.ror_id, classes=['control-medium']) }}
     {% endblock %}
 
     {% block package_metadata_fields_maintainer %}
-<hr>
+
     {{ form.input('maintainer', label=_('Maintainer'), id='field-maintainer', placeholder=_('Firstname Lastname of person that maintains this dataset'), value=data.maintainer, error=errors.maintainer, classes=['control-medium']) }}
 
       {{ form.input('maintainer_email', label=_('Maintainer Email'), id='field-maintainer-email', placeholder=_('max.mustermannk@dainst.de (currently only one E-mail address supported!)'), value=data.maintainer_email, error=errors.maintainer_email, classes=['control-medium']) }}
+      <span class="ds_notes" style="transform: translateY(-30px);">This E-Mail will be used to contact the person who is responsible for the dataset.</span>
 
     {% endblock %}
 
     {% block custom_fields %}
-<hr>
     {{ form.input('publisher', label=_('Publisher'), id='field-publisher', placeholder=_('DAI or other publishing house'), value=data.publisher, error=errors.publisher, classes=['control-medium']) }}
     {{ form.checkbox('agree', label=_('I have read and agree to the <a href="/participate" target="blank">terms of service</a>.'), id='agree', value='1' if data.agree else '0', error=errors.agree, is_required=true) }}
     <script>
@@ -50,6 +105,8 @@
                     agr.val('0')
                 }
             });
+
+            $('.js-example-basic-multiple').select2();
 
         });
     </script>

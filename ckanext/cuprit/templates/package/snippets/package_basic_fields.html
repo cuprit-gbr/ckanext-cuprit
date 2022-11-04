@@ -24,14 +24,13 @@
 
   {{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes) }}
 
-
   <div class="form-group">
     {% set error = errors.type_of_publication %}
     <label class="control-label" for="type_of_publication">Resource Type General</label>
     <div class="controls">
       <div class="row">
         <div class="col-md-6">
-          <select id="type_of_publication" name="type_of_publication" data-module="autocomplete">
+          <select id="type_of_publication" name="type_of_publication" data-module="autocomplete" placeholder="Choose">
             {% set existing_type_of_publication = data.get('type_of_publication') %}
             {% set empty_type = _('Please select a general resource type') %}
             <option value="">{{ empty_type }}</option>
@@ -44,6 +43,44 @@
       </div>
     </div>
   </div>
+
+
+
+  <div class="form-group">
+
+    {% set error = errors.tag_string %}
+    <label class="control-label" for="type_of_publication">Tags</label>
+    <div class="controls">
+      <div class="row">
+        <div class="col-md-12">
+          <select id="tags_str" data-module="autocomplete" multiple onchange="update_tags()">
+            {% set dataset_tags=data.get('tag_string') %}
+            {% if dataset_tags is iterable and (dataset_tags is not string and var is not mapping) %}
+              {% set existing_tag = dataset_tags.replace(', ',',').split(',') %}
+            {% else %}
+              {% set existing_tag = [] %}
+            {% endif %}
+
+            {% set empty_type = _('Please select tags') %}
+              {% for k in h.custom_tags %}
+                <optgroup label="{{ k }}">
+                  {% for tag_name in h.custom_tags[k] %}
+                  <option value="{{ tag_name }}" {% if tag_name in existing_tag %}selected="selected"{% endif %}>{{ tag_name }}</option>
+                  {% endfor %}
+              {% endfor %}
+            </optgroup>
+          </select>
+          {% if error %}<span class="error-block">{{ error }}</span>{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+<input type="input" name="tag_string" id="hidden_tags" value="{{data.tag_string}}" style="display: none;">
+  <script>
+    function update_tags(){
+      jQuery('#hidden_tags').val($("#tags_str").select2("val"))
+    }
+  </script>
 
 {% if not c.userobj.sysadmin %}
       <div class="form-group control-medium">
@@ -59,8 +96,16 @@
     </div>
 {% endif %}
 
+
+<!-- hide original tags -->
+{% block package_basic_fields_tags %}
+{% endblock %}
+
+
+
 {{ form.input('in_language', label=_('Published in language'), id='field-in_language', placeholder=_('English, French, Italien'), value=data.in_language, error=errors.in_language, classes=['control-medium']) }}
 {{ form.input('year_of_publication', label=_('Year of publication'), id='field-year_of_publication', placeholder=_('In which year was the publication published?'), value=data.year_of_publication, error=errors.year_of_publication, classes=['control-medium']) }}
+
 
 {{ form.markdown('related_resources', label=_('Related Resources (URLS, Literature)'), id='field-related_resources', placeholder=_('Book, Leaflet, Digital goods'), value=data.related_resources, error=errors.related_resources, classes=['control-small']) }}
 
