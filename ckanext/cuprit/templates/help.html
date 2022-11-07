@@ -1,180 +1,157 @@
 {% extends "page.html" %}
-
 {% block subtitle %}{{ _('Participate') }}{% endblock %}
-
-
-
 {% block primary %}
+
+
   <article class="module" role="main">
     <div class="module-content">
       {% block about %}
+      {% if request.environ.CKAN_LANG == 'de' %}
 
-      <html>
-        <body>
-            <h2>Was ist iDAI.open-data und wozu benutze ich es?</h2>
-            <p>Die den Forschungsergebnissen zugrunde liegenden Forschungsdaten 
-                zusätzlich zu den klassischen Forschungsprodukten zu veröffentlichen ist 
-                inzwischen ein allgmein annerkannter Bestandteil aller Wissenschaften, so 
-                auch der Archäologie, der Altertumswissenschaften und der Humanities 
-                und wird von der DFG Kodex „<a href="https://www.dfg.de/download/pdf/foerderung/rechtliche_rahmenbedingungen/gute_wissenschaftliche_praxis/kodex_gwp.pdf" target="blank">Leitlinien zur Sicherung guter wissenschaftlicher Praxis</a>“
-                explizit gefordert. Ein fachspezifisches Datenportal ist im Vergleich zu einem 
-                generischen von Vorteil, da Datensätze domänenspezifisch verstanden,
-                mit Metadaten versehen und verknüpft werden können.</p>
-            <p>Das Konzept von Open Data gewinnt auch in den archäologischen Wissenschaften immer mehr an Bedeutung. iDAI.open-data ermöglicht es den Mitarbeitenden des DAI und deren Projektpartnern Daten in niedrigschwelliger Weise zu teilen. Dieses Angebot ist als Ergänzung zu den bereits bestehenden <a href="https://idai.world/" target="blank"></a>iDAI.world Systemen des Deutschen Archäologischen Instituts (DAI) zu sehen, welche einen höhren Grad der Strukturierung bieten, aber gleichzeitig einen höheren Arbeitsaufwand bei der Datenintegration voraussetzen. Insbesondere kleinere Forschungsprodukte und naturwissenschaftliche Daten sollen so einfach und transparent veröffentlicht und für andere Wissenschaftlerinnen und Wissenschaftler nachnutzbar gemacht werden. 
+         <!-- Deutsche Version -->
+            <h2>Was ist iDAI.repo und wozu benutze ich es?</h2>
+            <p>Die den Forschungsergebnissen zugrunde liegenden Forschungsdaten zusätzlich zu den klassischen Forschungsprodukten zu veröffentlichen, ist inzwischen ein allgemein anerkannter Bestandteil aller Wissenschaften, so auch der Archäologie, der Altertumswissenschaften und der Humanities und wird von der DFG Kodex „<a href="https://www.dfg.de/download/pdf/foerderung/rechtliche_rahmenbedingungen/gute_wissenschaftliche_praxis/kodex_gwp.pdf" target="blank">Leitlinien zur Sicherung guter wissenschaftlicher Praxis</a>“ explizit gefordert. Ein fachspezifisches Datenportal ist im Vergleich zu einem generischen von Vorteil, da Datensätze domänenspezifisch verstanden, mit Metadaten versehen und verknüpft werden können.</p>
+            <p>Das Konzept von Open Data gewinnt auch in den archäologischen Wissenschaften immer mehr an Bedeutung. iDAI.repo ermöglicht es den Mitarbeitenden des DAI und deren Projektpartnern, Daten in niedrigschwelliger Weise zu teilen. Dieses Angebot ist als Ergänzung zu den bereits bestehenden <a href="https://idai.world/" target="blank">iDAI.world</a> Systemen des Deutschen Archäologischen Instituts (DAI) zu sehen, welche einen höhren Grad der Strukturierung bieten, aber gleichzeitig einen höheren Arbeitsaufwand bei der Datenintegration voraussetzen. Insbesondere kleinere Forschungsprodukte und naturwissenschaftliche Daten sollen so einfach und transparent veröffentlicht und für andere Wissenschaftlerinnen und Wissenschaftler nachnutzbar gemacht werden. </p>
+            <h2>Wer kann Daten veröffentlichen?</h2>
+            <p>Die Nutzung für das Veröffentlichen von Forschungsdaten und -produkten mit iDAI.repo ist in zwei Bereiche unterteilt (Gruppen):</p>
+            <ul>
+               <li>DAI Mitarbeiterinnen und Mitarbeiter (DAI-internal)</li>
+               <li>externe Kooperationspartnerinnen und -partner (DAI-external)</li>
+            </ul>
+            <p>Für Mitarbeiterinnen und Mitarbeiter des DAI: bitte nutzen Sie die folgende Confluence Seite: <a href="https://wiki.access.dainst.org/display/FDM/CKAN+Workflow" target="blank">https://wiki.access.dainst.org/display/FDM/CKAN+Workflow</a>.</p>
+            <p>Wenn Sie nicht dem DAI angehören, aber dennoch die Möglichkeiten von iDAI.repo nutzen möchten, um ihre Forschungsdaten zu veröffentlichen, kontaktieren Sie uns bitte möglichst frühzeitig mit folgenden Angaben:</p>
+            <ul>
+               <li>Projektname, (angestrebte) Laufzeit,</li>
+               <li>Datenmenge (ggf. geschätzt)</li>
+               <li>Lizenzwunsch (CC-BY, CC-BY-SA präferiert),</li>
+               <li>Zeitvorstellungen und Deadlines,</li>
+               <li>vollständig (soweit möglich) ausgefüllte „<a href="/base/pdf/metadata.pdf" target="blank">metadata.pdf</a>“</li>
+            </ul>
+            <p>sowie sonstigen Informationen, die für die Einschätzung der Forschungsdaten notwendig sind.<br>
+               Bitte beachten Sie, dass nur folgende Dateitypen in iDAI.repo aufgenommen werden:
             </p>
-        </body>
-    
-        <h2>Wer kann Daten veröffentlichen?</h2>
-        <p>Die Nutzung für das Veröffentlichen von Forschungsdaten und -produkten mit iDAI.open-data ist in zwei Bereiche unterteilt (Gruppen):</p>
-        <ul>
-            <li>DAI Mitarbeiterinnen und Mitarbeiter (DAI-internal)</li>
-            <li>externe Kooperationspartnerinnen und -partner (DAI-external)</li>
-        </ul>
-        <p>Für Mitarbeiterinnen und Mitarbeiter des DAI: bitte nutzen Sie die folgende Confluence Seite: <a href="http://confluence:8090/display/FDM/CKAN+Workflow" target="blank">http://confluence:8090/display/FDM/CKAN+Workflow</a>
-        </p>
-        <p>Wenn Sie nicht dem DAI angehören, aber dennoch die Möglichkeiten von iDAI.open-data nutzen möchten um ihre Forschungsdaten zu veröffentlichen, kontaktieren Sie uns bitte möglichst frühzeitig mit folgenden Angaben: 
-        </p>
-        <ul>
-            <li>Projektname, (angestrebte) Laufzeit,</li>
-            <li>Datenmenge (ggf. geschätzt)</li>
-            <li>Lizenzwunsch (CC-BY, CC-BY-SA präferiert),</li>
-            <li>Zeitvorstellungen und Deadlines,</li>
-            <li>vollständig (soweit möglich) ausgefüllte „<a href="/base/pdf/metadata.pdf" target="blank">metadata.pdf</a>“
-            </li>
-        </ul>
-        <p>sowie sonstigen Informationen die für die Einschätzung der Forschungsdaten notwendig sind.
-            Bitte beachten Sie, dass nur folgende Dateitypen in iDAI.open-data aufgenommen werden:
-        </p>
-        <p>
-         csv, odt, rdf, txt, jpeg, jpg, png, tif/tiff, pdf, json, xlsx, xml, mkv, geojson, tsv, geotiff, txt, docx, ods, wld, svg, sql, jsonl, zip, dng, geotiff, dxf, siard, gpkg, qgs, qgz, mov,
-            avi, ffv1, flac, wav, dae, obj, ply, warc, mhtml)
-        </p>
+            <p>csv, odt, rdf, txt, jpeg, jpg, png, tif/tiff, pdf, json, xlsx, xml, mkv, geojson, tsv, geotiff, txt, docx, ods, wld, svg, sql, jsonl, zip, dng, geotiff, dxf, siard, gpkg, qgs, qgz, mov,
+               avi, ffv1, flac, wav, dae, obj, ply, warc, mhtml)
+            </p>
+            <p>Bitte haben Sie Verständnis, dass wir bei kurzfristigen Anfragen nicht immer sofort reagieren können, wir antworten schnellstmöglich. Gern unterstützen wir Sie auch bei Drittmittelanträgen, falls Sie Ihre Forschungsdaten im Anschluss mit <u>iDAI.repo</u> veröffentlichen wollen. </p>
+            <p>Kontaktieren Sie uns unter: <a href="mailto:opendata@dainst.de">opendata@dainst.de</a></p>
+            <h2>Daten als externe Person einreichen (Kooperation)</h2>
+            <p>Nachdem Sie mit uns Kontakt aufgenommen haben sind folgende Schritte notwendig:</p>
+            <ol>
+               <li>Laden Sie das folgende Formular herunter: „metadata.pdf“. Füllen Sie das Dokument <b>vollständig</b> aus. <br> Die im Dokument abgefragten Metadaten spielen für die Archivierung Ihrer digitalen Daten eine wichtige Rolle. Darüber hinaus sind sie wichtig, um die Auffindbarkeit, Verständlichkeit und Nachnutzbarkeit der Daten zu gewährleisten. Die Vollständigkeit des Dokuments ist daher essentiell. Wenn Sie nicht sicher sind, welche Daten einzutragen sind, wenden Sie sich an die Kontaktmailadresse.
+               </li>
+               <li>Speichern Sie das Dokument zusammen mit allen Ihren zu hinterlegenden Dateien in einem eigenen Ordner.
+               </li>
+               <li>Archivieren Sie Ihren Ordner als "zip"-Archiv (Eine Anleitung finden Sie zum Beispiel <a href="https://support.microsoft.com/de-de/windows/zippen-und-entzippen-von-dateien-f6dde0a7-0fec-8294-e1d3-703ed85e7ebc" target="blank">hier</a> für Windows)
+               </li>
+               <li>Senden Sie uns die vollständigen Daten an: <a href="mailto:opendata@dainst.de">opendata@dainst.de</a></li>
+            </ol>
+            <p>Wenn Ihre Dateien zu groß für den Versand per E-Mail sind, verwenden Sie bitte einen Dateitransferdienst wie
+               <a href="https://www.dropbox.com/" target="blank">Dropbox</a>,
+               <a href="https://cumulus.dainst.org/" target="blank">Cumulus</a>,
+               <a href="https://wetransfer.com/" target="blank">Wetransfer</a>, oder
+               <a href="https://www.sendbig.com/" target="blank">Sendbig</a>.
+            </p>
+            <p>Falls dies nicht möglich ist, können Sie uns auch FTP-Zugangsdaten schicken. Sollte Ihnen kein FTP-Server zur Verfügung stehen, können wir Ihnen einen FTP-Zugang zur Verfügung stellen. Kontaktieren Sie uns hierzu möglichst frühzeitig.</p>
+            <p>Nach Erhalt der Daten werden diese von einer Administratorin / einem Administrator geprüft und bei Vollständigkeit veröffentlicht. Wenn weitere Informationen benötigt werden, werden Sie kontaktiert.</p>
+            <h2>Was bedeutet Daten veröffentlichen und nachnutzbar machen?</h2>
+            <p><mark>[03-11-2022: Achtung. Welche Lizenzen verwendet werden können und sollten, ist noch nicht abschließend geklärt. Dies ist ein Entwurf. Handelt es sich um externe Daten, kontaktieren Sie uns bitte vor der endgültigen Lizenzwahl.]
+               </mark>
+            </p>
+            <p>Wenn Sie Ihre Daten in iDAI.repo veröffentlichen möchten, ist es essentiell, dass Sie die Lizenzierung Ihrer Daten vornehmen, sowohl um möglichen Nachnutzerinnen und Nachnutzern die Verwendung zu ermöglichen, als auch eine rechtliche Absicherung darüber zu haben, wer die Daten wie nachnutzen darf. Wir raten Ihnen dazu, sich an den standardisierten [CC-Lizenzen] zu orientieren und diese so offen wie möglich zu halten. Um eine tatsächliche Nachnutzung von Ihren Daten zu gewährleisten, raten wir davon ab, NC- oder ND-Lizenzen zu vergeben. </p>
+            <p>[Da das Deutsche Archäologische Institut eine Bundesbehörde im Geschäftsbereich des Auswärtigen Amtes ist, sollten die Forschungsprodukte in Vereinbarung mit dem <a href="https://www.bmi.bund.de/SharedDocs/downloads/DE/gesetzestexte/gesetzesentwuerfe/zweites-open-data-gesetz.html;jsessionid=CC00E506797300448428FD8AFA3406BD.2_cid295" target="blank">Open-Data Gesetz</a> übereinstimmen. Hier kommen also nur die Lizenzen <a href="https://www.bva.bund.de/SharedDocs/Downloads/DE/Behoerden/Beratung/Methoden/open_data_faq.pdf?__blob=publicationFile&v=2" target="blank">CC-0, CC-BY und CC-BY-SA</a> in Frage (Stand November 2022). Einschränkungen können nur in Ausnahmefällen berücksichtigt werden.]</p>
+            <h3>Übersicht CC-Lizenzen</h3>
+            <ul>
+               <li>CC: Sie dürfen das Medium als Nutzerin / Nutzer verwenden.</li>
+               <li>BY: Sie müssen den Namen der lizenzgebenden Person(en) nennen.
+               </li>
+               <li>SA: Sie müssen Ihr Werk mit der gleichen Lizenz versehen wie das darin enthaltene Medium.</li>
+               <li style="color: #ccc">NC: Sie dürfen ihr Werk nicht für kommerzielle Zwecke nutzen, wenn ein das Medium enthalten ist. (Achtung, hier gibt es „ungewollte Nebenwirkungen“)
+               </li>
+               <li style="color: #ccc">ND: Sie dürfen das Medium nicht verändern oder kopieren.
+               </li>
+            </ul>
+            <p><a href="www.creativecommons.org" target="blank">www.creativecommons.org</a> (02.11.2022)</p>
+            <h2>Suche von Daten in iDAI.repo</h2>
+            <p>Um die generelle Suchfunktion nutzen zu können müssen Sie sich nicht registrieren.</p>
+            <p>Sie haben die Möglichkeit sich die Reihenfolge der Datensätze nach verschiedenen Optionen anzeigen zu lassen: nach der Relevanz, nach auf- bzw. absteigenden Dateinamen oder nach dem letzten Bearbeitungsstand.
+            </p>
+            <p>iDAI.repo basiert auf der Open-Source Software CKAN und unterstützt zwei Suchmodi, die beide vom gleichen Suchfeld aus verwendet werden. Wenn die in das Suchfeld eingegebenen Suchbegriffe keinen Doppelpunkt (":") enthalten, führt iDAI.repo eine einfache Freitext-Suche durch. Enthält der Suchausdruck mindestens einen Doppelpunkt (":"), so führt iDAI.repo eine erweiterte Suche durch.
+            </p>
+            <h2>Einfache Freitext-Suche</h2>
+            <p>Um Datensätze in iDAI.repo zu finden, geben Sie eine beliebige Kombination von Suchbegriffen in das Suchfeld auf der Startseite oder auf einer beliebigen Seite am oberen rechten Rand ein. 
+            </p>
+            <p>iDAI.repo sucht nach dem vollständigen Wort. Bei der einfachen Suche werden <b>Wildcards (Platzhalter)</b> nicht unterstützt.</p>
+            <p>iDAI.repo zeigt die erste Seite mit den Ergebnissen Ihrer Suche an. Sie können:</p>
+            <ul>
+               <li>weitere Seiten mit Ergebnissen anzeigen,</li>
+               <li>die Suche wiederholen und dabei einige Begriffe abändern,</li>
+               <li>die Suche auf Datensätze mit bestimmten Tags, Datenformaten usw. einschränken, indem Sie die Filter in der linken Spalte verwenden.</li>
+            </ul>
+            <p>Bei einer großen Anzahl von Ergebnissen können die Filter hilfreich sein, denn Sie können diese kombinieren, selektiv hinzufügen und entfernen, die Suche unter Beibehaltung der bestehenden Filter ändern und wiederholen.
+            </p>
+            <p>Die von der Benutzerin / dem Benutzer in das Suchfeld eingegebenen Suchbegriffe definieren die Haupt-"Abfrage", die die wesentliche Suche darstellt.
+            </p>
+            <p>Es gibt eine Reihe von Modifikatoren, welche die Parameter der Suchanfrage variieren. Das Zeichen + kennzeichnet Begriffe, die obligatorisch im Suchergebnis erhalten sein müssen. - Das Zeichen - kennzeichnet Begriffe, die nicht in dem Suchergebnis vorkommen sollen. Text, der in Anführungszeichen eingeschlossen ist (z. B. "San Jose") wird als Phrase behandelt. Standardmäßig werden alle von der Benutzerin / vom Benutzer angegebenen Wörter oder Phrasen als optional behandelt, es sei denn, ihnen geht ein "+" oder ein "-" voraus.
+            </p>
+            <h3>Beispiele für eine einfache Suche:</h3>
+            <p><i>Suchanfrage ist fettgedruckt:</i></p>
+            <ul>
+               <li><b>census</b> sucht nach allen Datensätzen, die das Wort "census" in den Abfragefeldern enthalten.</li>
+               <li><b>census +2019</b> sucht nach allen Datensätzen, die das Wort "census" enthalten und filtert nur diejenigen, die auch "2019" enthalten, da es als obligatorisch behandelt wird.</li>
+               <li><b>census -2019</b> sucht nach allen Datensätzen, die das Wort "census" enthalten, und schließt "2019" aus den Ergebnissen aus, da es als verboten behandelt wird.
+               </li>
+               <li><b>"european census"</b> sucht nach allen Datensätzen, die den Ausdruck "european census" enthalten.
+               </li>
+            </ul>
+            <p>iDAI.repo wendet bei der Suche einige Vorverarbeitungen an, sodass z. B. nur der Wortstamm übrig bleibt. Dies kann zum Beispiel dazu führen, dass bei der Suche nach "testing" oder "tested" auch Ergebnisse angezeigt werden, die das Wort "test" enthalten.
+            </p>
+            <p>Beispiel: Testing sucht nach allen Datensätzen, die das Wort "Testing" und auch "Test" enthalten, da es der Wortstamm von "Testing" ist.
+            </p>
+            <p>Hinweis: Wenn der Name des Datensatzes Wörter enthält, die durch "-" getrennt sind, wird jedes Wort bei der Suche berücksichtigt.
+            </p>
+            <h2>Erweitere Suche</h2>
+            <p>Wenn die Abfrage einen Doppelpunkt enthält, wird sie als feldbasierte Suche betrachtet und die Abfragesyntax wird für die Suche verwendet.
+            </p>
+            <p>Dies ermöglicht die Verwendung von Wildcards (Platzhaltern) "*", Proximity Matching "~" und weitere Funktionen. Die grundlegende Syntax ist Feld:Begriff.
+            </p>
+            <h3>Beispiele für die erweiterte Suche:</h3>
+            <ul>
+               <li>title:european sucht nach allen Datensätzen, die im Titel das Wort "european" enthalten.</li>
+               <li>title:europ* sucht nach allen Datensätzen, die im Titel ein Wort enthalten, das mit "europ" beginnt, wie "europa" und "europäisch".
+               </li>
+               <li>title:europe || title:africa sucht nach Datensätzen, die "europe" oder "africa" im Titel enthalten.
+               </li>
+               <li>title: "european census" ~ 4 Bei einer Umkreissuche wird nach Begriffen gesucht, die in einem bestimmten Abstand zueinander stehen. In diesem Beispiel wird nach Datensätzen gesucht, deren Titel die Wörter "european" und "census" innerhalb eines Abstands von 4 Wörtern enthalten.
+               </li>
+               <li>author:powell~ iDAI.repo unterstützt die Fuzzy-Suche. Um eine unscharfe Suche durchzuführen, verwenden Sie das Symbol "~" am Ende eines Einzelwortbegriffs. In diesem Beispiel werden Wörter wie "jowell" oder "pomell" auch gefunden werden.
+               </li>
+            </ul>
+            <h3>Angezeigte Ergebnisse</h3>
+            <p>Wenn Sie einen passenden Datensatz gefunden und ausgewählt haben, zeigt iDAI.repo die Seite mit den Datensätzen an. Diese enthält:
+            </p>
+            <ul>
+               <li>Name, Beschreibung und andere Informationen über den Datensatz</li>
+               <li>Links zu und kurze Beschreibungen von jeder der Ressourcen-Registerkarten:
+               </li>
+               <li>Aktivitätsstrom – zeigt den Verlauf der letzten Änderungen am Datensatz an
+               </li>
+               <li>Gruppen – hier sehen Sie alle mit diesem Datensatz verbundenen Gruppen.
+               </li>
+            </ul>
+            <p>Wenn Sie einen passenden Datensatz gefunden haben, können Sie über die Schaltfläche "Folgen" auf der Datensatzseite über Änderungen an diesem Datensatz informiert werden. Um diese Funktion nutzen zu können, müssen Sie einen Account bei iDAI.repo haben und angemeldet sein.  
+            </p>
+   
+            {% else %}
 
-        <p>Bitte haben Sie Verständnis, dass wir bei kurzfristigen Anfragen nicht immer sofort reagieren können, wir antworten schnellstmöglich. Gern unterstützen wir Sie auch bei Drittmittelanträgen, falls Sie Ihre Forschungsdaten im Anschluss mit <u>iDAI.open-data</u> veröffentlichen wollen. 
-        </p>
-        <p>Kontaktieren Sie uns unter: <a href="mailto:opendata@dainst.de">opendata@dainst.de</a></p>
-        
-        <h2>Daten als externe Person einreichen (Kooperation)</h2>
-        <p>Nachdem Sie mit uns Kontakt aufgenommen haben sind folgende Schritte notwendig:</p>
-        <ol>
-            <li>Laden Sie das folgende Formular herunter: „metadata.pdf“. Füllen Sie das Dokument <b>vollständig</b> aus. <br> Die im Dokument abgefragten Metadaten spielen für die Archivierung Ihrer digitalen Daten eine wichtige Rolle. Darüber hinaus sind sie wichtig, um die Auffindbarkeit, Verständlichkeit und Nachnutzbarkeit der Daten zu gewährleisten. Die Vollständigkeit des Dokuments ist daher essentiell. 
-            </li>
-            <li>Speichern Sie das Dokument zusammen mit allen Ihren zu hinterlegenden Dateien in einem eigenen Ordner.
-            </li>
-            <li>Archivieren Sie Ihren Ordner als "zip"-Archiv
-                <a href="https://support.microsoft.com/de-de/windows/zippen-und-entzippen-von-dateien-f6dde0a7-0fec-8294-e1d3-703ed85e7ebc" target="blank">zip with windows</a>
-            <li>Senden Sie uns diesen an: <a href="mailto:opendata@dainst.de">opendata@dainst.de</a></li>
-        </ol>
-        <p>Wenn Ihre Dateien zu groß für den Versand per E-Mail sind, verwenden Sie bitte einen Dateitransferdienst wie
-            <a href="https://www.dropbox.com/" target="blank">Dropbox</a>
-            <a href="https://cumulus.dainst.org/" target="blank">Cumulus</a>
-            <a href="https://wetransfer.com/" target="blank">Wetransfer</a>
-            <a href="https://www.sendbig.com/" target="blank">Sendbig</a>
-        </p>
-        <p>Falls dies nicht möglich ist, können Sie uns auch FTP-Zugangsdaten schicken. Sollte Ihnen kein FTP-Server zur Verfügung stehen, können wir Ihnen einen FTP-Zugang zur Verfügung stellen.
-        </p>
-        <p>Nach Erhalt der Daten werden diese von einer Administratorin / einem Administrator geprüft und bei Vollständigkeit veröffentlicht. Wenn weitere Informationen benötigt werden, werden Sie kontaktiert.</p>
-    
-        <h2>Was bedeutet Daten veröffentlichen und nachnutzbar machen?</h2>
-        <p>
-            <mark>[21-01-2022: Achtung. Dieser Bereich wird aktuell am DAI diskutiert. Welche Lizenzen verwendet werden können und sollten muss noch entschieden werden. Dies ist ein Entwurf.]
-            </mark>
-        </p>
-        <p>Wenn Sie Ihre Daten in iDAI.open-data veröffentlichen möchten ist es essentiell, dass Sie die Lizenzierung Ihrer Daten vornehmen, sowohl um möglichen Nachnutzerinnen und Nachnutzern die Verwendung zu ermöglichen, als auch eine rechtliche Absicherung  darüber zu haben, wer die Daten wie nachnutzen darf. Wir raten Ihnen dazu, sich an den standardisierten [CC-Lizenzen] zu orientieren und diese so offen wie möglich zu halten. Um eine tatsächliche Nachnutzung von Ihren Daten zu gewährleisten raten wir davon ab NC- oder ND-Lizenzen zu vergeben. 
-        </p>
-        <p>[Da das Deutsche Archäologische Institut eine Bundesbehörde im Geschäftsbereich des Auswärtigen Amtes ist, sollten die Forschungsprodukte in Vereinbarung mit dem <a href="https://www.bmi.bund.de/SharedDocs/downloads/DE/gesetzestexte/gesetzesentwuerfe/zweites-open-data-gesetz.html;jsessionid=CC00E506797300448428FD8AFA3406BD.2_cid295" target="blank">Open-Data Gesetz</a> übereinstimmen. Hier kommen also nur die Lizenze <a href="https://www.bva.bund.de/SharedDocs/Downloads/DE/Behoerden/Beratung/Methoden/open_data_faq.pdf?__blob=publicationFile&v=2" target="blank">CC-0, CC-BY und CC-BY-SA</a> in Frage (Stand August 2020). Einschränkungen können nur in Ausnahmefällen berücksichtigt werden.]</p>
-        <h3>Übersicht CC-Lizenzen</h3>
-        <ul>
-            <li>CC: Sie dürfen das Medium als Nutzerin / Nutzer verwenden.</li>
-            <li>BY: Sie müssen den Namen der lizenzgebenden Person(en) nennen.
-            </li>
-            <li>SA: Sie müssen Ihr Werk mit der gleichen Lizenz versehen, wie das darin enthaltene Medium.</li>
-            <li style="color: #ccc">NC: Sie dürfen ihr Werk nicht für kommerzielle Zwecke nutzen, wenn ein das Medium enthalten ist. (Achtung, hier gibt es „ungewollte Nebenwirkungen“)
-            </li>
-            <li style="color: #ccc">ND: Sie dürfen das Medium nicht verändern oder kopieren.
-            </li>
-        </ul>
-        <p><a href="www.creativecommons.org" target="blank">www.creativecommons.org</a> (17.01.2022)</p>
-       
-        <h2>Suche von Daten in iDAI.open-data</h2>
-        <p>Um die generelle Suchfunktion nutzen zu können müssen Sie sich nicht registrieren.</p>
-        <p>Sie haben die Möglichkeit sich die Reihenfolge der Datensätze nach verschiedenen Optionen anzeigen zu lassen: nach der Relevanz, nach auf- bzw. absteigenden Dateinamen oder nach dem letzten Bearbeitungsstand.
-        </p>
-        <p>iDAI.open-data basiert auf der Open-Source Software CKAN und unterstützt zwei Suchmodi, die beide vom gleichen Suchfeld aus verwendet werden. Wenn die in das Suchfeld eingegebenen Suchbegriffe keinen Doppelpunkt (":") enthalten, führt iDAI.open-data eine einfache Freitext-Suche durch. Enthält der Suchausdruck mindestens einen einen Doppelpunkt (":"), so führt iDAI.open-data eine erweiterte Suche durch.
-        </p>
-    
-        <h2>Einfache Freitext-Suche</h2>
-        <p>Um Datensätze in iDAI.open-data zu finden, geben Sie eine beliebige Kombination von Suchbegriffen in das Suchfeld auf der Startseite oder auf einer beliebigen Seite am oberen rechten Rand ein. 
-        </p>
-        <p>iDAI.open-data sucht nach dem vollständigen Wort. Bei der einfachen Suche werden <b>Wildcards (Platzhalter)</b> nicht unterstützt.</p>
-        <p>iDAI.open-data zeigt die erste Seite mit den Ergebnissen Ihrer Suche an. Sie können:</p>
-        <ul>
-            <li>weitere Seiten mit Ergebnissen anzeigen,</li>
-            <li>die Suche wiederholen und dabei einige Begriffe abändern,</li>
-            <li>die Suche auf Datensätze mit bestimmten Tags, Datenformaten usw. einschränken, indem Sie die Filter in der linken Spalte verwenden.</li>
-        </ul>
-        <p>Bei einer großen Anzahl von Ergebnissen können die Filter hilfreich sein, denn Sie können diese kombinieren, selektiv hinzufügen und entfernen, die Suche unter Beibehaltung der bestehenden Filter ändern und wiederholen.
-        </p>
-        <p>Die von der Benutzerin / dem Benutzer in das Suchfeld eingegebenen Suchbegriffe definieren die Haupt-"Abfrage", die die wesentliche Suche darstellt.
-        </p>
-        <p>Es gibt eine Reihe von Modifikatoren, welche die Parameter der Suchanfrage ... Das Zeichen + kennzeichnet Begriffe, die obligatorisch im Suchergebnis erhalten sein müssen. - Das Zeichen - kennzeichnit Begriffe, die nicht in dem Suchergebnis vorkommen sollen. Text, der in Anführungszeichen eingeschlossen ist (z. B. "San Jose"), wird als Phrase behandelt. Standardmäßig werden alle von der Benutzerin / vom Benutzer angegebenen Wörter oder Phrasen als optional behandelt, es sei denn, ihnen geht ein "+" oder ein "-" voraus.
-        </p>
-    
-        <h3>Beispiele für eine einfache Suche:</h3>
-        <ul>
-            <li>census sucht nach allen Datensätzen, die das Wort "census" in den Abfragefeldern enthalten.</li>
-            <li>census +2019 sucht nach allen Datensätzen, die das Wort "census" enthalten und filtert nur diejenigen, die auch "2019" enthalten, da es als obligatorisch behandelt wird.</li>
-            <li>census -2019 sucht nach allen Datensätzen, die das Wort "census" enthalten, und schließt "2019" aus den Ergebnissen aus, da es als verboten behandelt wird.
-            </li>
-            <li>"european census" sucht nach allen Datensätzen, die den Ausdruck "european census" enthalten.
-            </li>
-        </ul>
-        <p>iDAI.open-data wendet bei der Suche einige Vorverarbeitungen an, so dass z.B. nur der Wortstamm übrig bleibt. Dies kann zum Beispiel dazu führen, dass bei der Suche nach "testing" oder "tested" auch Ergebnisse angezeigt werden, die das Wort "test" enthalten.
-        </p>
-        <p>Beispiel: Testing sucht nach allen Datensätzen, die das Wort "Testing" und auch "Test" enthalten, da es der Wortstamm von "Testing" ist.
-        </p>
-        <p>Hinweis: Wenn der Name des Datensatzes Wörter enthält, die durch "-" getrennt sind, wird jedes Wort bei der Suche berücksichtigt.
-        </p>
-    
-        <h2>Erweitere Suche</h2>
-        <p>Wenn die Abfrage einen Doppelpunkt enthält, wird sie als feldbasierte Suche betrachtet und die Abfragesyntax wird für die Suche verwendet.
-        </p>
-        <p>Dies ermöglicht die Verwendung von Wildcards (Platzhaltern) "*", Proximity Matching "~" und weitere Funktionen. Die grundlegende Syntax ist Feld:Begriff.
-        </p>
-    
-        <h3>Beispiele für die erweiterte Suche:</h3>
-        <ul>
-            <li>title:european sucht nach allen Datensätzen, die im Titel das Wort "european" enthalten.</li>
-            <li>title:europ* sucht nach allen Datensätzen, die im Titel ein Wort enthalten, das mit "europ" beginnt, wie "europa" und "europäisch".
-            </li>
-            <li>title:europe || title:africa sucht nach Datensätzen, die "europe" oder "africa" im Titel enthalten.
-            </li>
-            <li>title: "european census" ~ 4 Bei einer Umkreissuche wird nach Begriffen gesucht, die in einem bestimmten Abstand zueinander stehen. In diesem Beispiel wird nach Datensätzen gesucht, deren Titel die Wörter "european" und "census" innerhalb eines Abstands von 4 Wörtern enthalten.
-            </li>
-            <li>author:powell~ iDAI.open-data unterstützt die Fuzzy-Suche. Um eine unscharfe Suche durchzuführen, verwenden Sie das Symbol "~" am Ende eines Einzelwortbegriffs. In diesem Beispiel werden Wörter wie "jowell" oder "pomell" auch gefunden werden.
-            </li>
-        </ul>
-    
-        <h3>Angezeigte Ergebnisse</h3>
-        <p>Wenn Sie einen passenden Datensatz gefunden und ausgewählt haben, zeigt iDAI.open-data die Seite mit den Datensätzen an. Diese enthält:
-        </p>
-        <ul>
-            <li>Name, Beschreibung und andere Informationen über den Datensatz</li>
-            <li>Links zu und kurze Beschreibungen von jeder der Ressourcen-Registerkarten:
-            </li>
-            <li>Aktivitätsstrom – zeigt den Verlauf der letzten Änderungen am Datensatz an
-            </li>
-            <li>Gruppen – hier sehen Sie alle mit diesem Datensatz verbundenen Gruppen.
-            </li>
-        </ul>
-        <p>Wenn Sie einen passenden Datensatz gefunden haben, können Sie über die Schaltfläche "Folgen" auf der Datensatzseite über Änderungen an diesem Datensatz informiert werden. Um diese Funktion nutzen zu können, müssen Sie einen Account bei iDAI.open-data haben und angemeldet sein.  
-        </p>
-    
-    
-    
-    </html>
-    
-    
+        <!-- Englische Version -->
+
+            <h1> Durch englische Übersetzung ersetzen</h1>
+
+        <!-- Englische Version Ende -->
+
+            {% endif %}
+
       {% endblock %}
     </div>
   </article>
