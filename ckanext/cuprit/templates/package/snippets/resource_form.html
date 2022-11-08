@@ -7,6 +7,8 @@
 
 <form id="resource-edit" class="dataset-form dataset-resource-form" method="post" action="{{ action }}" data-module="basic-form resource-form" enctype="multipart/form-data">
 
+
+
   {% block stages %}
     {# An empty stages variable will not show the stages #}
     {% if stage %}
@@ -17,6 +19,7 @@
   {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
 
   <input name="id" value="{{ data.id }}" type="hidden"/>
+  <p class="ds_notes" style="background-color: #F6F6F6">Note: The allowed filesize of a resource is {{ config["ckan.max_resource_size"] }} MB</p>
 
   {% block basic_fields %}
 
@@ -64,6 +67,8 @@
   {% endblock %}
 
   <div class="form-actions">
+
+    
     {% block delete_button %}
       {% if data.id %}
         {% if h.check_access('resource_delete', {'id': data.id})  %}
@@ -124,6 +129,15 @@ nameField.addEventListener ('change', function (event, initial_value) {
       event.target.value = cleaned_value
    }
 );
+
+/* 
+  TS:
+  Set allowed file types as long there is no solid backend validation
+*/
+
+document.getElementById('field-image-upload').setAttribute("accept",   "{{ config.ckan__allowed_resource_types or '.ply,.obj,.csv,.odt,.rdf,.txt,.jpeg,.jpg,.png,.tiff,.pdf,.json,.xlsx,.xml,.mkv,.geojson,.tsv,.geotiff,.txt,.docx,.ods,.wld,.svg,.sql,.jsonl,.zip' }}" );  
+
+
   </script>
   
 </form>

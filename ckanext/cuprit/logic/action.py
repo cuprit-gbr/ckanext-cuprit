@@ -51,16 +51,12 @@ def get_conf(context,data_dict=None):
   
     # toolkit.config.get("ckan.max_resource.size")
     # does not work so read from env by now
+    fallback_extensions=".ply,.obj,.csv,.odt,.rdf,.txt,.jpeg,.jpg,.png,.tiff,.pdf,.json,.xlsx,.xml,.mkv,.geojson,.tsv,.geotiff,.txt,.docx,.ods,.wld,.svg,.sql,.jsonl,.zip"
+
     max_size = os.getenv('CKAN__MAX_RESOURCE_SIZE', 200)
-    
-    ext_file = os.getenv('CKANEXT__RESOURCE_VALIDATION__TYPES_FILE',
-                         '/srv/app/src/ckanext-cuprit/ckanext/cuprit/config/resource_types.json')
-    try:
-        read_ext_file = open(ext_file)
-        ext_file_content = json.load(read_ext_file)
-        return {
-            "max_size": max_size,
-            "ext": ext_file_content['allowed_extensions']
-        }
-    except:
-        return {"error": "Cannot read ext file"}
+    allowed_resource_extensions = os.getenv('CKAN__ALLOWED_RESOURCE_TYPES', fallback_extensions).split(',')
+
+    return {
+        "max_size": max_size,
+        "ext": allowed_resource_extensions
+    }
