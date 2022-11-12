@@ -12,7 +12,7 @@ import ckanext.cuprit.lib.helpers as helpers
 from flask import Blueprint
 import ckanext.cuprit.blueprints as cuprit_blueprints
 from ckan.lib.plugins import DefaultTranslation
-from ckanext.cuprit.lib.choices import resource_types, custom_tags
+from ckanext.cuprit.lib.choices import resource_types, get_custom_tags
 
 
 
@@ -170,7 +170,7 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
             'is_editor': helpers.is_editor,
             'get_recent_articles': helpers.get_recent_articles,
             'resource_types': resource_types,
-            'custom_tags': custom_tags,
+            'custom_tags': get_custom_tags(),
             'format_orcid': helpers.format_orcid
         }
 
