@@ -1,4 +1,4 @@
-# Updateing Custom tags
+# Updating Custom tags
 
 The tags used with cKAN come from http://thesauri.dainst.org/
 Use the script https://github.com/dainst/iqvoc_skosxl/blob/master/dai_scripts/complete_export.py
