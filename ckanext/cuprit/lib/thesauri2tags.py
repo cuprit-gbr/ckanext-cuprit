@@ -33,7 +33,7 @@ def find_parents(data: dict) -> dict:
 
 def find_relations(parent_key: str, data: dict, childs: list) -> dict:
     """
-    Find all parten child relations
+    Find all partent child relations
     """
     for element in data:
         if element["@id"] == parent_key:
