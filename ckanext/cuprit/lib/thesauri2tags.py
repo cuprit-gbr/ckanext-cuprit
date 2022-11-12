@@ -40,11 +40,9 @@ def find_relations(parent_key: str, data: dict, childs: list) -> dict:
             has_relations = element.get(child_relations)
             if has_relations == None:
                 for e in element[names]:
-                    if e["@language"] == "de":
-                        term = e["@value"]
-                        if term not in exclude_terms:
-                            childs.append(e["@value"])
-                continue
+                    if e["@language"] == "de" and e["@value"] not in exclude_terms:
+                        childs.append(e["@value"])
+                    continue
             else:
                 for relation in has_relations:
                     find_relations(relation["@id"], data, childs)
@@ -56,8 +54,7 @@ def main():
     # iter parent child relations
     flattend_data, mapping_dict = find_parents(data)
     for k, v in mapping_dict.items():
-        child_terms = find_relations(k, data, [])
-        flattend_data[mapping_dict[k]] = child_terms
+        flattend_data[mapping_dict[k]] = find_relations(k, data, [])
     print(flattend_data)
 
     # pickle object to store
