@@ -10,7 +10,7 @@ parent_relation = "http://www.w3.org/2004/02/skos/core#broader"
 child_relations = "http://www.w3.org/2004/02/skos/core#narrower"
 top_level_parent_id = "http://thesauri.dainst.org/_fe65f286"
 names = "http://www.w3.org/2004/02/skos/core#prefLabel"
-exclude_terms = ["Donald", "Trump"]
+exclude_terms = ["Remove", "me"]
 
 # Todo: maybe merge with find_relations() and use generator instead
 def find_parents(data: dict) -> dict:
