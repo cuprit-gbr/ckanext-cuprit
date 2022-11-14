@@ -10,7 +10,8 @@ parent_relation = "http://www.w3.org/2004/02/skos/core#broader"
 child_relations = "http://www.w3.org/2004/02/skos/core#narrower"
 top_level_parent_id = "http://thesauri.dainst.org/_fe65f286"
 names = "http://www.w3.org/2004/02/skos/core#prefLabel"
-exclude_terms = ["Donald", "Trump"]
+exclude_parent_terms = ["Remove", "me"]
+exclude_child_terms = ["Remove", "me"]
 
 
 # Todo: maybe merge with find_relations() and use generator instead
@@ -24,11 +25,9 @@ def find_parents(data: dict) -> list:
         if parent_relation in element:
             if element[parent_relation][0]["@id"] == top_level_parent_id:
                 for e in element[names]:
-                    if e["@language"] == "de":
-                        de_term = e["@value"]
-                        element_id = element["@id"]
-                        flattened_data[de_term] = []
-                        mapping_dict[element_id] = de_term
+                    if e["@language"] == "de" and e["value"] not in exclude_parent_terms:
+                        flattened_data[e["value"]] = []
+                        mapping_dict[element["@id"]] = e["value"]
     return [flattened_data, mapping_dict]
 
 
@@ -41,7 +40,7 @@ def find_relations(parent_key: str, data: dict, childs: list) -> list:
             has_relations = element.get(child_relations)
             if has_relations is None:
                 for e in element[names]:
-                    if e["@language"] == "de" and e["@value"] not in exclude_terms:
+                    if e["@language"] == "de" and e["@value"] not in exclude_child_terms:
                         childs.append(e["@value"])
                     continue
             else:
