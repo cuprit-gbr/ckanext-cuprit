@@ -2,7 +2,7 @@ import json
 import pickle
 
 # load data from thesauri.json file
-with open("thesauri.json", "r") as f:
+with open("thesauri.json", "r",  encoding="utf-8") as f:
     data = json.load(f)
 
 # keys defining relations
@@ -10,8 +10,8 @@ parent_relation = "http://www.w3.org/2004/02/skos/core#broader"
 child_relations = "http://www.w3.org/2004/02/skos/core#narrower"
 top_level_parent_id = "http://thesauri.dainst.org/_fe65f286"
 names = "http://www.w3.org/2004/02/skos/core#prefLabel"
-exclude_parent_terms = ["Remove", "me"]
-exclude_child_terms = ["Remove", "me"]
+exclude_parent_terms = ["Geopolitische Einheiten", "Natürliche Prozesse", "Raumbezogene Einheiten"]
+exclude_child_terms = ["Ereignisse", "Forschungspraktiken", "Fiktionale und übernatürliche Wesen", "Konzepte des menschlichen Zusammenlebens", "Konzepte in den Naturwissenschaften", "Theoretische Konzepte", "Sprachen", "Truppeneinheiten"]
 
 
 # Todo: maybe merge with find_relations() and use generator instead
@@ -25,9 +25,9 @@ def find_parents(data: dict) -> list:
         if parent_relation in element:
             if element[parent_relation][0]["@id"] == top_level_parent_id:
                 for e in element[names]:
-                    if e["@language"] == "de" and e["value"] not in exclude_parent_terms:
-                        flattened_data[e["value"]] = []
-                        mapping_dict[element["@id"]] = e["value"]
+                    if e["@language"] == "de" and e["@value"] not in exclude_parent_terms:
+                        flattened_data[e["@value"]] = []
+                        mapping_dict[element["@id"]] = e["@value"]
     return [flattened_data, mapping_dict]
 
 
