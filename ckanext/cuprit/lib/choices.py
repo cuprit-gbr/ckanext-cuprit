@@ -1,3 +1,6 @@
+import os
+import pickle
+
 resource_types = [
                 ('Audiovisual', 'Audiovisual'), 
                 ('Book', 'Book'), 
@@ -30,6 +33,10 @@ resource_types = [
                 ] 
 
 def get_custom_tags():
-        with open("tags.pickle", "rb") as file:
+        # get current directory
+        current_dir = os.path.dirname(os.path.realpath(__file__))
+        # get custom tags
+        custom_tags_file = os.path.join(current_dir, 'tags.pickle')
+        with open(custom_tags_file, "rb") as file:
                 custom_tags = pickle.load(file)     
                 return custom_tags
