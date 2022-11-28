@@ -9,36 +9,39 @@
       {% if request.environ.CKAN_LANG == 'de' %}
 
          <!-- Deutsche Version -->
-            <h2>Was ist iDAI.repo und wozu benutze ich es?</h2>
-            <p>Die den Forschungsergebnissen zugrunde liegenden Forschungsdaten zusätzlich zu den klassischen Forschungsprodukten zu veröffentlichen, ist inzwischen ein allgemein anerkannter Bestandteil aller Wissenschaften, so auch der Archäologie, der Altertumswissenschaften und der Humanities und wird von der DFG Kodex „<a href="https://www.dfg.de/download/pdf/foerderung/rechtliche_rahmenbedingungen/gute_wissenschaftliche_praxis/kodex_gwp.pdf" target="blank">Leitlinien zur Sicherung guter wissenschaftlicher Praxis</a>“ explizit gefordert. Ein fachspezifisches Datenportal ist im Vergleich zu einem generischen von Vorteil, da Datensätze domänenspezifisch verstanden, mit Metadaten versehen und verknüpft werden können.</p>
-            <p>Das Konzept von Open Data gewinnt auch in den archäologischen Wissenschaften immer mehr an Bedeutung. iDAI.repo ermöglicht es den Mitarbeitenden des DAI und deren Projektpartnern, Daten in niedrigschwelliger Weise zu teilen. Dieses Angebot ist als Ergänzung zu den bereits bestehenden <a href="https://idai.world/" target="blank">iDAI.world</a> Systemen des Deutschen Archäologischen Instituts (DAI) zu sehen, welche einen höhren Grad der Strukturierung bieten, aber gleichzeitig einen höheren Arbeitsaufwand bei der Datenintegration voraussetzen. Insbesondere kleinere Forschungsprodukte und naturwissenschaftliche Daten sollen so einfach und transparent veröffentlicht und für andere Wissenschaftlerinnen und Wissenschaftler nachnutzbar gemacht werden. </p>
-            <h2>Wer kann Daten veröffentlichen?</h2>
-            <p>Die Nutzung für das Veröffentlichen von Forschungsdaten und -produkten mit iDAI.repo ist in zwei Bereiche unterteilt (Gruppen):</p>
-            <ul>
-               <li>DAI Mitarbeiterinnen und Mitarbeiter (DAI-internal)</li>
-               <li>externe Kooperationspartnerinnen und -partner (DAI-external)</li>
-            </ul>
-            <p>Für Mitarbeiterinnen und Mitarbeiter des DAI: bitte nutzen Sie die folgende Confluence Seite: <a href="https://wiki.access.dainst.org/display/FDM/CKAN+Workflow" target="blank">https://wiki.access.dainst.org/display/FDM/CKAN+Workflow</a>.</p>
-            <p>Wenn Sie nicht dem DAI angehören, aber dennoch die Möglichkeiten von iDAI.repo nutzen möchten, um ihre Forschungsdaten zu veröffentlichen, kontaktieren Sie uns bitte möglichst frühzeitig mit folgenden Angaben:</p>
+            <h1>Was ist iDAI.repo und wozu benutze ich es?</h1>
+            <p>Die den Forschungsergebnissen zugrunde liegenden Forschungsdaten zusätzlich zu den klassischen Forschungsprodukten zu veröffentlichen ist inzwischen ein allgemein anerkannter Bestandteil der wissenschaftlichen Praxis, so auch in der Archäologie, den Altertumswissenschaften und den Humanities. Sie wird von dem DFG Kodex „<a href="https://www.dfg.de/download/pdf/foerderung/rechtliche_rahmenbedingungen/gute_wissenschaftliche_praxis/kodex_gwp.pdf" target="blank">Leitlinien zur Sicherung guter wissenschaftlicher Praxis</a>“ daher explizit gefordert. Ein fachspezifisches Datenportal hat im Vergleich zu einem generischen den Vorteil, dass Datensätze domänenspezifisch verstanden, mit Metadaten versehen und verknüpft werden können.</p>
+            <p>Das Konzept von Open Data gewinnt auch in den archäologischen Wissenschaften immer mehr an Bedeutung. iDAI.reporepo ermöglicht es den Mitarbeitenden des DAI und deren Projektpartnern Daten einfach und ohne hohen technischen Aufwand zu teilen. Dieses Angebot ergänzt die bereits bestehenden <a href="https://idai.world/" target="blank">iDAI.world</a> des Deutschen Archäologischen Instituts (DAI), welche einen höhren Grad der Strukturierung bieten, aber gleichzeitig einen höheren Arbeitsaufwand bei der Datenintegration voraussetzen. Insbesondere kleinere Forschungsprodukte und naturwissenschaftliche Daten sollen so einfach und transparent veröffentlicht und für andere Wissenschaftlerinnen und Wissenschaftler nachnutzbar gemacht werden.</p>
+            <p>Technische Basis von iDAI.repo ist die Open-Source Software <a href="https://ckan.org/" target="blank">CKAN</a>.</p>
+
+            <h2>Wie können Daten veröffentlicht werden?</h2>
+            <p>Die selbstständige Nutzung von iDAI.repo für die Veröffentlichung von Forschungsdaten und -produkten  ist Mitarbeitenden des DAI und ihren Kooperationspartnern vorbehalten.</p>
+            <p>Für die Veröffentlichung von Forschungsdaten aus Kooperationsprojekten werden folgenden Angaben benötigt:</p>
             <ul>
                <li>Projektname, (angestrebte) Laufzeit,</li>
+               <li>Angabe zu den Kooperationspartnern,</li>
                <li>Datenmenge (ggf. geschätzt)</li>
                <li>Lizenzwunsch (CC-BY, CC-BY-SA präferiert),</li>
                <li>Zeitvorstellungen und Deadlines,</li>
                <li>vollständig (soweit möglich) ausgefüllte „<a href="/base/pdf/metadata.pdf" target="blank">metadata.pdf</a>“</li>
+               <li>sowie sonstigen Informationen, die für die Einschätzung der Forschungsdaten notwendig sind.</li>
             </ul>
-            <p>sowie sonstigen Informationen, die für die Einschätzung der Forschungsdaten notwendig sind.<br>
-               Bitte beachten Sie, dass nur folgende Dateitypen in iDAI.repo aufgenommen werden:
-            </p>
+            <p>Die Forschungsdaten können entweder einzeln oder mit Hilfe eines Skripts in größeren Paketen hochladen werden.</p>
+            <p>Bitte beachten Sie, dass nur folgende Dateitypen in iDAI.repo aufgenommen werden:</p>
+            
             <p>csv, odt, rdf, txt, jpeg, jpg, png, tif/tiff, pdf, json, xlsx, xml, mkv, geojson, tsv, geotiff, txt, docx, ods, wld, svg, sql, jsonl, zip, dng, geotiff, dxf, siard, gpkg, qgs, qgz, mov,
-               avi, ffv1, flac, wav, dae, obj, ply, warc, mhtml)
-            </p>
-            <p>Bitte haben Sie Verständnis, dass wir bei kurzfristigen Anfragen nicht immer sofort reagieren können, wir antworten schnellstmöglich. Gern unterstützen wir Sie auch bei Drittmittelanträgen, falls Sie Ihre Forschungsdaten im Anschluss mit <u>iDAI.repo</u> veröffentlichen wollen. </p>
+               avi, ffv1, flac, wav, dae, obj, ply, warc, mhtml.</p>
+            <p>Bitte haben Sie Verständnis, dass wir bei kurzfristigen Anfragen nicht immer sofort reagieren können, wir antworten schnellstmöglich. Gern unterstützen wir Sie auch bei Drittmittelanträgen, falls Sie Ihre Forschungsdaten im Anschluss mit <u>iDAI.repo</u> veröffentlichen wollen.</p>
+           
             <p>Kontaktieren Sie uns unter: <a href="mailto:opendata@dainst.de">opendata@dainst.de</a></p>
-            <h2>Daten als externe Person einreichen (Kooperation)</h2>
+
+            <h2>Einzelne Datensätze per grafischer Benutzerobefläche hinzufügen</h2>
+            <p>Bitte nutzen Sie die Beschreibung auf der <a href="https://wiki.access.dainst.org/display/FDM/CKAN+Workflow" target="blank">Confluence-Seite</a> für iDAI.repo.</p>
+            
+            <h2>Größere Datenpakete importieren</h2>
             <p>Nachdem Sie mit uns Kontakt aufgenommen haben sind folgende Schritte notwendig:</p>
             <ol>
-               <li>Laden Sie das folgende Formular herunter: „metadata.pdf“. Füllen Sie das Dokument <b>vollständig</b> aus. <br> Die im Dokument abgefragten Metadaten spielen für die Archivierung Ihrer digitalen Daten eine wichtige Rolle. Darüber hinaus sind sie wichtig, um die Auffindbarkeit, Verständlichkeit und Nachnutzbarkeit der Daten zu gewährleisten. Die Vollständigkeit des Dokuments ist daher essentiell. Wenn Sie nicht sicher sind, welche Daten einzutragen sind, wenden Sie sich an die Kontaktmailadresse.
+               <li>Laden Sie das folgende Formular herunter: <a href="/base/pdf/metadata.pdf" target="blank">metadata.pdf</a>. Füllen Sie das Dokument <b>vollständig</b> aus. <br> Die im Dokument abgefragten Metadaten spielen für die Archivierung Ihrer digitalen Daten eine wichtige Rolle. Darüber hinaus sind sie wichtig, um die Auffindbarkeit, Verständlichkeit und Nachnutzbarkeit der Daten zu gewährleisten. Die Vollständigkeit des Dokuments ist daher essentiell. Wenn Sie nicht sicher sind, welche Daten einzutragen sind, wenden Sie sich an die Kontaktmailadresse.
                </li>
                <li>Speichern Sie das Dokument zusammen mit allen Ihren zu hinterlegenden Dateien in einem eigenen Ordner.
                </li>
@@ -54,12 +57,10 @@
             </p>
             <p>Falls dies nicht möglich ist, können Sie uns auch FTP-Zugangsdaten schicken. Sollte Ihnen kein FTP-Server zur Verfügung stehen, können wir Ihnen einen FTP-Zugang zur Verfügung stellen. Kontaktieren Sie uns hierzu möglichst frühzeitig.</p>
             <p>Nach Erhalt der Daten werden diese von einer Administratorin / einem Administrator geprüft und bei Vollständigkeit veröffentlicht. Wenn weitere Informationen benötigt werden, werden Sie kontaktiert.</p>
+            
             <h2>Was bedeutet Daten veröffentlichen und nachnutzbar machen?</h2>
-            <p><mark>[03-11-2022: Achtung. Welche Lizenzen verwendet werden können und sollten, ist noch nicht abschließend geklärt. Dies ist ein Entwurf. Handelt es sich um externe Daten, kontaktieren Sie uns bitte vor der endgültigen Lizenzwahl.]
-               </mark>
-            </p>
-            <p>Wenn Sie Ihre Daten in iDAI.repo veröffentlichen möchten, ist es essentiell, dass Sie die Lizenzierung Ihrer Daten vornehmen, sowohl um möglichen Nachnutzerinnen und Nachnutzern die Verwendung zu ermöglichen, als auch eine rechtliche Absicherung darüber zu haben, wer die Daten wie nachnutzen darf. Wir raten Ihnen dazu, sich an den standardisierten [CC-Lizenzen] zu orientieren und diese so offen wie möglich zu halten. Um eine tatsächliche Nachnutzung von Ihren Daten zu gewährleisten, raten wir davon ab, NC- oder ND-Lizenzen zu vergeben. </p>
-            <p>[Da das Deutsche Archäologische Institut eine Bundesbehörde im Geschäftsbereich des Auswärtigen Amtes ist, sollten die Forschungsprodukte in Vereinbarung mit dem <a href="https://www.bmi.bund.de/SharedDocs/downloads/DE/gesetzestexte/gesetzesentwuerfe/zweites-open-data-gesetz.html;jsessionid=CC00E506797300448428FD8AFA3406BD.2_cid295" target="blank">Open-Data Gesetz</a> übereinstimmen. Hier kommen also nur die Lizenzen <a href="https://www.bva.bund.de/SharedDocs/Downloads/DE/Behoerden/Beratung/Methoden/open_data_faq.pdf?__blob=publicationFile&v=2" target="blank">CC-0, CC-BY und CC-BY-SA</a> in Frage (Stand November 2022). Einschränkungen können nur in Ausnahmefällen berücksichtigt werden.]</p>
+            <p>Wenn Sie Ihre Daten in iDAI.repo veröffentlichen möchten ist es notwendig, Angaben zur Lizensierung der Daten zu machen. Nur so ist eine rechtssichere Nachnutzung der Daten gesichert., Eine Lizenz bietet zudem die Möglichkeit,festzulegen in welcher Weise die Daten von wem nachgenutzt werden dürfen.. Prinzipiell raten wir Ihnen dazu, sich an den standardisierten [CC-Lizenzen] zu orientieren und diese so offen wie möglich zu halten. Um eine tatsächliche Nachnutzung von Ihren Daten zu gewährleisten raten wir davon ab NC- oder ND-Lizenzen zu vergeben. DAI-Projekte müssen sich vor der Datenveröffentlichung über etwaige DAI-interen Vorgaben zur Lizensierung informieren.</p>
+               
             <h3>Übersicht CC-Lizenzen</h3>
             <ul>
                <li>CC: Sie dürfen das Medium als Nutzerin / Nutzer verwenden.</li>
@@ -72,15 +73,14 @@
                </li>
             </ul>
             <p><a href="www.creativecommons.org" target="blank">www.creativecommons.org</a> (02.11.2022)</p>
-            <h2>Suche von Daten in iDAI.repo</h2>
+            
+            <h1>Suche von Daten in iDAI.repo</h1>
             <p>Um die generelle Suchfunktion nutzen zu können müssen Sie sich nicht registrieren.</p>
-            <p>Sie haben die Möglichkeit sich die Reihenfolge der Datensätze nach verschiedenen Optionen anzeigen zu lassen: nach der Relevanz, nach auf- bzw. absteigenden Dateinamen oder nach dem letzten Bearbeitungsstand.
-            </p>
-            <p>iDAI.repo basiert auf der Open-Source Software CKAN und unterstützt zwei Suchmodi, die beide vom gleichen Suchfeld aus verwendet werden. Wenn die in das Suchfeld eingegebenen Suchbegriffe keinen Doppelpunkt (":") enthalten, führt iDAI.repo eine einfache Freitext-Suche durch. Enthält der Suchausdruck mindestens einen Doppelpunkt (":"), so führt iDAI.repo eine erweiterte Suche durch.
-            </p>
+            <p>Sie haben die Möglichkeit sich die Reihenfolge der Datensätze nach verschiedenen Optionen anzeigen zu lassen: nach der Relevanz, nach auf- bzw. absteigenden Dateinamen oder nach dem letzten Bearbeitungsstand.</p>
+            <p>iDAI.repo  unterstützt zwei Suchmodi. Beide können von dem gleichen Suchfeld aus benutz werden. Wenn die in das Suchfeld eingegebenen Suchbegriffe keinen Doppelpunkt (":") enthalten, führt iDAI.repo eine einfache Freitext-Suche durch. Enthält der Suchausdruck mindestens einen einen Doppelpunkt (":"), so führt iDAI.repo eine erweiterte Suche durch.</p>
+
             <h2>Einfache Freitext-Suche</h2>
-            <p>Um Datensätze in iDAI.repo zu finden, geben Sie eine beliebige Kombination von Suchbegriffen in das Suchfeld auf der Startseite oder auf einer beliebigen Seite am oberen rechten Rand ein. 
-            </p>
+            <p>Um Datensätze in iDAI.repo zu finden, geben Sie eine beliebige Kombination von Suchbegriffen in das Suchfeld auf der Startseite oder auf einer beliebigen Seite am oberen rechten Rand ein.</p>
             <p>iDAI.repo sucht nach dem vollständigen Wort. Bei der einfachen Suche werden <b>Wildcards (Platzhalter)</b> nicht unterstützt.</p>
             <p>iDAI.repo zeigt die erste Seite mit den Ergebnissen Ihrer Suche an. Sie können:</p>
             <ul>
@@ -104,8 +104,7 @@
                <li><b>"european census"</b> sucht nach allen Datensätzen, die den Ausdruck "european census" enthalten.
                </li>
             </ul>
-            <p>iDAI.repo wendet bei der Suche einige Vorverarbeitungen an, sodass z. B. nur der Wortstamm übrig bleibt. Dies kann zum Beispiel dazu führen, dass bei der Suche nach "testing" oder "tested" auch Ergebnisse angezeigt werden, die das Wort "test" enthalten.
-            </p>
+            <p>iDAI.repo wendet bei der Suche einige Vorverarbeitungen an, sodass z. B. nur der Wortstamm übrig bleibt.</p>
             <p>Beispiel: Testing sucht nach allen Datensätzen, die das Wort "Testing" und auch "Test" enthalten, da es der Wortstamm von "Testing" ist.
             </p>
             <p>Hinweis: Wenn der Name des Datensatzes Wörter enthält, die durch "-" getrennt sind, wird jedes Wort bei der Suche berücksichtigt.
@@ -132,7 +131,7 @@
             </p>
             <ul>
                <li>Name, Beschreibung und andere Informationen über den Datensatz</li>
-               <li>Links zu und kurze Beschreibungen von jeder der Ressourcen-Registerkarten:
+               <li>Links zu und kurze Beschreibungen von jeder der Ressourcen-Registerkarten.
                </li>
                <li>Aktivitätsstrom – zeigt den Verlauf der letzten Änderungen am Datensatz an
                </li>
@@ -145,37 +144,40 @@
             {% else %}
 
         <!-- Englische Version -->
-
-            <h2>What is iDAI.repo and what do I use it for?</h2>
-            <p>Publishing the research data forming the basis of the results of the research in addition to the classic research products is now a generally accepted part of all sciences, including archaeology, ancient studies, and the humanities, and is explicitly required by the DFG Code "<a href="https://www.dfg.de/download/pdf/foerderung/rechtliche_rahmenbedingungen/gute_wissenschaftliche_praxis/kodex_gwp.pdf" target="blank">Guidelines for Ensuring Good Scientific Practice</a>". A domain-specific data portal is advantageous over a generic one because datasets can be understood, metadata added, and linked in a domain-specific manner.</p>
-            <p>The concept of Open Data is also becoming increasingly important in the archaeological sciences. iDAI.repo enables DAI staff and their project partners to share data in a low-threshold manner. This offer is to be seen as a supplement to the already existing <a href="https://idai.world/" target="blank">iDAI.world</a> systems of the German Archaeological Institute (DAI), which offer a higher degree of structuring, but at the same time require more work for data integration. Especially smaller research products and scientific data should be published in a simple and transparent way and made reusable for other scientists.</p>
-            <h2>Who can publish data?</h2>
-            <p>The usage for publishing research data and products with iDAI.repo is divided into two sections (groups)</p>
+            <h1>What is iDAI.repo and what do I use it for?</h1>
+            <p>Publishing the research data on which the research results are based in addition to the classic research products is now a generally accepted part of scientific practice, including in archaeology, ancient studies and the humanities. It is therefore explicitly required by the DFG Code "<a href="https://www.dfg.de/download/pdf/foerderung/rechtliche_rahmenbedingungen/gute_wissenschaftliche_praxis/kodex_gwp.pdf" target="blank">Guidelines for Safeguarding Good Research Practice. Code of Conduct</a>". A domain-specific data portal is advantageous over a generic one because datasets can be understood, metadata added, and linked in a domain-specific manner.</p>
+            <p>The concept of Open Data is also gaining more and more importance in the archaeological sciences. iDAI.reporepo enables DAI staff and their project partners to share data easily and without high technical effort. This offer complements the already existing <a href="https://idai.world/" target="blank">iDAI.world</a>  of the German Archaeological Institute (DAI), which offers a higher degree of structuring, but at the same time requires more work for data integration. In particular, smaller research products and scientific data should be published in a simple and transparent way and made available to other scientists.</p>
+            <p>The technical basis of iDAI.repo is the open source software <a href="https://ckan.org/" target="blank">CKAN</a>.</p>>
+            
+            <h2>How can data be published?</h2>
+            <p>The independent use of iDAI.repo for the publication of research data and products is reserved for DAI employees and their cooperation partners.</p>
+            <p>Please contact the RDM-Departement of the DAI, if there are any uncertainties: <a href="mailto:opendata@dainst.de">opendata@dainst.de</a></p>
+            <p>The following information is required for the publication of research data from collaborative projects:</p>   
             <ul>
-               <li>DAI employees (DAI-internal)</li>
-               <li>external cooperation partners (DAI-external)</li>
-            </ul>
-            <p>For DAI employees: please use the following Confluence page: <a href="https://wiki.access.dainst.org/display/FDM/CKAN+Workflow" target="blank">https://wiki.access.dainst.org/display/FDM/CKAN+Workflow</a>.</p>
-            <p>If you are not a member of the DAI but want to use the possibilities of iDAI.repo to publish your research data, please contact us as early as possible with the following information:</p>
-            <ul>
-               <li>Project name, estimated duration,</li>
-               <li>Amount of data (estimated if necessary)</li>
+               <li>Project name and estimated duration,</li>
+               <li>Information on the cooperation partners,</li>
+               <li>Amount of data (estimated if necessary),</li>
                <li>License request (CC-BY, CC-BY-SA preferred),</li>
                <li>Schedules and deadlines,</li>
                <li>completely (as far as possible) filled out „<a href="/base/pdf/metadata.pdf" target="blank">metadata.pdf</a>“</li>
+               <li>and other information necessary for the assessment of the research data.</li>
             </ul>
-            <p>and other information necessary for the assessment of the research data.<br>
-               Please note that only the following file formats will be included in iDAI.repo:
+            <p>Research data can be uploaded either one at a time or in larger packages using a script.</p>
+            <p>Please note that only the following file formats will be included in iDAI.repo:
             </p>
             <p>csv, odt, rdf, txt, jpeg, jpg, png, tif/tiff, pdf, json, xlsx, xml, mkv, geojson, tsv, geotiff, txt, docx, ods, wld, svg, sql, jsonl, zip, dng, geotiff, dxf, siard, gpkg, qgs, qgz, mov,
-               avi, ffv1, flac, wav, dae, obj, ply, warc, mhtml)
-            </p>
-            <p>Please understand that we cannot always respond immediately to short-term requests, we will answer as soon as possible. We are also happy to support you with third-party funding applications if you subsequently want to publish your research data with <u>iDAI.repo</u>.</p>
+               avi, ffv1, flac, wav, dae, obj, ply, warc, mhtml.</p>
+
+            <p>We are also happy to support you with third-party funding applications if you want to subsequently publish your research data with <u>iDAI.repo</u>. <br> Please understand that we cannot always respond immediately to short notice requests, we will answer as soon as possible. </p>
             <p>Contact us at: <a href="mailto:opendata@dainst.de">opendata@dainst.de</a></p>
-            <h2>Submit data as an external person (new or existing cooperation)</h2>
-            <p>After you have contacted us the following steps are necessary:</p>
+            
+            <h2>Add individual records via graphical user interface</h2>
+            <p>Please use the description on the <a href="https://wiki.access.dainst.org/display/FDM/CKAN+Workflow" target="blank">Confluence page</a> for iDAI.repo.</p>
+            
+            <h2>Import larger data packages</h2>
+            <p>After you have contacted the DAIs RDM-Departement the following steps are necessary:</p>
             <ol>
-               <li>Download the following form: „metadata.pdf“. Fill out the document. <br> Die im Dokument abgefragten Metadaten spielen für die Archivierung Ihrer digitalen Daten eine wichtige Rolle. Darüber hinaus sind sie wichtig, um die Auffindbarkeit, Verständlichkeit und Nachnutzbarkeit der Daten zu gewährleisten. Die Vollständigkeit des Dokuments ist daher essentiell. Wenn Sie nicht sicher sind, welche Daten einzutragen sind, wenden Sie sich an die Kontaktmailadresse.
+               <li>Download the following form:"<a href="/base/pdf/metadata.pdf" target="blank">metadata.pdf</a>". Fill out the document in its entirety.<br> The metadata requested in the document play an important role in archiving your digital data. In addition, they are important for ensuring the findability, comprehensibility and reusability of the data. The completeness of the document is therefore essential. If you are not sure which data to enter, please contact the contact mail address.
                </li>
                <li>Save the document together with all your files to be deposited in a separate folder.
                </li>
@@ -191,9 +193,77 @@
             </p>
             <p>If this is not possible, you can also send us FTP access data. If you do not have an FTP server available, we can provide you with FTP access. Contact us as early as possible for this purpose.</p>
             <p>Once received, the data will be reviewed by an administrator and published if complete. If further information is needed, you will be contacted.</p>
-            <h2>What does publishing data and making it reusable mean?</h2>
-         <!-- TODO FINISH TRANSLATION -->
-         
+            
+            <h2>What does it mean to publish data and make it reusable?</h2>
+            <p>If you want to publish your data in iDAI.repo, it is necessary to provide information about the licensing of the data. This is the only way to ensure a legally compliant subsequent use of the data. A license also offers the possibility to specify how the data may be used and by whom. In principle, we advise you to orientate yourself on the standardized [CC licenses] and to keep them as open as possible. In order to ensure an actual re-use of your data, we advise against issuing NC or ND licenses. DAI projects need to be aware of any DAI internal licensing requirements before publishing data.</p>
+            <h3>Overview CC-licenses</h3>
+            <ul>
+               <li>CC: You may use the medium as a user.</li>
+               <li>BY: You must mention the name of the licensing person(s).
+               </li>
+               <li>SA: You must license your work with the same license as the media it contains.</li>
+               <li style="color: #ccc">NC: You may not use their work for commercial purposes if a the medium is included. (Attention, there are "<a href="https://meta.wikimedia.org/wiki/Open_Content_-_A_Practical_Guide_to_Using_Creative_Commons_Licences/The_Creative_Commons_licencing_scheme" target ="blank">unwanted side effects</a>" here).
+               </li>
+               <li style="color: #ccc">ND: You may not alter or copy the media.
+               </li>
+            </ul>
+            <p><a href="www.creativecommons.org" target="blank">www.creativecommons.org</a> (02.11.2022)</p>
+
+            <h1>Searching data in iDAI.repo</h1>
+            <p>You do not need to register to use the general search function.</p>
+            <p>You have the possibility to display the order of the records according to different options: according to relevance, according to ascending or descending file names or according to the last processing status.</p>
+            <p>iDAI.repo supports two search modes. Both can be used from the same search field. If the search expression entered in the search field does not contain a colon (":"), iDAI.repo performs a simple free text search. If the search expression contains at least one colon (":"), iDAI.repo performs an advanced search.</p>
+            
+            <h2>Simple free text search</h2>
+            <p>To find records in iDAI.repo, enter any combination of search terms in the search box on the home page or on any page at the top right.</p>
+            <p>iDAI.repo searches for the complete word. Wildcards are not supported in the simple search.</p>
+            <p>iDAI.repo displays the first page with the results of your search. You can:
+               <ol>
+                  <li>show more pages with results,</li>
+                  <li>repeat the search, modifying some terms,</li>
+                  <li>narrow the search to records with specific tags, data formats, etc., using the filters in the left column.</li>
+               </ol>
+            </p>
+            <p>In case of a large number of results, the filters can be helpful, because you can combine them, selectively add and remove them, change the search while keeping the existing filters and repeat it.</p>
+            <p>The search terms entered by the user in the search field define the main "query", which is the essential search.</p>
+            <p>There are a number of modifiers that vary the parameters of the search query. The + sign indicates terms that must be included in the search result. - The - sign indicates terms that should not appear in the search result. Text enclosed in quotation marks (e.g. "San Jose") is treated as a phrase. By default, all words or phrases specified by the user are treated as optional unless they are preceded by a "+" or a "-".</p>
+            <h3>Examples</h3>
+            <p><i>Search request is printed in bold.</i><br>
+            <ol>
+               <li><b>census</b> searches for all records that contain the word "census" in the query fields.</li>
+               <li><b>census +2019</b> searches for all records that contain the word "census" and filters only those that also contain "2019", since it is treated as obligatory.</li>
+               <li><b>census -2019</b>  searches for all records containing the word "census" and excludes "2019" from the results, treating it as necessarily excluded.</li>
+               <li><b>"european census"</b> searches for all records containing the exact phrase "european census".</li>
+            </ol>
+            </p>
+            <p>iDAI.repo applies some preprocessing during the search. <br> Example: Testing searches for all records that contain the word "testing" and also "test", since it is the root word of "testing". </p>
+            <p>Note: If the record name contains words separated by "-", each word will be considered individually in the search.</p>
+
+            <h2>Advanced search</h2>
+            <p>If the query contains a colon, it is considered a field-based search and the query syntax is used for the search.</p>
+            <p>This allows the use of wildcards "*", proximity matching "~" and other functions. The basic syntax is field:term.</p>
+
+            <h3>Examples</h3>
+            <p><i>Search request is printed in bold.</i><br>
+               <ul>
+                  <li><b>title:european</b> searches for all records that contain the word "european" in the field title.</li>
+                  <li><b>title:europ*</b> searches for all records that contain a word beginning with "europ" in the field title, such as "europa" and "european".</li>
+                  <li><b>title:europe || title:africa</b> searches for records that contain "europe" or "africa" in the title.</li>
+                  <li><b>title: "european census" ~ 4</b> A proximity search looks for terms that are within a certain distance of each other. This example searches for records whose titles contain the words "european" and "census" within a distance of 4 words.</li>
+                  <li><b>author:powell~</b>  iDAI.repo supports fuzzy search. To perform a fuzzy search, use the "~" symbol at the end of a single word term. In this example, words like "jowell" or "pomell" will also be found.</li>
+               </ul>
+            </p>
+            <h3>Displayed results</h3>
+            <p>When you have found and selected a matching record, iDAI.repo displays the records page. This contains:
+               <ol>
+                  <li>Name, description, and other information about the record.</li>
+                  <li>Links to and brief descriptions of each of the resource tabs.</li>
+                  <li>Activity Stream - shows the history of recent changes to the dataset.</li>
+                  <li>Groups - here you can see all the groups associated with this dataset.</li>
+               </ol>
+            </p>
+            <p>When you have found a matching record, you can be informed about changes to this record via the "Follow" button on the record page. To use this feature, you must have an account with iDAI.repo and be logged in.</p>
+
         <!-- Englische Version Ende -->
 
             {% endif %}
