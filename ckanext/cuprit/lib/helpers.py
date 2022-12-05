@@ -41,6 +41,5 @@ def format_resources(resources: str) -> str:
     resources = resources.split(";")
     for resource in resources:
         resources_html_str += f'{resource}<br>'
-    resources_html_str = resources_html_str.replace('\"', '')
-    resources_html_str = resources_html_str.replace('"', '')
+    re.sub('"', '', resources_html_str)
     return resources_html_str
