@@ -37,9 +37,11 @@ def format_orcid(authors: str) -> str:
     return author_html_str
 
 def format_resources(resources: str) -> str:
-    resources_html_str = ""
+    resources = str(resources)
+    resources = resources.replace('"','')
+    re.sub('"', '', resources)
+    resources_html_str = ''
     resources = resources.split(";")
     for resource in resources:
         resources_html_str += f'{resource}<br>'
-    re.sub('"', '', resources_html_str)
     return resources_html_str
