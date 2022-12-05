@@ -115,7 +115,7 @@
   {% if pkg_dict.type_of_publication %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Resource Type General") }}</th>
-      <td class="dataset-details">{{ pkg_dict.type_of_publication }}</td>
+      <td class="dataset-details">{{ h.format_orcid(pkg_dict.type_of_publication) | safe }}</td>
     </tr>
   {% endif %}
 {% if pkg_dict.doi %}

@@ -171,7 +171,8 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
             'get_recent_articles': helpers.get_recent_articles,
             'resource_types': resource_types,
             'custom_tags': get_custom_tags(),
-            'format_orcid': helpers.format_orcid
+            'format_orcid': helpers.format_orcid,
+            'format_resources': helpers.format_resources
         }
 
     # Custom pages
