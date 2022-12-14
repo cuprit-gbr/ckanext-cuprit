@@ -11,7 +11,7 @@ html, body {
     color: #fff;
     background: white!important;
     border-bottom: 1px solid #666;
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    // box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 
 .section__headline-blue {
@@ -29,7 +29,13 @@ html, body {
 .c_attention-box {
   background-color: #E6E6E6;
   padding: 2rem 0 5rem 0;
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  // box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.wrapper {
+  -webkit-box-shadow: none!important; 
+  box-shadow: none!important; 
+  border-radius: 0px!important
 }
 
 .c_attention {
