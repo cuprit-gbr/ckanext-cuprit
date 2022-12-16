@@ -51,8 +51,8 @@ def get_conf(context,data_dict=None):
   
     # toolkit.config.get("ckan.max_resource.size")
     # does not work so read from env by now
-    fallback_extensions="ply, obj, csv, odt, rdf, txt, jpeg, jpg, png, tiff, pdf, json, xlsx, " \
-                        "xml, mkv, geojson, tsv, geotiff, txt, docx, ods, wld, svg, sql, jsonl, zip"
+    fallback_extensions="ply,obj,csv,odt,rdf,txt,jpeg,jpg,png,tiff,pdf,json,xlsx, " \
+                        "xml,mkv,geojson,tsv,geotiff,txt,docx,ods,wld,svg,sql,jsonl,zip"
 
     max_size = os.getenv('CKAN__MAX_RESOURCE_SIZE', 200)
     allowed_resource_extensions = os.getenv('CKAN__ALLOWED_RESOURCE_TYPES', fallback_extensions).split(',')
