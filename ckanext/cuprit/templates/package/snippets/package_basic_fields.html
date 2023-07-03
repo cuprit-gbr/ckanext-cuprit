@@ -55,7 +55,7 @@
         <div class="col-md-12">
           <select id="tags_str" data-module="autocomplete" multiple onchange="update_tags()">
             {% set dataset_tags=data.get('tag_string') %}
-            {% if dataset_tags is iterable and (dataset_tags is not string and var is not mapping) %}
+            {% if dataset_tags is string and var is not mapping %}
               {% set existing_tag = dataset_tags.replace(', ',',').split(',') %}
             {% else %}
               {% set existing_tag = [] %}
