@@ -13,3 +13,12 @@ body .masthead .navigation .nav-pills li a:hover, .site-footer .navigation .nav-
     color: #333;
     background-color: #003647!important
 }
+
+/* for ckan 3 */
+
+.masthead .main-navbar ul li a {
+  color: #333!important;
+}
+.masthead .main-navbar ul li:hover a, .masthead .main-navbar ul li:focus a, .masthead .main-navbar ul li.active a {
+  background-color: #eee!important;
+}
