@@ -25,7 +25,7 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.IPackageController, inherit=True)
-    plugins.implements(plugins.IRoutes)
+    # plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IFacets)
     plugins.implements(plugins.ITemplateHelpers)
 
