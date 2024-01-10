@@ -1,5 +1,6 @@
-@import url('inter-font.css');
+@import url('font.css');
 
+/* GENERAL */
 html, body {
   font-family: 'Inter', sans-serif!important;
 }
@@ -11,7 +12,11 @@ html, body {
     color: #fff;
     background: white!important;
     border-bottom: 1px solid #666;
-    // box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.masthead .container {
+  padding-left: 0px!important;
+  padding-right: 0px!important;
 }
 
 .section__headline-blue {
@@ -29,7 +34,6 @@ html, body {
 .c_attention-box {
   background-color: #E6E6E6;
   padding: 2rem 0 5rem 0;
-  // box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 
 .wrapper {
@@ -47,18 +51,283 @@ html, body {
   margin-top: 1rem;
 }
 
-/* Format dataset headlines */
+/* DATASET */
 h2.dataset-heading a {
-  color: #065D77!important;
+  color: #344C70!important;
 }
 
 h2.dataset-heading {
-  font-size: 2.4rem!important;
+  font-size: 26px!important;
 }
 
-/* Dataset Form */
 .ds_notes {
   background-color: #ffd;
   color: #8d939e;
   display: block;
+  margin-bottom: 10px;
+}
+
+#cuprit_banner {
+  color: #fff;
+  background-color: #344C70;
+  margin-top: 0;
+  margin-bottom: 50px;
+  padding: 30px 0;
+  border: 0;
+  word-wrap: break-word;
+}
+
+.main {
+  padding-top: 0px!important;
+  background: none !important;
+}
+
+.box, .wrapper {
+  background-color: #fff;
+  border: none!important;
+  border-radius: 0px!important;
+  box-shadow: none!important;
+}
+
+@media (min-width: 768px){
+  .wrapper:before {
+      border-right: none!important;
+  }
+}
+
+h2.module-heading {
+  background: none;
+  font-size: 20px;
+  padding-left: 0!important;
+  border-bottom: none!important;
+  border-top: none!important;
+  color: #666;
+}
+
+h2.module-heading i.fa.fa-filter {
+  display: none;
+}
+
+.module .read-more {
+  color: #666!important;
+}
+
+.module-narrow .nav-item > a, .module-narrow .nav-aside li a {
+  text-decoration: none;
+  display: block;
+  color: #344C70!important;
+  font-size: 80%;
+  line-height: 0!important;
+  margin: -7px -25px;
+  padding: 10px 25px;
+}
+
+
+/* PAGE */ 
+.module-narrow .nav-item > a .separator, .module-narrow .nav-aside li a .separator{
+  display: none!important;
+}
+
+.module-narrow .nav-item > a .badge, .module-narrow .nav-aside li a .badge {
+  background-color: #fff!important;
+  border-radius: 10px;
+  color: #767676;
+  font-size: 80%;
+}
+
+.nav-simple > li, .nav-aside > li {
+  border-bottom: none!important;
+  padding: 2px 25px!important;
+}
+
+.module-narrow .nav-item > a:hover {
+  background: none!important;
+  color: #000!important;
+}
+
+.module-footer {
+  border-top: none!important;
+}
+
+li.dataset-item h2 {
+  margin-top: 10px!important;
+  margin-bottom: 5px!important;
+}
+
+
+.fa-lock{
+  color: #999!important;
+  font-size: 80%;
+  transform: translate(0px, -1px);
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #344C70!important;
+  border-color: #344C70!important;
+}
+
+.text-primary, p.text-primary {
+  color: #344C70!important;
+}
+
+ol.breadcrumb li a {
+  color: white!important;
+}
+
+ol.breadcrumb li a i {
+  display:none!important;
+}
+
+.breadcrumb>li+li:before {
+  font: normal normal normal 14px/1 FontAwesome;
+  padding: 0 8px;
+  content: "\f105";
+}
+
+.headline-font {
+  font-size: 42px!important;
+  font-weight: 400;
+  font-family: Cargan, Inter;
+}
+
+.input-lg {
+  height: 63px!important;
+  padding: 10px 16px!important;
+  font-size: 23px!important;
+  line-height: 1.3333333!important;
+  border-radius: 0!important;
+}
+
+.search-form {
+  border-bottom: 0px dotted #fff!important;
+}
+
+.module-search .tags {
+  overflow: auto;
+}
+
+.dataset_search_btn {
+  position: absolute!important;
+  right: 0.5rem;
+  top: 0.95rem;
+  border: none!important;
+  box-shadow: none!important;
+  color: #999;
+}
+
+
+
+#content section.module .module-content{
+  padding-right: 0px!important;
+  padding-top: 0px!important;
+}
+
+.breadcrumb li.active a {
+  color: #aaa!important;
+}
+
+.badge[data-format=html],
+.badge[data-format*=html],
+.badge[data-format=json],
+.badge[data-format*=json],
+.badge[data-format=ods],
+.badge[data-format*=ods],
+.badge[data-format=xml],
+.badge[data-format*=xml],
+.badge[data-format=text],
+.badge[data-format*=text],
+.badge[data-format=csv],
+.badge[data-format*=csv],
+.badge[data-format=xls],
+.badge[data-format*=xls],
+.badge[data-format=zip],
+.badge[data-format*=zip],
+.badge[data-format=api],
+.badge[data-format*=api],
+.badge[data-format=pdf],
+.badge[data-format*=pdf],
+.badge[data-format=rdf],
+.badge[data-format*=rdf],
+.badge[data-format*=nquad],
+.badge[data-format*=ntriples],
+.badge[data-format*=turtle]   {
+  background-color: #344C70!important;
+}
+
+.badge-default {
+  padding-top: 0.4rem!important;
+}
+.badge-default[href]:hover,
+.badge-default[href]:focus {
+  background-color: #344C70!important;
+  color: #fff;
+  text-decoration: none;
+}
+
+
+.additional-info td, .additional-info th {
+  width: auto!important;
+}
+
+.dataset-label:first-child, .table-striped td:first-child {
+  width: 200px!important;
+}
+
+section.tags .tag-list {
+  border: none !important;
+  background: none !important;
+  padding-left: 0px;
+}
+
+
+.module-narrow .nav-item.active > a, .module-narrow .nav-aside li.active a {
+  position: relative;
+  color: #FFF;
+  background-color: #eee!important;
+}
+
+.module-narrow .nav-item.active > a:before, .module-narrow .nav-aside li.active a:before {
+  content: none!important;
+  position: absolute;
+  border: none!important;
+  border-right: none;
+  border-left-color: none!important;
+  border-left-width: none!important;
+  top: 0;
+  bottom: 0;
+  right: 0!important;
+  width: 0!important;
+  height: 0!important;
+}
+
+.nav-item .facet-close {
+  float: right;
+  font-weight: bold!important;
+}
+
+
+.site-footer {
+  background: none!important;
+  padding: 0!important;
+}
+
+#author_widget, #contributor_widget{
+  background-color: rgb(248 246 243 / 58%); 
+  padding: 16px 8px; 
+  padding-top: 10px;
+}
+
+.dataset_dynamic_input{
+  width: 90%; 
+  display: inline-block;
+}
+
+/* MARGIN */
+.pe-md { padding-right: 0!important; }
+.ps-md { padding-left: 0!important; }
+
+/* HELPER */
+.hidden {
+  visibility: hidden;
 }

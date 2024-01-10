@@ -29,16 +29,17 @@
 
 .splash_cards .btn {
   color: #333;
-  padding: 0.8rem;
+  padding: 0.3rem;
   font-size: 14px;
   text-transform: uppercase;
   border-radius: 4px;
   font-weight: 400;
   display: block;
-  width: 100%;
+  width: auto;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: white;
+  margin-left: 1rem;
 }
 
 .splash_cards .btn:hover {
@@ -81,27 +82,27 @@
 }
 
 .splash_cards .card_content {
-  padding: 1rem;
+  padding: .5rem;
   background: rgb(126,168,164);
   background: linear-gradient(173deg, rgba(126,168,164,1) 0%, rgba(85,121,173,1) 100%);
-  min-height: 304px;
+  height: 100%;
 }
 
 .splash_cards .card_content p{
-  min-height: 140px
+  /* min-height: 140px */
 }
 
 .splash_cards h2 {
     margin: 0;
-    margin-left: 1rem;
-    line-height: 2.6rem;
+    margin-left: 1.1rem;
+    line-height: 1.3rem;
     margin-top: 1rem;
-    min-height: 6rem;
+    margin-bottom: .5rem;
 }
 
 .splash_cards .card_title a{
     color: #ffffff;
-    font-size: 2rem!important;
+    font-size: 1rem!important;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: capitalize;
@@ -111,8 +112,8 @@
 
 .splash_cards .card_text {
   color: #ffffff;
-  font-size: 1.5rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.3rem;
   margin-bottom: 1.25rem;
   font-weight: 400;
   padding-left: 1rem;
@@ -121,4 +122,8 @@
 .card_tag-container{
   margin-top: 1rem;
   min-height: 20px;
+}
+
+.cargan {
+  font-family: Cargan;
 }

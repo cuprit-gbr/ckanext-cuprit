@@ -49,32 +49,53 @@
 
 </script>
 
-<footer class="site-footer">
-  <div class="container">
-    {% block footer_content %}
-    <div class="row">
-      <div class="col-md-8 footer-links">
-        {% block footer_nav %}
-          <ul class="list-unstyled">
-            {% block footer_links %}
-              <li><a href="/">{{ _('Home') }}</a></li>
+<footer class="site-footer mt-5">
+
+  
+  <div class="div decoration-bg-blue">
+
+    <div class="p-5" style="background-color: #6d8dbd;">
+      <div class="container">
+        {% block footer_content %}
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4 attribution">
+            {% block footer_lang %}
+              {% snippet "snippets/language_selector.html" %}
             {% endblock %}
-          </ul>
-          <ul class="list-unstyled">
-            {% block footer_links_ckan %}
-              {% set api_url = 'http://docs.ckan.org/en/{0}/api/'.format(g.ckan_doc_version) %}
-              <li><a href="https://idai.world/">idai.world</a></li>
-              <li><a href="https://www.dainst.org/de/datenschutz/">DSGVO</a></li>
+          </div>
+          <div class="col-md-4 footer-links">
+            {% block footer_nav %}
+              <ul class="list-unstyled d-flex justify-content-center mt-3">
+                {% block footer_links %}
+                  <li><a href="/"  class="text-white  p-1">{{ _('Home') }}</a></li>
+                {% endblock %}
+                {% block footer_links_ckan %}
+                  {% set api_url = 'http://docs.ckan.org/en/{0}/api/'.format(g.ckan_doc_version) %}
+                  <li><a href="/dataset/" class="text-white p-1">{{_("Datasets")}}</a></li>
+                  <li><a href="/organisation/" class="text-white p-1">{{_("Organisations")}}</a></li>
+                  <li><a href="/help/" class="text-white p-1">{{_("Help")}}</a></li> 
+                  <li><a href="https://idai.world/" class="text-white p-1">idai.world</a></li>
+                {% endblock %}
+              </ul>
             {% endblock %}
-          </ul>
-        {% endblock %}
-      </div>
-      <div class="col-md-4 attribution">
-        {% block footer_lang %}
-          {% snippet "snippets/language_selector.html" %}
+          </div>
+          <div class="col-md-2"></div>
+        </div>
         {% endblock %}
       </div>
     </div>
-    {% endblock %}
+
+  <div class="p-5" style="background-color: #5882c2;">
+    <div class="container text-center">
+
+      <img alt="DAI" src="https://idai.world/assets/images/content/footer/idai_footer.png"></div>
+      <div class="container d-flex text-center mt-5">
+        <p class="col"><span class="text-white">iDAI.repo is a service of the German Archaeological Institute.</span></p>
+        <p class="col"><span class="text-white"><a href="https://www.dainst.org/en/datenschutz" target="_blank">Data Protection Regulation</a></span></p>
+        <p class="col"><span class="text-white"><a href="https://idai.world/why/contact">Legal notice</a></span></p>
+    
+    </div>
   </div>
+
 </footer>

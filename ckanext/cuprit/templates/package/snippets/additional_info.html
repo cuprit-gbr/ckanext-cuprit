@@ -1,135 +1,148 @@
-{% ckan_extends %}
+<section class="additional-info">
+  <h2 class="mt-5">{{ _('Additional Info') }}</h2>
+  <table class="table table-striped table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th scope="col">{{ _('Field') }}</th>
+        <th scope="col">{{ _('Value') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% block package_additional_info %}
+      {% if pkg_dict.url %}
+        <tr>
+          <th scope="row" class="dataset-label">{{ _('Source') }}</th>
+          {% if h.is_url(pkg_dict.url) %}
+            <td class="dataset-details" property="foaf:homepage">
+              <a href="{{ pkg_dict.url }}" rel="foaf:homepage" target="_blank">
+                {{ pkg_dict.url }}
+              </a>
+            </td>
+          {% else %}
+            <td class="dataset-details" property="foaf:homepage">{{ pkg_dict.url }}</td>
+          {% endif %}
+        </tr>
+      {% endif %}
+      
+      {% if pkg_dict.author  %}
+        <tr>
+          <th scope="row" class="dataset-label">{{ _("Author(s)") }}</th>
+          <td class="dataset-details" property="dc:creator">{{ h.format_orcid(pkg_dict.author) | safe }}</td>
+        </tr>
+      {% endif %}
+      
+      {% if pkg_dict.maintainer%}
+        <tr>
+          <th scope="row" class="dataset-label">{{ _('Maintainer') }}</th>
+          <td class="dataset-details" property="dc:contributor">{{ pkg_dict.maintainer }}</td>
+        </tr>
+      {% endif %}
+      
+      {% if pkg_dict.version %}
+        <tr>
+          <th scope="row" class="dataset-label">{{ _("Version") }}</th>
+          <td class="dataset-details">{{ pkg_dict.version }}</td>
+        </tr>
+      {% endif %}
+      
+      {% if h.check_access('package_update',{'id':pkg_dict.id}) %}
+        <tr>
+          <th scope="row" class="dataset-label">{{ _("State") }}</th>
+          <td class="dataset-details">{{ _(pkg_dict.state) }}</td>
+        </tr>
+      {% endif %}
+      {% if pkg_dict.metadata_modified %}
+        <tr>
+          <th scope="row" class="dataset-label">{{ _("Last Updated") }}</th>
+          <td class="dataset-details">
+              {% snippet 'snippets/local_friendly_datetime.html', datetime_obj=pkg_dict.metadata_modified %}
+          </td>
+        </tr>
+      {% endif %}
+      {% if pkg_dict.metadata_created %}
+        <tr>
+          <th scope="row" class="dataset-label">{{ _("Created") }}</th>
+      
+          <td class="dataset-details">
+              {% snippet 'snippets/local_friendly_datetime.html', datetime_obj=pkg_dict.metadata_created %}
+          </td>
+        </tr>
+      {% endif %}
+      
+      
+      
+      
+      
+      {% block extras %}
+      
+      
+      
+      {% if pkg_dict.subtitle %}
+      <tr>
+        <th scope="row" class="dataset-label">{{ _("Subtitle") }}</th>
+        <td class="dataset-details">{{ pkg_dict.subtitle }}</td>
+      </tr>
+      {% endif %}
+        {% if pkg_dict.publisher %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Publisher") }}</th>
+            <td class="dataset-details">{{ pkg_dict.publisher }}</td>
+          </tr>
+        {% endif %}
+        {% if pkg_dict.funding %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Funding") }}</th>
+            <td class="dataset-details">{{ pkg_dict.funding }}</td>
+          </tr>
+        {% endif %}
+        {% if pkg_dict.contributor %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Contributor(s)") }}</th>
+            <td class="dataset-details">{{ h.format_orcid(pkg_dict.contributor) | safe }}</td>
+          </tr>
+        {% endif %}
+      
+        {% if pkg_dict.ror_id %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("ROR ID") }}</th>
+            <td class="dataset-details">{{ pkg_dict.ror_id }}</td>
+          </tr>
+        {% endif %}
+        {% if pkg_dict.in_language %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("In Language") }}</th>
+            <td class="dataset-details">{{ pkg_dict.in_language }}</td>
+          </tr>
+        {% endif %}
+        {% if pkg_dict.year_of_publication %}
+        <tr>
+          <th scope="row" class="dataset-label">{{ _("Year of publication") }}</th>
+          <td class="dataset-details">{{ pkg_dict.year_of_publication }}</td>
+        </tr>
+      {% endif %}
+        {% if pkg_dict.type_of_publication %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Resource Type General") }}</th>
+            <td class="dataset-details">{{ h.format_orcid(pkg_dict.type_of_publication) | safe }}</td>
+          </tr>
+        {% endif %}
+      {% if pkg_dict.doi %}
+        <tr>
+          <th scope="row" class="dataset-label">{{ _("DOI") }}</th>
+          <td class="dataset-details">{{ pkg_dict.doi }}</td>
+        </tr>
+      {% endif %}
+      {% if pkg_dict.related_resources %}
+        <tr>
+          {% set rel = h.render_markdown(pkg_dict.related_resources) %}
+          <th scope="row" class="dataset-label">{{ _("Related Resources") }}</th>
+          <td class="dataset-details">{{ rel }}</td>
+        </tr>
+      {% endif %}
+      {% endblock %}
+      {% endblock %}
+    </tbody>
+  </table>
+</section>
 
-{% block package_additional_info %}
-{% if pkg_dict.url %}
-  <tr>
-    <th scope="row" class="dataset-label">{{ _('Source') }}</th>
-    {% if h.is_url(pkg_dict.url) %}
-      <td class="dataset-details" property="foaf:homepage">
-        <a href="{{ pkg_dict.url }}" rel="foaf:homepage" target="_blank">
-          {{ pkg_dict.url }}
-        </a>
-      </td>
-    {% else %}
-      <td class="dataset-details" property="foaf:homepage">{{ pkg_dict.url }}</td>
-    {% endif %}
-  </tr>
-{% endif %}
 
-{% if pkg_dict.author  %}
-  <tr>
-    <th scope="row" class="dataset-label">{{ _("Author(s)") }}</th>
-    <td class="dataset-details" property="dc:creator">{{ h.format_orcid(pkg_dict.author) | safe }}</td>
-  </tr>
-{% endif %}
-
-{% if pkg_dict.maintainer%}
-  <tr>
-    <th scope="row" class="dataset-label">{{ _('Maintainer') }}</th>
-    <td class="dataset-details" property="dc:contributor">{{ pkg_dict.maintainer }}</td>
-  </tr>
-{% endif %}
-
-{% if pkg_dict.version %}
-  <tr>
-    <th scope="row" class="dataset-label">{{ _("Version") }}</th>
-    <td class="dataset-details">{{ pkg_dict.version }}</td>
-  </tr>
-{% endif %}
-
-{% if h.check_access('package_update',{'id':pkg_dict.id}) %}
-  <tr>
-    <th scope="row" class="dataset-label">{{ _("State") }}</th>
-    <td class="dataset-details">{{ _(pkg_dict.state) }}</td>
-  </tr>
-{% endif %}
-{% if pkg_dict.metadata_modified %}
-  <tr>
-    <th scope="row" class="dataset-label">{{ _("Last Updated") }}</th>
-    <td class="dataset-details">
-        {% snippet 'snippets/local_friendly_datetime.html', datetime_obj=pkg_dict.metadata_modified %}
-    </td>
-  </tr>
-{% endif %}
-{% if pkg_dict.metadata_created %}
-  <tr>
-    <th scope="row" class="dataset-label">{{ _("Created") }}</th>
-
-    <td class="dataset-details">
-        {% snippet 'snippets/local_friendly_datetime.html', datetime_obj=pkg_dict.metadata_created %}
-    </td>
-  </tr>
-{% endif %}
-
-
-
-
-
-{% block extras %}
-
-
-
-{% if pkg_dict.subtitle %}
-<tr>
-  <th scope="row" class="dataset-label">{{ _("Subtitle") }}</th>
-  <td class="dataset-details">{{ pkg_dict.subtitle }}</td>
-</tr>
-{% endif %}
-  {% if pkg_dict.publisher %}
-    <tr>
-      <th scope="row" class="dataset-label">{{ _("Publisher") }}</th>
-      <td class="dataset-details">{{ pkg_dict.publisher }}</td>
-    </tr>
-  {% endif %}
-  {% if pkg_dict.funding %}
-    <tr>
-      <th scope="row" class="dataset-label">{{ _("Funding") }}</th>
-      <td class="dataset-details">{{ pkg_dict.funding }}</td>
-    </tr>
-  {% endif %}
-  {% if pkg_dict.contributor %}
-    <tr>
-      <th scope="row" class="dataset-label">{{ _("Contributor(s)") }}</th>
-      <td class="dataset-details">{{ h.format_orcid(pkg_dict.contributor) | safe }}</td>
-    </tr>
-  {% endif %}
-
-  {% if pkg_dict.ror_id %}
-    <tr>
-      <th scope="row" class="dataset-label">{{ _("ROR ID") }}</th>
-      <td class="dataset-details">{{ pkg_dict.ror_id }}</td>
-    </tr>
-  {% endif %}
-  {% if pkg_dict.in_language %}
-    <tr>
-      <th scope="row" class="dataset-label">{{ _("In Language") }}</th>
-      <td class="dataset-details">{{ pkg_dict.in_language }}</td>
-    </tr>
-  {% endif %}
-  {% if pkg_dict.year_of_publication %}
-  <tr>
-    <th scope="row" class="dataset-label">{{ _("Year of publication") }}</th>
-    <td class="dataset-details">{{ pkg_dict.year_of_publication }}</td>
-  </tr>
-{% endif %}
-  {% if pkg_dict.type_of_publication %}
-    <tr>
-      <th scope="row" class="dataset-label">{{ _("Resource Type General") }}</th>
-      <td class="dataset-details">{{ h.format_orcid(pkg_dict.type_of_publication) | safe }}</td>
-    </tr>
-  {% endif %}
-{% if pkg_dict.doi %}
-  <tr>
-    <th scope="row" class="dataset-label">{{ _("DOI") }}</th>
-    <td class="dataset-details">{{ pkg_dict.doi }}</td>
-  </tr>
-{% endif %}
-{% if pkg_dict.related_resources %}
-  <tr>
-    {% set rel = h.render_markdown(pkg_dict.related_resources) %}
-    <th scope="row" class="dataset-label">{{ _("Related Resources") }}</th>
-    <td class="dataset-details">{{ rel }}</td>
-  </tr>
-{% endif %}
-{% endblock %}
-{% endblock %}
