@@ -4,6 +4,7 @@ import pickle
 resource_types = [
                 ('Audiovisual', 'Audiovisual'), 
                 ('Book', 'Book'), 
+                ('BookChapter', 'BookChapter'),
                 ('Booklet', 'Booklet'), 
                 ('Collection', 'Collection'),
                 ('Computational Notebook', 'Computational Notebook'),

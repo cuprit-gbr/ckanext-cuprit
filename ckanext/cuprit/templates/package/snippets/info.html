@@ -1,0 +1,101 @@
+{#
+    Displays a sidebar module with information for given package
+    
+    pkg          - The package dict that owns the resources.
+    am_following - True if the user is following the package.
+    
+    Example:
+    
+      {% snippet "package/snippets/info.html", pkg=pkg, am_following=am_following %}
+    
+    #}
+    {% block package_info %}
+      {% if pkg %}
+        <section id="package-info" class="module module-narrow">
+          <div class="module context-info">
+            <div class="module-content">
+              {% block package_info_inner %}
+                {% block heading %}
+                  <h1 class="heading">{{ h.dataset_display_name(pkg) }}</h1>
+                {% endblock %}
+                <hr>
+                
+                {% if c.userobj.sysadmin %}
+                <div class="form-check form-switch custom-switch">
+                    <label class="form-check-label ms-2 publish-switch" for="publishPackageSwitch">Published</label>
+                    <input class="form-check-input" type="checkbox" role="switch" id="publishPackageSwitch" />
+                </div>
+            
+                <script>
+                document.addEventListener("DOMContentLoaded", function(){
+                    var selectField = jQuery('#field-private');
+                    var switchInput = jQuery('#switchSizeLargeChecked');
+                    console.log(selectField.val())
+
+                    if (selectField.val() == 'False') { 
+                        console.log("here")
+                        switchInput.prop('checked', true);
+                    } else if (selectField.val() == 'True') { 
+                        switchInput.prop('checked', false);
+                    }
+            
+                    // Disable or enable the switch based on the select field's value
+                    selectField.change(function() {
+                        if (jQuery(this).val() === 'False') {
+                            switchInput.prop('disabled', false);
+                        } else if (jQuery(this).val() === 'True') {
+                            switchInput.prop('disabled', true);
+                        }
+                    });
+            
+                    // Add change event to the switch to update the select field's value
+                    switchInput.change(function() {
+                        console.log("cahnge value")
+
+                        if ($(this).is(':checked')) {
+                            // If the switch is checked, set the select field's value to "True"
+                            selectField.val('False')
+                            console.log(selectField.val())
+                        } else {
+                            // If the switch is unchecked, set the select field's value to "False"
+                            selectField.val('True')
+                            console.log(selectField.val())
+
+                        }
+                    });
+                });
+                </script>
+            {% endif %}
+
+                {#
+
+                    {% block nums %}
+                    {% set num_followers = h.follow_count('dataset', pkg.id) %}
+                    <div class="nums">
+                        <dl>
+                        <dt>{{ _('Followers') }}</dt>
+                        <dd>{{ h.SI_number_span(num_followers) }}</dd>
+                        </dl>
+                    </div>
+                    {% endblock %}
+                    {% block follow_button %}
+                    {% if current_user.is_authenticated %}
+                    {% if error_message %}
+                        <div class="alert alert-danger">{{ error_message }}</div>
+                        {% endif %}
+                    {% if am_following %}
+                        <a class="btn btn-danger" hx-post="{{ h.url_for('dataset.unfollow', id=pkg.id) }}" hx-target="#package-info"><i class="fa-solid fa-circle-minus"></i> Unfollow</a>
+                        {% else %}
+                        <a class="btn btn-success" hx-post="{{ h.url_for('dataset.follow', id=pkg.id) }}" hx-target="#package-info"><i class="fa-solid fa-circle-plus"></i> Follow</a>
+                        {% endif %}
+                    {% endif %}
+                    {% endblock %}
+              
+                #}
+              
+                {% endblock %}
+            </div>
+          </div>
+        </section>
+      {% endif %}
+    {% endblock %}

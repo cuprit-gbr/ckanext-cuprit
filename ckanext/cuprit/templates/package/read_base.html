@@ -1,16 +1,22 @@
-{% extends "package/base.html" %}
+{% ckan_extends %}
 
 {% set default_group_type = h.default_group_type('group') %}
 
 {% block subtitle %}{{ h.dataset_display_name(pkg) }} {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
+
 
 {% block head_extras -%}
   {{ super() }}
   {% set description = h.markdown_extract(pkg.notes, extract_length=200)|forceescape %}
   <meta property="og:title" content="{{ h.dataset_display_name(pkg) }} - {{ g.site_title }}">
   <meta property="og:description" content="{{ description|forceescape|trim }}">
+  <style>
+    .module-content {
+      padding: 0em!important; 
+  }
+  </style>
+  
 {% endblock -%}
-
 
 
 {% block secondary %}
@@ -18,7 +24,15 @@
 {% endblock %}
 
 
+
+
+{% block content_primary_nav %}
+  {{ h.build_nav_icon(dataset_type ~ '.read', _('Dataset'),  id=pkg.name, icon='sitemap') }}
+  {{ h.build_nav_icon(dataset_type ~ '.groups', h.humanize_entity_type('group', default_group_type, 'content tab') or _('Groups'), id=pkg.name, icon='users') }}
+{% endblock %}
+
 {% block primary %}
+
   <div class="primary new-class2 col-xs-12 pe-md px-md-0" role="main">
     <article class="module">
 
@@ -30,6 +44,7 @@
 
       {% block page_header %}{% endblock %}
       <div class="module-content">
+        
         {% if self.page_primary_action() | trim %}
           <div class="page_primary_action">
             {% block page_primary_action %}{% endblock %}

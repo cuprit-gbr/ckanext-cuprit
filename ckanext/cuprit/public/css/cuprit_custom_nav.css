@@ -22,3 +22,7 @@ body .masthead .navigation .nav-pills li a:hover, .site-footer .navigation .nav-
 .masthead .main-navbar ul li:hover a, .masthead .main-navbar ul li:focus a, .masthead .main-navbar ul li.active a {
   background-color: #eee!important;
 }
+
+a.logo:hover {
+  text-decoration: none;
+}

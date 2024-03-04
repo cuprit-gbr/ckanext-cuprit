@@ -16,10 +16,8 @@
 .card_image {
   height: 184px;
   overflow: hidden;
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
-
+  /* box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; */
 }
-
 
 .splash_cards img {
   height: auto;
@@ -37,13 +35,15 @@
   display: block;
   width: auto;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  /* background: white; */
   margin-left: 1rem;
+  margin-bottom: 1rm;
 }
 
 .splash_cards .btn:hover {
   background-color: rgba(255, 255, 255, 0.12);
+  background-color: #eee;
 }
 
 .splash_cards .cards {
@@ -74,7 +74,7 @@
 .splash_cards .card {
   background-color: white;
   border-radius: 0.25rem;
-  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.10);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -83,8 +83,8 @@
 
 .splash_cards .card_content {
   padding: .5rem;
-  background: rgb(126,168,164);
-  background: linear-gradient(173deg, rgba(126,168,164,1) 0%, rgba(85,121,173,1) 100%);
+  /* background: rgb(126,168,164);
+  background: linear-gradient(173deg, rgba(126,168,164,1) 0%, rgba(85,121,173,1) 100%); */
   height: 100%;
 }
 
@@ -95,33 +95,46 @@
 .splash_cards h2 {
     margin: 0;
     margin-left: 1.1rem;
-    line-height: 1.3rem;
+    line-height: 1.1rem;
     margin-top: 1rem;
     margin-bottom: .5rem;
 }
 
 .splash_cards .card_title a{
-    color: #ffffff;
+    /* color: #ffffff; */
     font-size: 1rem!important;
     font-weight: 700;
-    letter-spacing: 1px;
     text-transform: capitalize;
     margin: 0px;
     text-decoration: none;
+    color: #344C70;
 }
 
 .splash_cards .card_text {
-  color: #ffffff;
-  font-size: 1rem;
-  line-height: 1.3rem;
-  margin-bottom: 1.25rem;
+  /* color: #ffffff; */
+  font-size: .95rem;
+  line-height: 1.2rem;
+  margin-bottom: .5rem;
   font-weight: 400;
   padding-left: 1rem;
+  padding-right: 0.5rem;
 }
 
-.card_tag-container{
-  margin-top: 1rem;
+.splash_cards .card_text p {
+  margin-bottom: .5rem;
+}
+
+.card_tag-container {
+  margin: .5rem 0 1rem 1.1rem;
   min-height: 20px;
+}
+
+.card_tag-container .badge {
+  color: inherit;
+  padding-left: 0px;
+  padding-right: .5rem;
+  padding-top: .2rem;
+  padding-bottom: .2rem;
 }
 
 .cargan {

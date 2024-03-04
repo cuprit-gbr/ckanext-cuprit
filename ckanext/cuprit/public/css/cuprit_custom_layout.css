@@ -1,17 +1,12 @@
 @import url('font.css');
 
 /* GENERAL */
-html, body {
-  font-family: 'Inter', sans-serif!important;
-}
+html, body { font-family: 'Inter', 'Helvetica', 'Arial', sans-serif!important;}
 
-
+/* header styling */
 .masthead {
-    margin-bottom: initial;
     padding: 10px 0;
-    color: #fff;
     background: white!important;
-    border-bottom: 1px solid #666;
 }
 
 .masthead .container {
@@ -19,6 +14,7 @@ html, body {
   padding-right: 0px!important;
 }
 
+/* splash page */
 .section__headline-blue {
   color: #344C70;
   text-align: center;
@@ -33,13 +29,7 @@ html, body {
 
 .c_attention-box {
   background-color: #E6E6E6;
-  padding: 2rem 0 5rem 0;
-}
-
-.wrapper {
-  -webkit-box-shadow: none!important; 
-  box-shadow: none!important; 
-  border-radius: 0px!important
+  padding: 2rem 0 3rem 0;
 }
 
 .c_attention {
@@ -51,35 +41,26 @@ html, body {
   margin-top: 1rem;
 }
 
-/* DATASET */
-h2.dataset-heading a {
-  color: #344C70!important;
-}
+/* dataset list */
 
-h2.dataset-heading {
-  font-size: 26px!important;
-}
-
-.ds_notes {
-  background-color: #ffd;
-  color: #8d939e;
-  display: block;
-  margin-bottom: 10px;
+.main {
+  padding-top: 0px!important;
+  background: none !important; /* remove box background from dataset */
 }
 
 #cuprit_banner {
   color: #fff;
   background-color: #344C70;
   margin-top: 0;
-  margin-bottom: 50px;
-  padding: 30px 0;
+  margin-bottom: 2rem;
   border: 0;
   word-wrap: break-word;
 }
 
-.main {
-  padding-top: 0px!important;
-  background: none !important;
+.wrapper {
+  -webkit-box-shadow: none!important; 
+  box-shadow: none!important; 
+  border-radius: 0px!important
 }
 
 .box, .wrapper {
@@ -93,6 +74,60 @@ h2.dataset-heading {
   .wrapper:before {
       border-right: none!important;
   }
+}
+
+.input-lg {
+  height: 63px!important;
+  padding: 10px 16px!important;
+  font-size: 23px!important;
+  line-height: 1.3333333!important;
+  border-radius: 0!important;
+}
+
+.search-form {
+  border-bottom: 0px dotted #fff!important;
+}
+
+.module-search .tags {
+  overflow: auto;
+}
+
+
+ol.breadcrumb li a {
+  color: white!important;
+}
+
+ol.breadcrumb li a i {
+  display:none!important;
+}
+
+.breadcrumb>li+li:before {
+  font: normal normal normal 14px/1 FontAwesome;
+  padding: 0 8px;
+  content: "\f105";
+}
+
+.headline-font {
+  font-size: 42px!important;
+  font-weight: 400;
+  font-family: Cargan, Inter;
+}
+
+.dataset_search_btn {
+  position: absolute!important;
+  right: 0.5rem;
+  top: 0.95rem;
+  border: none!important;
+  box-shadow: none!important;
+  color: #999;
+}
+
+h2.dataset-heading {
+  font-size: 26px!important;
+}
+
+h2.dataset-heading a {
+  color: #344C70!important;
 }
 
 h2.module-heading {
@@ -123,8 +158,8 @@ h2.module-heading i.fa.fa-filter {
 }
 
 
-/* PAGE */ 
-.module-narrow .nav-item > a .separator, .module-narrow .nav-aside li a .separator{
+/* dataset details */ 
+.module-narrow .nav-item > a .separator, .module-narrow .nav-aside li a .separator {
   display: none!important;
 }
 
@@ -154,13 +189,6 @@ li.dataset-item h2 {
   margin-bottom: 5px!important;
 }
 
-
-.fa-lock{
-  color: #999!important;
-  font-size: 80%;
-  transform: translate(0px, -1px);
-}
-
 .btn-primary {
   color: #fff;
   background-color: #344C70!important;
@@ -171,52 +199,10 @@ li.dataset-item h2 {
   color: #344C70!important;
 }
 
-ol.breadcrumb li a {
-  color: white!important;
+
+.resources ul.list-unstyled li {
+  padding-bottom: 1rem!important;
 }
-
-ol.breadcrumb li a i {
-  display:none!important;
-}
-
-.breadcrumb>li+li:before {
-  font: normal normal normal 14px/1 FontAwesome;
-  padding: 0 8px;
-  content: "\f105";
-}
-
-.headline-font {
-  font-size: 42px!important;
-  font-weight: 400;
-  font-family: Cargan, Inter;
-}
-
-.input-lg {
-  height: 63px!important;
-  padding: 10px 16px!important;
-  font-size: 23px!important;
-  line-height: 1.3333333!important;
-  border-radius: 0!important;
-}
-
-.search-form {
-  border-bottom: 0px dotted #fff!important;
-}
-
-.module-search .tags {
-  overflow: auto;
-}
-
-.dataset_search_btn {
-  position: absolute!important;
-  right: 0.5rem;
-  top: 0.95rem;
-  border: none!important;
-  box-shadow: none!important;
-  color: #999;
-}
-
-
 
 #content section.module .module-content{
   padding-right: 0px!important;
@@ -225,6 +211,12 @@ ol.breadcrumb li a i {
 
 .breadcrumb li.active a {
   color: #aaa!important;
+}
+
+.fa-lock{
+  color: #999!important;
+  font-size: 80%;
+  transform: translate(0px, -1px);
 }
 
 .badge[data-format=html],
@@ -252,19 +244,22 @@ ol.breadcrumb li a i {
 .badge[data-format*=nquad],
 .badge[data-format*=ntriples],
 .badge[data-format*=turtle]   {
-  background-color: #344C70!important;
+  background-color: #fff!important;
+  color: #344C70!important;
+  border: 1px solid #344C70;
+  border-radius: 1rem;
 }
 
 .badge-default {
   padding-top: 0.4rem!important;
 }
+
 .badge-default[href]:hover,
 .badge-default[href]:focus {
   background-color: #344C70!important;
   color: #fff;
   text-decoration: none;
 }
-
 
 .additional-info td, .additional-info th {
   width: auto!important;
@@ -279,7 +274,6 @@ section.tags .tag-list {
   background: none !important;
   padding-left: 0px;
 }
-
 
 .module-narrow .nav-item.active > a, .module-narrow .nav-aside li.active a {
   position: relative;
@@ -315,7 +309,14 @@ section.tags .tag-list {
 #author_widget, #contributor_widget{
   background-color: rgb(248 246 243 / 58%); 
   padding: 16px 8px; 
-  padding-top: 10px;
+  padding-top: 16px;
+  border: 1px dotted black;
+  margin-bottom: 30px;
+}
+
+
+.c_holder {
+  display: none;
 }
 
 .dataset_dynamic_input{
@@ -323,11 +324,44 @@ section.tags .tag-list {
   display: inline-block;
 }
 
-/* MARGIN */
+
+.ds_notes {
+  background-color: #ffd;
+  color: #8d939e;
+  display: block;
+  margin-bottom: 10px;
+}
+
+
+.additional-info .mt-5 {
+  margin-top: 1rem !important; /* lower margin for all other mt-5 */
+}
+
+/* dataset form */
+
+.no-margin-bottom > .form-group {
+  margin-bottom: 0px !important;
+}
+
+/* HELPER */
+
 .pe-md { padding-right: 0!important; }
 .ps-md { padding-left: 0!important; }
 
-/* HELPER */
-.hidden {
-  visibility: hidden;
+.hidden { visibility: hidden; }
+
+
+.publish-switch:after {
+  content: none!important;
+}
+
+/* Package */
+
+#publishPackageSwitch {
+  height: 20px;
+  width: 60px;
+}
+
+.custom-switch label {
+  padding-top: 2px;
 }

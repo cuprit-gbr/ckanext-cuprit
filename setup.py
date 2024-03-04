@@ -88,7 +88,12 @@ setup(
 
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
+
+        [ckan.rdf.profiles]
+        dai_dcat_profile=ckanext.cuprit.profiles.dai_dcat_profile:DAIDCATProfile
     ''',
+
+
 
     # If you are changing from the default layout of your extension, you may
     # have to change the message extractors, you can read more about babel

@@ -7,9 +7,8 @@
       <span class="dataset-private badge badge-inverse pull-right">
         <i class="fa fa-lock"></i>
         {{ _('Private') }}
-      </span>
+      </span><br><br>
       {% endif %}
-      {% snippet "snippets/license.html", pkg_dict=pkg %}
     <h1>
       {% block page_heading %}
 
@@ -30,17 +29,31 @@
       {% endif %}
     {% endblock %}
   {% endblock %}
-
-  {% block package_resources %}
-    {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources,
-      can_edit=h.check_access('package_update', {'id':pkg.id }) %}
-  {% endblock %}
-
+  
   {% block package_tags %}
     {% snippet "package/snippets/tags.html", tags=pkg.tags %}
   {% endblock %}
 
+  {% if pkg.doi %}
+    {% snippet "doi/snippets/package_citation.html", pkg_dict=pkg %}
+  {% endif %}
+
+
+  <h2 class="mt-3">{{ _('Licenses') }}</h2>
+  {% snippet "snippets/license.html", pkg_dict=pkg %}
+
+
+
+  {% block package_resources %}
+
+    {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources,
+      can_edit=h.check_access('package_update', {'id':pkg.id }) %}
+  {% endblock %}
+
+
+
   {% block package_additional_info %}
+
     {% snippet "package/snippets/additional_info.html", pkg_dict=pkg %}
   {% endblock %}
 

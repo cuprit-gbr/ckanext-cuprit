@@ -8,12 +8,14 @@ import ckanext.cuprit.mailer as mailer
 import ckanext.cuprit.logic.auth as auth
 import ckanext.cuprit.logic.action as action
 import ckanext.cuprit.lib.helpers as helpers
-
+from ckanext.cuprit.lib.build_metadata_dict_dai import build_metadata_dict_dai
+from ckanext.cuprit.lib.build_xml_dict_doi import build_xml_dict_doi
 from flask import Blueprint
 import ckanext.cuprit.blueprints as cuprit_blueprints
 from ckan.lib.plugins import DefaultTranslation
 from ckanext.cuprit.lib.choices import resource_types, get_custom_tags
 
+from ckanext.doi.interfaces import IDoi
 
 
 class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultTranslation):
@@ -28,6 +30,7 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
     # plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IFacets)
     plugins.implements(plugins.ITemplateHelpers)
+    plugins.implements(IDoi, inherit=True)
 
     def _get_config_value(self, key):
         if config.get(key):
@@ -195,4 +198,19 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         '''
         if self._get_config_value('ckanext.cuprit.email_sender'):
             mailer.mail_dataset_created_to_admins(context, pkg_dict)
+
+    def build_metadata_dict(self, pkg_dict, metadata_dict, errors):
+        """
+        Customize DOI metadata dictionary
+        """
+        metadata_dict, errors = build_metadata_dict_dai(pkg_dict, metadata_dict, errors)
+        return metadata_dict, errors
+
+
+    def build_xml_dict(self, metadata_dict, xml_dict):
+        """
+        Customize DOI XML for datacite
+        """
+        xml_dict = build_xml_dict_doi(metadata_dict, xml_dict)
+        return xml_dict
 

@@ -82,6 +82,7 @@
     }
   </script>
 
+
 {% if not c.userobj.sysadmin %}
       <div class="form-group control-medium">
         <label for="field-organizations" class="form-label">{{ _('Organization') }}</label><br>
@@ -101,9 +102,56 @@
 {% block package_basic_fields_tags %}
 {% endblock %}
 
+{% set error = errors.in_language %}
+<div class="form-group control-medium">
+  <label class="control-label" for="type_of_publication">{{_('Language')}}</label>
+  <div class="controls">
+    <div class="row">
+      <div class="col-md-12">
+        <select id="lang_str" data-module="autocomplete" multiple onchange="update_lang()">
+          {% set predefined_languages = [
+            ('English', 'en'), ('German', 'de'), ('Spanish', 'es'), ('Italian', 'it'), 
+            ('Amharic', 'am'), ('Arabic', 'ar'), ('Azerbaijani', 'az'), ('Bengali', 'bn'), 
+            ('Bulgarian', 'bg'), ('Burmese', 'my'), ('Croatian', 'hr'), ('Czech', 'cs'), 
+            ('Danish', 'da'), ('Dutch', 'nl'), ('Estonian', 'et'), ('Filipino', 'fil'), 
+            ('Finnish', 'fi'), ('French', 'fr'), ('Greek', 'el'), ('Gujarati', 'gu'), 
+            ('Hebrew', 'he'), ('Hindi', 'hi'), ('Hungarian', 'hu'), ('Indonesian', 'id'), 
+            ('Japanese', 'ja'), ('Kazakh', 'kk'), ('Khmer', 'km'), ('Korean', 'ko'), 
+            ('Kurdish', 'ku'), ('Lao', 'lo'), ('Latvian', 'lv'), ('Lithuanian', 'lt'), 
+            ('Malagasy', 'mg'), ('Malay', 'ms'), ('Marathi', 'mr'), ('Mongolian', 'mn'), 
+            ('Nepali', 'ne'), ('Norwegian', 'no'), ('Pashto', 'ps'), ('Persian', 'fa'), 
+            ('Polish', 'pl'), ('Portuguese', 'pt'), ('Punjabi', 'pa'), ('Romanian', 'ro'), 
+            ('Russian', 'ru'), ('Serbian', 'sr'), ('Sinhala', 'si'), ('Slovak', 'sk'), 
+            ('Slovenian', 'sl'), ('Swahili', 'sw'), ('Swedish', 'sv'), ('Tamil', 'ta'), 
+            ('Telugu', 'te'), ('Thai', 'th'), ('Turkish', 'tr'), ('Ukrainian', 'uk'), 
+            ('Urdu', 'ur'), ('Vietnamese', 'vi'), ('Sundanese', 'su')
+          ] %}
+          {% set dataset_lang = data.get('in_language', '') %}
+          {% if dataset_lang is string %}
+            {% set existing_lang = dataset_lang.replace(', ',',').split(',') %}
+          {% else %}
+            {% set existing_lang = [] %}
+          {% endif %}
+        
+          <option value="" disabled>Please select languages</option>
+          {% for lang, code in predefined_languages %}
+            <option value="{{ code }}" {% if code in existing_lang %}selected="selected"{% endif %}>{{ lang }} ({{ code }})</option>
+          {% endfor %}
+        </select>
+        {% if error %}<span class="error-block">{{ error }}</span>{% endif %}
+      </div>
+    </div>
+  </div>
+</div>
 
+<input type="text" name="in_language" id="hidden_lang" value="{{data.in_language}}" style="display:none">
 
-{{ form.input('in_language', label=_('Published in language'), id='field-in_language', placeholder=_('English, French, Italien'), value=data.in_language, error=errors.in_language, classes=['control-medium']) }}
+<script>
+  function update_lang(){
+    jQuery('#hidden_lang').val($("#lang_str").select2("val"))
+  }
+</script>
+
 {{ form.input('year_of_publication', label=_('Year of publication'), id='field-year_of_publication', placeholder=_('In which year was the publication published?'), value=data.year_of_publication, error=errors.year_of_publication, classes=['control-medium']) }}
 
 
