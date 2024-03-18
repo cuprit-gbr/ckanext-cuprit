@@ -317,12 +317,12 @@ section.tags .tag-list {
   margin-bottom: 10px;
 }
 
-#field-contributor {
+#field-contributor, #field-author {
   opacity: .5;
 
 }
 
-#c_holder {
+#c_holder, #a_holder {
   display: none;
 }
 
