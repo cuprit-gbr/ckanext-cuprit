@@ -3,117 +3,234 @@
 {% block package_metadata_author %}
 </fieldset>
 <script src="/js/vue.global.prod.min.js"></script>
+<script>const { createApp } = Vue;</script>
 
 <fieldset>
   <legend>Responsibilities</legend>
   <div class="no-margin-bottom">
     {{ form.input('author', label=_('Author(s)'), id='field-author', placeholder=_('Firstname Lastname of author'), value=data.author, error=errors.author, classes=['control-medium']) }}
   </div>
-    <input id="a_holder" value="{{data.author}}" class="hidden" style="height: 1px">
-    <div id="author_widget">
-          <div v-for="(item, index) in authors" >
-            <input type="text" :value="item" @input="update_item($event, index)" class="form-control control-medium">
-            <a @click="remove_author(item)" style="cursor: pointer; color: #979797; display: block; margin-bottom: 8px; margin-left: 8px">remove</a> 
-          </div>
-
-          <input type="text" ref="newInput" placeholder="Firstname Lastname (0000-0000-0000-0000)" class="form-control dataset_dynamic_input"> 
-          <span class="ds_notes" style="width: 90%">Add the authors ORCID in parantheses to link it.</span>
-          <button @click.prevent.stop="add_new_author($event)" class="btn btn-primary btn-sm" style="transform: translateY(-2px);">add</button>
-
-    </div>
+  <input id="a_holder" value="{{data.author}}" class="hidden" style="height: 1px">
+  <div id="author_widget">
+    <div v-for="(item, index) in authors" :key="index" class="author-block">
+      <!-- Author Name Label -->
+      <label for="author-name-{{index}}" class="form-label mb-0 mt-2 fw-normal">Author Name</label>
+      <input type="text" v-model="item.name" id="author-name-{{index}}" class="form-control control-medium" placeholder="Firstname Lastname">
+  
+      <!-- ORCID Label -->
+      <label for="author-orcid-{{index}}" class="form-label mb-0 mt-2 fw-normal">ORCID</label>
+      <input type="text" v-model="item.tempOrcid" @keyup="validateAndUpdateAuthor(index, 'orcid', item.tempOrcid)" id="author-orcid-{{index}}" class="form-control dataset_dynamic_input" placeholder="Format: 0000-1111-2222-3333">
       
-
-    <script>
-        const { createApp } = Vue
-        document.getElementById("field-author").readOnly = true
-        createApp({
-          data() {
-            return {
-              authors: []
-            }
-          },
-          mounted() {
-            dat = document.getElementById("a_holder").value
-            authors_from_database = dat.replaceAll('; ',';').split(";").filter(item => item);
-            this.authors = authors_from_database
-          },
-          updated() {
-            document.getElementById("field-author").value = this.authors.join('; ')
-          },
-          methods: {
-            add_new_author(e){
-              this.authors.push(this.$refs.newInput.value)
-              this.$refs.newInput.value = ""
-            },
-            remove_author(item) {
-              this.authors = this.authors.filter((t) => t !== item)
-            },
-            update_item(event, i){
-              if (i !== -1 && event){
-                this.authors[i] = event.target.value  !== "" ? event.target.value : "please fill"
-              }
-            }
-          }
-        }).mount('#author_widget')
-      </script>
-
-
-<script>
-
-
-
-</script>
-    <div class="no-margin-bottom">
-      {{ form.input('contributor', label=_('Contributor'), id='field-contributor', placeholder=_('Firstname Lastname of person who contributed to this work'), value=data.contributor, error=errors.contributor, classes=['control-medium']) }} 
+      <!-- RORID Label -->
+      <label for="author-rorid-{{index}}" class="form-label mb-0 mt-2 fw-normal">RORID</label>
+      <input type="text" v-model="item.tempRorid" @keyup="validateAndUpdateAuthor(index, 'rorid', item.tempRorid)" id="author-rorid-{{index}}" class="form-control dataset_dynamic_input" placeholder="Format: 041qv0h25">
+      
+      <a @click="removeAuthor(index)" style="cursor: pointer;" class="mt-3 text-end text-danger d-block">remove</a>
     </div>
-    
-    <input id="c_holder" value="{{data.contributor}}" class="hidden" style="height: 1px">
-    <div id="contributor_widget">
-          <div v-for="(item, index) in contributors" >
-            <input type="text" :value="item" @input="update_item($event, index)" class="form-control control-medium">
-            <a @click="remove_contributor(item)" style="cursor: pointer; color: #979797; display: block; margin-bottom: 8px; margin-left: 8px">remove</a> 
-          </div>
-         
-          <input type="text" ref="newContributorInput" placeholder="Firstname Lastname (0000-0000-0000-0000)" class="form-control dataset_dynamic_input"> 
-          <span class="ds_notes" style="width: 90%">Add the contributor ORCID in parantheses to link it.</span>
-          <button @click.prevent.stop="add_new_contributor($event)" class="btn btn-primary btn-sm" style="transform: translateY(-2px);">add</button>
-        
-     </div>
-
-    <script>
-      document.getElementById("field-contributor").readOnly = true
-      createApp({
-        data() {
-          return {
-            contributors: []
-          }
-        },
-        mounted() {
-          dat = document.getElementById("c_holder").value
-          contributors_from_database = dat.replaceAll('; ',';').split(";").filter(item => item);
-          this.contributors = contributors_from_database
-        },
-        updated() {
-          document.getElementById("field-contributor").value = this.contributors.join('; ')
-        },
-        methods: {
-          add_new_contributor(e){
-            this.contributors.push(this.$refs.newContributorInput.value)
-            console.log(this.$refs.newContributorInput.value)
-            console.log(this.contributors.join('; '))
-            this.$refs.newContributorInput.value = ""
-          },
-          remove_contributor(item) {
-            this.contributors = this.contributors.filter((t) => t !== item)
-          },
-          update_item(event, i){
-            if (i !== -1 && event){
-              this.contributors[i] = event.target.value  !== "" ? event.target.value : "please fill"
-            }
+    <button @click.prevent="addNewAuthor" class="btn btn-primary btn-sm" style="transform: translateY(-2px); margin-top: 10px;">Add Author</button>
+  </div>
+  
+  <script>
+  document.getElementById("field-author").readOnly = true;
+  createApp({
+    data() {
+      return {
+        authors: [],
+      }
+    },
+    mounted() {
+      const data = document.getElementById("a_holder").value;
+      this.authors = data.split(';').filter(item => item).map(author => {
+        const parts = author.split(/[\[\]()]/).filter(part => part.trim());
+        let name = parts[0].trim();
+        let orcid = parts[1]?.trim() || '';
+        let rorid = parts[2]?.trim() || '';
+        return { name, orcid, rorid, tempOrcid: orcid, tempRorid: rorid };
+      });
+    },
+    methods: {
+      addNewAuthor() {
+        this.authors.push({ name: '', orcid: '', rorid: '', tempOrcid: '', tempRorid: '' });
+      },
+      removeAuthor(index) {
+        this.authors.splice(index, 1);
+      },
+      validateAndUpdateAuthor(index, field, value) {
+        // Validation logic here
+        if (value === '') {
+          this.authors[index][field] = '';
+          this.authors[index]['temp' + field.charAt(0).toUpperCase() + field.slice(1)] = '';
+        } else {
+          let isValid = (field === 'orcid') ? this.validateOrcid(value) : this.validateRorid(value);
+          if (isValid) {
+            this.authors[index][field] = value;
           }
         }
-      }).mount('#contributor_widget')
-    </script>
+        this.updateHiddenInputs();
+      },
+      updateHiddenInputs() {
+        // Update logic here
+        document.getElementById("field-author").value = this.authors.map(author => {
+          let formatted = author.name;
+          if (author.orcid) formatted += ` (${author.orcid})`;
+          if (author.rorid) formatted += ` [${author.rorid}]`;
+          return formatted;
+        }).join('; ');
+      },
+      validateOrcid(orcid) {
+        const regex = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+        return regex.test(orcid);
+      },
+      validateRorid(rorid) {
+        const regex = /^[0-9a-zA-Z]+$/;
+        return regex.test(rorid);
+      },
+    }
+  }).mount('#author_widget');
+  </script>
+  
+
+  <div class="no-margin-bottom">
+    {{ form.input('contributor', label=_('Contributor'), id='field-contributor', placeholder=_('Firstname Lastname of person who contributed to this work'), value=data.contributor, error=errors.contributor, classes=['control-medium']) }}
+  </div>
+  
+  <input id="c_holder" value="{{data.contributor}}" class="hidden" style="height: 1px">
+  
+  <div id="contributor_widget">
+    <div v-for="(item, index) in contributors" :key="index" class="contributor-block">
+      <!-- Name Label and Input -->
+      <div class="row">
+      <div class="col-md-8">
+        <label for="name-{{index}}" class="form-label mb-0 mt-2 fw-normal">Name</label>
+        <input type="text" v-model="item.name" id="name-{{index}}" class="form-control control-medium" placeholder="Firstname Lastname">
+      </div>
+    
+      <!-- Type Select Field -->
+      <div class="col-md-4">
+        <label for="type-{{index}}" class="form-label mb-0 mt-2 fw-normal">Type</label>
+        <select v-model="item.tempType" @change="validateAndUpdateContributor(index, 'type', item.tempType)" id="type-{{index}}" class="form-control control-medium">
+          <option value="ContactPerson">ContactPerson</option>
+          <option value="DataCollector">DataCollector</option>
+          <option value="DataCurator">DataCurator</option>
+          <option value="DataManager">DataManager</option>
+          <option value="Distributor">Distributor</option>
+          <option value="Editor">Editor</option>
+          <option value="HostingInstitution">HostingInstitution</option>
+          <option value="Producer">Producer</option>
+          <option value="ProjectLeader">ProjectLeader</option>
+          <option value="ProjectManager">ProjectManager</option>
+          <option value="ProjectMember">ProjectMember</option>
+          <option value="RegistrationAgency">RegistrationAgency</option>
+          <option value="RegistrationAuthority">RegistrationAuthority</option>
+          <option value="RelatedPerson">RelatedPerson</option>
+          <option value="Researcher">Researcher</option>
+          <option value="ResearchGroup">ResearchGroup</option>
+          <option value="RightsHolder">RightsHolder</option>
+          <option value="Sponsor">Sponsor</option>
+          <option value="Supervisor">Supervisor</option>
+          <option value="WorkPackageLeader">WorkPackageLeader</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+      <!-- ORCID Label and Input -->
+      <div class="col-md-12">
+        <label for="orcid-{{index}}" class="form-label mb-0 mt-2 fw-normal">ORCID ID</label>
+        <input type="text" v-model="item.tempOrcid" @keyup="validateAndUpdateContributor(index, 'orcid', item.tempOrcid)" id="orcid-{{index}}" class="form-control dataset_dynamic_input" placeholder="Format: 0000-1111-2222-3333">
+      </div>
+
+      <!-- RORID Label and Input -->
+      <div class="col-md-12">
+        <label for="rorid-{{index}}" class="form-label mb-0 mt-2 fw-normal">ROR ID</label>
+        <input type="text" v-model="item.tempRorid" @keyup="validateAndUpdateContributor(index, 'rorid', item.tempRorid)" id="rorid-{{index}}" class="form-control dataset_dynamic_input" placeholder="Format: 041qv0h25">
+      </div>
+  
+      <a @click="removeContributor(index)" style="cursor: pointer;" class="mt-3 text-end text-danger d-block">remove</a>
+    </div>
+    
+    <button @click.prevent="addNewContributor" class="btn btn-primary btn-sm" style="transform: translateY(-2px); margin-top: 10px;">Add Contributor</button>
+  </div>
+  
+  <script>
+    document.getElementById("field-contributor").readOnly = true;
+    createApp({
+      data() {
+        return {
+          contributors: [],
+        }
+      },
+      mounted() {
+        const data = document.getElementById("c_holder").value;
+        this.contributors = data.split(';').filter(item => item).map(contributor => {
+          const parts = contributor.split(/[\[\]{}()]/).filter(part => part.trim());
+          let name = parts[0].trim();
+          let orcid = parts[1]?.trim() || '';
+          let rorid = parts[2]?.trim() || '';
+          let type = parts[3]?.trim() || 'Researcher'; // Default to Researcher if not specified
+
+          return { name, orcid, rorid, tempOrcid: orcid, tempRorid: rorid, tempType: type };
+        });
+      },
+      methods: {
+        addNewContributor() {
+          this.contributors.push({ name: '', orcid: '', rorid: '', tempOrcid: '', tempRorid: '', tempType: 'Researcher' }); // Include type
+        },
+        removeContributor(index) {
+          this.contributors.splice(index, 1);
+        },
+        validateAndUpdateContributor(index, field, value) {
+          if (value === '') {
+            this.contributors[index][field] = '';
+            this.contributors[index]['temp' + field.charAt(0).toUpperCase() + field.slice(1)] = '';
+          } else {
+            let isValid = true;
+            if (field === 'orcid') {
+              isValid = this.validateOrcid(value);
+            } else if (field === 'rorid') {
+              isValid = this.validateRorid(value);
+            } // No else, type does not need validation
+  
+            if (isValid) {
+              this.contributors[index][field] = value;
+            }
+          }
+          this.updateHiddenInputs();
+        },
+        updateHiddenInputs() {
+          const formattedContributors = this.contributors.map(item => {
+            let formattedName = item.name;
+            if (item.orcid && this.validateOrcid(item.orcid)) {
+              formattedName += ` (${item.orcid})`;
+            }
+            if (item.rorid && this.validateRorid(item.rorid)) {
+              formattedName += ` [${item.rorid}]`;
+            }
+            if (item.tempType) {
+              formattedName += ` {${item.tempType}}`; // Format type
+            }
+            return formattedName;
+          }).join('; ');
+          document.getElementById("c_holder").value = formattedContributors;
+          document.getElementById("field-contributor").value = formattedContributors;
+        },
+        validateOrcid(orcid) {
+          const regex = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+          return regex.test(orcid);
+        },
+        validateRorid(rorid) {
+          const regex = /^[0-9a-zA-Z]+$/;
+          return regex.test(rorid);
+        },
+      }
+    }).mount('#contributor_widget');
+  </script>
+  
+
+    
+    
+    
+    
+  
 
     {{ form.input('ror_id', label=_('ROR ID (of organization)'), id='field-ror_id', placeholder=_('https://ror.org/041qv0h25'), value=data.ror_id, error=errors.ror_id, classes=['control-medium']) }}
     {% endblock %}

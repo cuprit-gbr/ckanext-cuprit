@@ -306,16 +306,23 @@ section.tags .tag-list {
   padding: 0!important;
 }
 
+
 #author_widget, #contributor_widget{
-  background-color: rgb(248 246 243 / 58%); 
-  padding: 16px 8px; 
-  padding-top: 16px;
-  border: 1px dotted black;
   margin-bottom: 30px;
 }
 
+.contributor-block, .author-block {
+  background: #eee;
+  padding: 10px;
+  margin-bottom: 10px;
+}
 
-.c_holder {
+#field-contributor {
+  opacity: .5;
+
+}
+
+#c_holder {
   display: none;
 }
 
@@ -364,4 +371,10 @@ section.tags .tag-list {
 
 .custom-switch label {
   padding-top: 2px;
+}
+
+@media (min-width: 768px){
+  .wrapper:before {
+      display: none!important;
+  }
 }
