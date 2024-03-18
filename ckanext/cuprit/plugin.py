@@ -64,13 +64,14 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
             'maintainer_email': options.get('force_default'),
             'publisher': options.get('force_extras'),
             'contributor': options.get('default'),
-            'ror_id': options.get('default'),
             'orcid_id': options.get('default'),
             'in_language': options.get('force_extras'),
             'year_of_publication': options.get('default'),
             'type_of_publication': options.get('force_extras'),
             'doi': options.get('default'),
             'related_resources': options.get('default'),
+            'gazetteer_id': options.get('default'),
+            'bibliography_id': options.get('default'),
             'agree': options.get('default'),
         })
         
@@ -84,7 +85,6 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
         schema.update({
             'publisher': options.get('default'),
             'contributor': options.get('default'),
-            'ror_id': options.get('default'),
             'in_language': options.get('default'),
             'year_of_publication': options.get('default'),
             'type_of_publication': options.get('default'),
@@ -92,6 +92,8 @@ class CupritPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm, DefaultT
             'funding': options.get('default'),
             'subtitle': options.get('default'),
             'related_resources': options.get('default'),
+            'gazetteer_id': options.get('default'),
+            'bibliography_id': options.get('default'),
             'agree': options.get('default'),
         })
         return schema

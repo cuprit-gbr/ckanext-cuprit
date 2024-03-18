@@ -101,12 +101,6 @@
           </tr>
         {% endif %}
       
-        {% if pkg_dict.ror_id %}
-          <tr>
-            <th scope="row" class="dataset-label ps-0">{{ _("ROR ID") }}</th>
-            <td class="dataset-details">{{ pkg_dict.ror_id }}</td>
-          </tr>
-        {% endif %}
         {% if pkg_dict.in_language %}
         {% set lang_codes_to_names = {
           'en': 'English', 'es': 'Spanish', 'fr': 'French', 'de': 'German', 
@@ -166,7 +160,18 @@
           <td class="dataset-details">{{ rel }}</td>
         </tr>
       {% endif %}
-
+      {% if pkg_dict.gazetteer_id %}
+        <tr>
+          <th scope="row" class="dataset-label ps-0">{{ _("iDAI Gazetteer ID") }}</th>
+          <td class="dataset-details"><a href="https://gazetteer.dainst.org/app/#!/show/{{ pkg_dict.gazetteer_id }}" target="_blank">https://gazetteer.dainst.org/app/#!/show/{{ pkg_dict.gazetteer_id }}</a></td>
+        </tr>
+      {% endif %}
+      {% if pkg_dict.bibliography_id %}
+        <tr>
+          <th scope="row" class="dataset-label ps-0">{{ _("iDAI Bibliography ID") }}</th>
+          <td class="dataset-details"><a href="https://zenon.dainst.org/Record/{{ pkg_dict.bibliography_id }}" target="_blank">https://zenon.dainst.org/Record/{{ pkg_dict.bibliography_id }}</a></td>
+        </tr>
+      {% endif %}
       {% endblock %}
       {% endblock %}
     </tbody>

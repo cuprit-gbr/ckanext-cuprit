@@ -157,6 +157,10 @@
 
 {{ form.markdown('related_resources', label=_('Related Resources (URLS, Literature)'), id='field-related_resources', placeholder=_('Book, Leaflet, Digital goods'), value=data.related_resources, error=errors.related_resources, classes=['control-small']) }}
 
+{{ form.input('gazetteer_id', label=_('iDAI.gazetteer ID'), id='field-gazetteer_id', placeholder=_('ID without URL f.e.: 2282601'), value=data.gazetteer_id, error=errors.gazetteer_id, classes=['control-medium']) }}
+
+{{ form.input('bibliography_id', label=_('iDAI.bibliography ID'), id='field-bibliography_id', placeholder=_('ID without URL f.e.: 000230542'), value=data.bibliography_id, error=errors.bibliography_id, classes=['control-medium']) }}
+
 {% if c.userobj.sysadmin %}
   {{ form.input('doi', label=_('DOI'), id='field-doi', placeholder=_('The dataset DOI (datacite.org) if present'), value=data.doi, error=errors.doi, classes=['control-medium']) }}
 {% endif %}
