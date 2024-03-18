@@ -65,7 +65,6 @@ def build_xml_dict_doi(metadata_dict, xml_dict):
             
             processed_contributors.append(a_contributor)
         xml_dict['contributors'] = processed_contributors
-        xml_dict['creators'] = processed_contributors
 
     print("New XML dict:", xml_dict)
     return xml_dict
