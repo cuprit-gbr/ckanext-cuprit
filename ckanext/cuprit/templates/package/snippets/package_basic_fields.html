@@ -2,27 +2,33 @@
 
 {% block package_metadata_fields_visibility %}
 {% if not h.is_editor(c.user, data.owner_org or data.group) and data.id %}
-  {{ super() }}
+{{ super() }}
 {% endif %}
 {% endblock %}
 
 
 {% block package_basic_fields_org %}
-  {% if c.userobj.sysadmin %}
-    {{ super() }}
-  {% endif %}
+{% if c.userobj.sysadmin %}
+{{ super() }}
+{% endif %}
 {% endblock %}
 
 
 {% block package_basic_fields_title %}
 <fieldset>
   <legend>General Dataset Information</legend>
-  {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('eg. A descriptive title'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
-  {{ form.input('subtitle', label=_('Subtitle'), id='field-subtitle', placeholder=_('Project Name'), value=data.subtitle, error=errors.subtitle, classes=['control-medium']) }}
-  {{ form.input('funding', label=_('Funding'), id='field-funding', placeholder=_('Funding authority'), value=data.funding, error=errors.funding, classes=['control-medium']) }}
-  {{ form.input('version', label=_('Version'), id='field-version', placeholder=_('1.0'), value=data.version, error=errors.version, classes=['control-medium']) }}
+  {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('eg. A descriptive title'), value=data.title,
+  error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class':
+  'form-control'}) }}
+  {{ form.input('subtitle', label=_('Subtitle'), id='field-subtitle', placeholder=_('Project Name'),
+  value=data.subtitle, error=errors.subtitle, classes=['control-medium']) }}
+  {{ form.input('funding', label=_('Funding'), id='field-funding', placeholder=_('Funding authority'),
+  value=data.funding, error=errors.funding, classes=['control-medium']) }}
+  {{ form.input('version', label=_('Version'), id='field-version', placeholder=_('1.0'), value=data.version,
+  error=errors.version, classes=['control-medium']) }}
 
-  {{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes) }}
+  {{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the
+  data'), value=data.notes, error=errors.notes) }}
 
   <div class="form-group">
     {% set error = errors.type_of_publication %}
@@ -35,7 +41,8 @@
             {% set empty_type = _('Please select a general resource type') %}
             <option value="">{{ empty_type }}</option>
             {% for res_id, res_desc in h.resource_types %}
-              <option value="{{ res_id }}" {% if existing_type_of_publication == res_id %}selected="selected"{% endif %}>{{ res_desc }}</option>
+            <option value="{{ res_id }}" {% if existing_type_of_publication==res_id %}selected="selected" {% endif %}>{{
+              res_desc }}</option>
             {% endfor %}
           </select>
           {% if error %}<span class="error-block">{{ error }}</span>{% endif %}
@@ -47,126 +54,188 @@
 
 
   <div class="form-group">
-
     {% set error = errors.tag_string %}
     <label class="control-label" for="type_of_publication">Tags</label>
     <div class="controls">
       <div class="row">
         <div class="col-md-12">
-          <select id="tags_str" data-module="autocomplete" multiple onchange="update_tags()">
-            {% set dataset_tags=data.get('tag_string') %}
-            {% if dataset_tags is string and var is not mapping %}
-              {% set existing_tag = dataset_tags.replace(', ',',').split(',') %}
+          <!-- This will be the visible part of the Select2 control -->
+          <input type="hidden" id="dai_tags" style="width:100%" name="tag_string" />
+          {% if error %}<span class="error-block">{{ error }}</span>{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    // we need to wait until select2 is present. Furthermore ckan uses select2 3.5 not 4!
+
+    function initializeSelect2() {
+      if (window.jQuery && jQuery.fn.select2) {
+        $("#dai_tags").select2({
+          placeholder: "Search for a repository",
+          minimumInputLength: 0,
+          multiple: true, // Allow multiple selections
+          ajax: {
+            url: "/api/thesauri/words",
+            dataType: 'json',
+            data: function (term, page) {
+              return {
+                search: term,
+                page: page
+              };
+            },
+            results: function (data, page) {
+              return {
+                results: data.results,
+                more: data.pagination.more
+              };
+            }
+          },
+          formatResult: function (repo) { return repo.text; },
+          formatSelection: function (repo) { return repo.text; },
+          escapeMarkup: function (m) { return m; },
+          initSelection: function (element, callback) {
+            var data = [];
+            $(element.val().split(",")).each(function () {
+              data.push({ id: this, text: this });
+            });
+            callback(data);
+          }
+        });
+
+        $select = $("#dai_tags");
+        // Trigger the dropdown to open and search immediately on focus
+        $select.on("select2-open", function() {
+          // Only trigger the search if the input is empty
+          if (!$select.select2('data').length) {
+              var search = $select.data('select2').search; // Access the search box
+              search.trigger('input'); // Trigger input event to start search
+          }
+      });
+
+        // Prepopulate the tags from the `data.tag_string` if it exists
+        var preselectTags = "{{data.tag_string}}".split(',').map(function (tag, index) {
+          return { id: tag.trim(), text: tag.trim() };
+        });
+        if (preselectTags.length > 0) {
+          $("#dai_tags").select2('data', preselectTags);
+        }
+
+
+        $("#dai_tags").on("change", function (e) {
+          var selectedData = $(this).select2('data');
+          var tagNames = selectedData.map(function (item) {
+            return item.text; // Use the text (name) instead of the id
+          }).join(',');
+          $("#dai_tags").val(tagNames);
+        });
+
+        console.log('Select2 initialized.');
+      } else {
+        setTimeout(initializeSelect2, 50);
+      }
+    }
+
+    initializeSelect2();
+  </script>
+
+
+  {% if not c.userobj.sysadmin %}
+  <div class="form-group control-medium">
+    <label for="field-organizations" class="form-label">{{ _('Organization') }}</label><br>
+    <select id="field-organizations" name="owner_org" readonly="readonly">
+      {% set organizations_available = h.organizations_available('create_dataset') %}
+      {% for organization in organizations_available %}
+      {# get out first org from users list only if there is not an existing org #}
+      {% set selected_org = (existing_org and existing_org == organization.id) or (not existing_org and not data.id and
+      organization.id == organizations_available[0].id) %}
+      <option value="{{ organization.id }}" {% if selected_org %} selected="selected" {% endif %}>{{
+        organization.display_name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  {% endif %}
+
+
+  <!-- hide original tags -->
+  {% block package_basic_fields_tags %}
+  {% endblock %}
+
+  {% set error = errors.in_language %}
+  <div class="form-group control-medium">
+    <label class="control-label" for="type_of_publication">{{_('Language')}}</label>
+    <div class="controls">
+      <div class="row">
+        <div class="col-md-12">
+          <select id="lang_str" data-module="autocomplete" multiple onchange="update_lang()">
+            {% set predefined_languages = [
+            ('English', 'en'), ('German', 'de'), ('Spanish', 'es'), ('Italian', 'it'),
+            ('Amharic', 'am'), ('Arabic', 'ar'), ('Azerbaijani', 'az'), ('Bengali', 'bn'),
+            ('Bulgarian', 'bg'), ('Burmese', 'my'), ('Croatian', 'hr'), ('Czech', 'cs'),
+            ('Danish', 'da'), ('Dutch', 'nl'), ('Estonian', 'et'), ('Filipino', 'fil'),
+            ('Finnish', 'fi'), ('French', 'fr'), ('Greek', 'el'), ('Gujarati', 'gu'),
+            ('Hebrew', 'he'), ('Hindi', 'hi'), ('Hungarian', 'hu'), ('Indonesian', 'id'),
+            ('Japanese', 'ja'), ('Kazakh', 'kk'), ('Khmer', 'km'), ('Korean', 'ko'),
+            ('Kurdish', 'ku'), ('Lao', 'lo'), ('Latvian', 'lv'), ('Lithuanian', 'lt'),
+            ('Malagasy', 'mg'), ('Malay', 'ms'), ('Marathi', 'mr'), ('Mongolian', 'mn'),
+            ('Nepali', 'ne'), ('Norwegian', 'no'), ('Pashto', 'ps'), ('Persian', 'fa'),
+            ('Polish', 'pl'), ('Portuguese', 'pt'), ('Punjabi', 'pa'), ('Romanian', 'ro'),
+            ('Russian', 'ru'), ('Serbian', 'sr'), ('Sinhala', 'si'), ('Slovak', 'sk'),
+            ('Slovenian', 'sl'), ('Swahili', 'sw'), ('Swedish', 'sv'), ('Tamil', 'ta'),
+            ('Telugu', 'te'), ('Thai', 'th'), ('Turkish', 'tr'), ('Ukrainian', 'uk'),
+            ('Urdu', 'ur'), ('Vietnamese', 'vi'), ('Sundanese', 'su')
+            ] %}
+            {% set dataset_lang = data.get('in_language', '') %}
+            {% if dataset_lang is string %}
+            {% set existing_lang = dataset_lang.replace(', ',',').split(',') %}
             {% else %}
-              {% set existing_tag = [] %}
+            {% set existing_lang = [] %}
             {% endif %}
 
-            {% set empty_type = _('Please select tags') %}
-              {% for k in h.custom_tags %}
-                <optgroup label="{{ k }}">
-                  {% for tag_name in h.custom_tags[k] %}
-                  <option value="{{ tag_name }}" {% if tag_name in existing_tag %}selected="selected"{% endif %}>{{ tag_name }}</option>
-                  {% endfor %}
-              {% endfor %}
-            </optgroup>
+            <option value="" disabled>Please select languages</option>
+            {% for lang, code in predefined_languages %}
+            <option value="{{ code }}" {% if code in existing_lang %}selected="selected" {% endif %}>{{ lang }} ({{ code
+              }})</option>
+            {% endfor %}
           </select>
           {% if error %}<span class="error-block">{{ error }}</span>{% endif %}
         </div>
       </div>
     </div>
   </div>
-<input type="input" name="tag_string" id="hidden_tags" value="{{data.tag_string}}" style="display: none;">
+
+  <input type="text" name="in_language" id="hidden_lang" value="{{data.in_language}}" style="display:none">
+
   <script>
-    function update_tags(){
-      jQuery('#hidden_tags').val($("#tags_str").select2("val"))
+    function update_lang() {
+      jQuery('#hidden_lang').val($("#lang_str").select2("val"))
     }
   </script>
 
-
-{% if not c.userobj.sysadmin %}
-      <div class="form-group control-medium">
-        <label for="field-organizations" class="form-label">{{ _('Organization') }}</label><br>
-        <select id="field-organizations" name="owner_org" readonly="readonly" >
-          {% set organizations_available = h.organizations_available('create_dataset') %}
-          {% for organization in organizations_available %}
-            {# get out first org from users list only if there is not an existing org #}
-          {% set selected_org = (existing_org and existing_org == organization.id) or (not existing_org and not data.id and organization.id == organizations_available[0].id) %}
-          <option value="{{ organization.id }}" {% if selected_org %} selected="selected" {% endif %}>{{ organization.display_name }}</option>
-          {% endfor %}
-        </select>
-    </div>
-{% endif %}
+  {{ form.input('year_of_publication', label=_('Year of publication'), id='field-year_of_publication', placeholder=_('In
+  which year was the publication published?'), value=data.year_of_publication, error=errors.year_of_publication,
+  classes=['control-medium']) }}
 
 
-<!-- hide original tags -->
-{% block package_basic_fields_tags %}
-{% endblock %}
+  {{ form.markdown('related_resources', label=_('Related Resources (URLS, Literature)'), id='field-related_resources',
+  placeholder=_('Book, Leaflet, Digital goods'), value=data.related_resources, error=errors.related_resources,
+  classes=['control-small']) }}
 
-{% set error = errors.in_language %}
-<div class="form-group control-medium">
-  <label class="control-label" for="type_of_publication">{{_('Language')}}</label>
-  <div class="controls">
-    <div class="row">
-      <div class="col-md-12">
-        <select id="lang_str" data-module="autocomplete" multiple onchange="update_lang()">
-          {% set predefined_languages = [
-            ('English', 'en'), ('German', 'de'), ('Spanish', 'es'), ('Italian', 'it'), 
-            ('Amharic', 'am'), ('Arabic', 'ar'), ('Azerbaijani', 'az'), ('Bengali', 'bn'), 
-            ('Bulgarian', 'bg'), ('Burmese', 'my'), ('Croatian', 'hr'), ('Czech', 'cs'), 
-            ('Danish', 'da'), ('Dutch', 'nl'), ('Estonian', 'et'), ('Filipino', 'fil'), 
-            ('Finnish', 'fi'), ('French', 'fr'), ('Greek', 'el'), ('Gujarati', 'gu'), 
-            ('Hebrew', 'he'), ('Hindi', 'hi'), ('Hungarian', 'hu'), ('Indonesian', 'id'), 
-            ('Japanese', 'ja'), ('Kazakh', 'kk'), ('Khmer', 'km'), ('Korean', 'ko'), 
-            ('Kurdish', 'ku'), ('Lao', 'lo'), ('Latvian', 'lv'), ('Lithuanian', 'lt'), 
-            ('Malagasy', 'mg'), ('Malay', 'ms'), ('Marathi', 'mr'), ('Mongolian', 'mn'), 
-            ('Nepali', 'ne'), ('Norwegian', 'no'), ('Pashto', 'ps'), ('Persian', 'fa'), 
-            ('Polish', 'pl'), ('Portuguese', 'pt'), ('Punjabi', 'pa'), ('Romanian', 'ro'), 
-            ('Russian', 'ru'), ('Serbian', 'sr'), ('Sinhala', 'si'), ('Slovak', 'sk'), 
-            ('Slovenian', 'sl'), ('Swahili', 'sw'), ('Swedish', 'sv'), ('Tamil', 'ta'), 
-            ('Telugu', 'te'), ('Thai', 'th'), ('Turkish', 'tr'), ('Ukrainian', 'uk'), 
-            ('Urdu', 'ur'), ('Vietnamese', 'vi'), ('Sundanese', 'su')
-          ] %}
-          {% set dataset_lang = data.get('in_language', '') %}
-          {% if dataset_lang is string %}
-            {% set existing_lang = dataset_lang.replace(', ',',').split(',') %}
-          {% else %}
-            {% set existing_lang = [] %}
-          {% endif %}
-        
-          <option value="" disabled>Please select languages</option>
-          {% for lang, code in predefined_languages %}
-            <option value="{{ code }}" {% if code in existing_lang %}selected="selected"{% endif %}>{{ lang }} ({{ code }})</option>
-          {% endfor %}
-        </select>
-        {% if error %}<span class="error-block">{{ error }}</span>{% endif %}
-      </div>
-    </div>
-  </div>
-</div>
+  {{ form.input('gazetteer_id', label=_('iDAI.gazetteer ID'), id='field-gazetteer_id', placeholder=_('ID without URL
+  f.e.: 2282601'), value=data.gazetteer_id, error=errors.gazetteer_id, classes=['control-medium']) }}
 
-<input type="text" name="in_language" id="hidden_lang" value="{{data.in_language}}" style="display:none">
+  {{ form.input('bibliography_id', label=_('iDAI.bibliography ID'), id='field-bibliography_id', placeholder=_('ID
+  without URL f.e.: 000230542'), value=data.bibliography_id, error=errors.bibliography_id, classes=['control-medium'])
+  }}
 
-<script>
-  function update_lang(){
-    jQuery('#hidden_lang').val($("#lang_str").select2("val"))
-  }
-</script>
+  {% if c.userobj.sysadmin %}
+  {{ form.input('doi', label=_('DOI'), id='field-doi', placeholder=_('The dataset DOI (datacite.org) if present'),
+  value=data.doi, error=errors.doi, classes=['control-medium']) }}
+  {% endif %}
 
-{{ form.input('year_of_publication', label=_('Year of publication'), id='field-year_of_publication', placeholder=_('In which year was the publication published?'), value=data.year_of_publication, error=errors.year_of_publication, classes=['control-medium']) }}
+  {% block package_basic_fields_description %}
+  {% endblock %}
 
-
-{{ form.markdown('related_resources', label=_('Related Resources (URLS, Literature)'), id='field-related_resources', placeholder=_('Book, Leaflet, Digital goods'), value=data.related_resources, error=errors.related_resources, classes=['control-small']) }}
-
-{{ form.input('gazetteer_id', label=_('iDAI.gazetteer ID'), id='field-gazetteer_id', placeholder=_('ID without URL f.e.: 2282601'), value=data.gazetteer_id, error=errors.gazetteer_id, classes=['control-medium']) }}
-
-{{ form.input('bibliography_id', label=_('iDAI.bibliography ID'), id='field-bibliography_id', placeholder=_('ID without URL f.e.: 000230542'), value=data.bibliography_id, error=errors.bibliography_id, classes=['control-medium']) }}
-
-{% if c.userobj.sysadmin %}
-  {{ form.input('doi', label=_('DOI'), id='field-doi', placeholder=_('The dataset DOI (datacite.org) if present'), value=data.doi, error=errors.doi, classes=['control-medium']) }}
-{% endif %}
-
-{% block package_basic_fields_description %}
-{% endblock %}
-
-{% endblock %}
-
+  {% endblock %}
