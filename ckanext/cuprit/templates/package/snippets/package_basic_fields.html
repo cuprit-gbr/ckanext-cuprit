@@ -115,14 +115,18 @@
           }
       });
 
-        // Prepopulate the tags from the `data.tag_string` if it exists
-        var preselectTags = "{{data.tag_string}}".split(',').map(function (tag, index) {
-          return { id: tag.trim(), text: tag.trim() };
-        });
-        if (preselectTags.length > 0) {
-          $("#dai_tags").select2('data', preselectTags);
-        }
-
+      var preselectTags = "{{data.tag_string}}".split(',').map(function (tag) {
+        return { id: tag.trim(), text: tag.trim() };
+    }).filter(function(tag) {
+        return tag.id !== "";  // Exclude tags that are empty after trimming
+    });
+    
+    console.log("hey");
+    console.log(preselectTags);
+    
+    if (preselectTags.length > 0) {
+        $("#dai_tags").select2('data', preselectTags);
+    }
 
         $("#dai_tags").on("change", function (e) {
           var selectedData = $(this).select2('data');
