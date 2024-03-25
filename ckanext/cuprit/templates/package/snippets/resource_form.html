@@ -5,29 +5,31 @@
 {% set action = form_action or h.url_for(dataset_type ~ '_resource.new', id=pkg_name) %}
 
 
-<form id="resource-edit" class="dataset-form dataset-resource-form" method="post" action="{{ action }}" data-module="basic-form resource-form" enctype="multipart/form-data">
-
-
-
+<form id="resource-edit" method="post" action="{{ action }}" data-module="basic-form resource-form" enctype="multipart/form-data">
+  {{ h.csrf_input() }}
   {% block stages %}
     {# An empty stages variable will not show the stages #}
     {% if stage %}
-      {{ h.snippet('package/snippets/stages.html', stages=stage, pkg_name=pkg_name) }}
+      {{ h.snippet('package/snippets/stages.html', stages=stage, pkg_name=pkg_name, dataset_type=dataset_type) }}
     {% endif %}
   {% endblock %}
 
   {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
 
   <input name="id" value="{{ data.id }}" type="hidden"/>
-  <p class="ds_notes" style="background-color: #F6F6F6">Note: The allowed filesize of a resource is {{ config["ckan.max_resource_size"] }} MB</p>
 
   {% block basic_fields %}
-
     {% block basic_fields_url %}
       {% set is_upload = (data.url_type == 'upload') %}
-      {{ form.image_upload(data, errors, field_url='url', field_upload='upload', field_clear='clear_upload',
-         is_upload_enabled=h.uploads_enabled(), is_url=data.url and not is_upload, is_upload=is_upload,
-         upload_label=_('Data'), url_label=_('URL'), placeholder=_('http://example.com/external-data.csv'), field_name='name') }}
+      {% snippet 'package/snippets/resource_upload_field.html',
+        data=data,
+        errors=errors,
+        is_url=data.url and not is_upload,
+        is_upload=is_upload,
+        is_upload_enabled=h.uploads_enabled(),
+        url_label=_('URL'),
+        upload_label=_('File'),
+        placeholder=_('http://example.com/external-data.csv') %}
     {% endblock %}
 
     {% block basic_fields_name %}
@@ -47,12 +49,10 @@
         </span>
       {% endcall %}
     {% endblock %}
-
   {% endblock basic_fields %}
 
   {% block metadata_fields %}
     {% if include_metadata %}
-
       {# TODO: Where do these come from, they don't exist in /package/new_package_form.html #}
       {# {{ form.select('resource_type', id='field-type', label=_('Resource Type'), options=[{'value': 'empty', 'text': _('Select a type…')}], selected="empty", error=errors.type) }} #}
 
@@ -67,8 +67,6 @@
   {% endblock %}
 
   <div class="form-actions">
-
-    
     {% block delete_button %}
       {% if data.id %}
         {% if h.check_access('resource_delete', {'id': data.id})  %}
@@ -94,50 +92,48 @@
       {% endblock %}
     {% endif %}
   </div>
-  
   <script>
- const umlautMap = {
-  '\u00dc': 'U',
-  '\u00c4': 'a',
-  '\u00d6': 'O',
-  '\u00fc': 'u',
-  '\u00e4': 'a',
-  '\u00f6': 'o',
-  '\u00df': 'ss',
-}
-
-function replaceUmlaute(str) {
-  return str
-    .replace(/[\u00dc|\u00c4|\u00d6][a-z]/g, (a) => {
-      const big = umlautMap[a.slice(0, 1)];
-      return big.charAt(0) + big.charAt(1).toLowerCase() + a.slice(1);
-    })
-    .replace(new RegExp('['+Object.keys(umlautMap).join('|')+']',"g"),
-      (a) => umlautMap[a]
-    );
-}
-
-let nameField = document.getElementById('field-name')
-nameField.addEventListener ('change', function (event, initial_value) {
-      var dirty_value = event.target.value;
-      if (dirty_value == "" || dirty_value == " "){
-        var dirty_value = document.getElementById('field-image-url').value
-      }
-      
-      cleaned_value = dirty_value.replace(/  +/g, ' ').replace(/\s/g,'_')
-      cleaned_value = replaceUmlaute(cleaned_value)
-      event.target.value = cleaned_value
+    const umlautMap = {
+     '\u00dc': 'U',
+     '\u00c4': 'a',
+     '\u00d6': 'O',
+     '\u00fc': 'u',
+     '\u00e4': 'a',
+     '\u00f6': 'o',
+     '\u00df': 'ss',
    }
-);
-
-/* 
-  TS:
-  Set allowed file types as long there is no solid backend validation
-*/
-
-document.getElementById('field-image-upload').setAttribute("accept",   "{{ config.ckan__allowed_resource_types or '.ply,.obj,.csv,.odt,.rdf,.txt,.jpeg,.jpg,.png,.tiff,.pdf,.json,.xlsx,.xml,.mkv,.geojson,.tsv,.geotiff,.txt,.docx,.ods,.wld,.svg,.sql,.jsonl,.zip' }}" );  
-
-
-  </script>
-  
+   
+   function replaceUmlaute(str) {
+     return str
+       .replace(/[\u00dc|\u00c4|\u00d6][a-z]/g, (a) => {
+         const big = umlautMap[a.slice(0, 1)];
+         return big.charAt(0) + big.charAt(1).toLowerCase() + a.slice(1);
+       })
+       .replace(new RegExp('['+Object.keys(umlautMap).join('|')+']',"g"),
+         (a) => umlautMap[a]
+       );
+   }
+   
+   let nameField = document.getElementById('field-name')
+   nameField.addEventListener ('change', function (event, initial_value) {
+         var dirty_value = event.target.value;
+         if (dirty_value == "" || dirty_value == " "){
+           var dirty_value = document.getElementById('field-image-url').value
+         }
+         
+         cleaned_value = dirty_value.replace(/  +/g, ' ').replace(/\s/g,'_')
+         cleaned_value = replaceUmlaute(cleaned_value)
+         event.target.value = cleaned_value
+      }
+   );
+   
+   /* 
+     TS:
+     Set allowed file types as long there is no solid backend validation
+   */
+   
+   document.getElementById('field-image-upload').setAttribute("accept",   "{{ config.ckan__allowed_resource_types or '.ply,.obj,.csv,.odt,.rdf,.txt,.jpeg,.jpg,.png,.tiff,.pdf,.json,.xlsx,.xml,.mkv,.geojson,.tsv,.geotiff,.txt,.docx,.ods,.wld,.svg,.sql,.jsonl,.zip' }}" );  
+   
+   
+     </script>
 </form>
